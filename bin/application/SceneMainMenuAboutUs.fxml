@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<ScrollPane hbarPolicy="NEVER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.SceneController">
+   <content>
+      <BorderPane prefHeight="768.0" prefWidth="1024.0" styleClass="mainMenuPane" stylesheets="@application.css">
+         <top>
+            <Label fx:id="aboutUsTitle" styleClass="mainMenuTitle" stylesheets="@application.css" text="About Us" BorderPane.alignment="CENTER" />
+         </top>
+         <bottom>
+            <Label fx:id="goBackToMainMenu" onMouseClicked="#switchToSceneMainMenu" styleClass="mainMenuButtons" stylesheets="@application.css" text="Back to Main Menu" BorderPane.alignment="CENTER" />
+         </bottom>
+         <center>
+            <GridPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="750.0" BorderPane.alignment="CENTER">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Label prefHeight="100.0" prefWidth="350.0" styleClass="mainMenuText" stylesheets="@application.css" text="The Tara Warframe development team, the group behind the critically acclaimed 'Plow to Profit.' They are the biggest and the baddest of them all." wrapText="true" GridPane.halignment="CENTER">
+                     <GridPane.margin>
+                        <Insets />
+                     </GridPane.margin>
+                  </Label>
+                  <Label prefHeight="100.0" prefWidth="350.0" styleClass="mainMenuText" stylesheets="@application.css" text="Andre &quot;the Giant (Mind)&quot; Victor Arcilla: Fearlessly tackles complex algorithms with lightning speed and precision." wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+                  <Label prefHeight="100.0" prefWidth="350.0" styleClass="mainMenuText" stylesheets="@application.css" text="Kenichi Lei Cali(sthenics)ca: Wordsmith extraordinaire, his documentation is as elegant and efficient his code." wrapText="true" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+                  <Label prefHeight="100.0" prefWidth="350.0" styleClass="mainMenuText" stylesheets="@application.css" text="Roberto Nathaniel &quot;The Third Son of God&quot; Camacho: Master debugger who fearlessly hunts down and squashes every software glitch in his path." wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
+                  <Label prefHeight="100.0" prefWidth="350.0" styleClass="mainMenuText" stylesheets="@application.css" text="Carl Angelo &quot;The Dreadlord&quot; Jamero: Executes flawless deployments with ninja-like precision, ensuring smooth transitions every time." wrapText="true" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
+                  <Label prefHeight="100.0" prefWidth="350.0" styleClass="mainMenuText" stylesheets="@application.css" text="Israel &quot;Dominator Enthusiast ;-)&quot; Rodriguez: Crafts stunning interfaces that seamlessly blend beauty with functionality." wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
+                  <ImageView fx:id="imageTheTeam" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" />
+                  <ImageView fx:id="imageAndre" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+                     <image>
+                        <Image url="@../../../../SexLord.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="imageKen" fitHeight="150.0" fitWidth="110.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+                     <image>
+                        <Image url="@../../../../SexLord3.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="imageNat" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="3">
+                     <image>
+                        <Image url="@../../../../SexLord4.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="imageCarl" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4">
+                     <image>
+                        <Image url="@../../../../SexLord2.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="imageIsrael" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="5">
+                     <image>
+                        <Image url="@../../../../SexLord5.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </GridPane>
+         </center>
+      </BorderPane>
+   </content>
+</ScrollPane>

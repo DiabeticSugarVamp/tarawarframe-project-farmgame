@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.media.MediaView?>
+<?import javafx.scene.text.Font?>
+
+<FlowPane fx:id="mainMenuPane" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="768.0" prefWidth="1024.0" styleClass="mainMenuPane" stylesheets="@application.css" vgap="15.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.SceneController">
+   <children>
+      <BorderPane prefHeight="768.0" prefWidth="1024.0">
+         <center>
+            <GridPane prefWidth="599.0" BorderPane.alignment="CENTER">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Label fx:id="mainMenuStart" alignment="CENTER" contentDisplay="CENTER" prefHeight="75.0" prefWidth="200.0" styleClass="mainMenuButtons" stylesheets="@application.css" text="New Game" wrapText="true" GridPane.halignment="CENTER" />
+                  <Label fx:id="mainMenuSaves" alignment="CENTER" contentDisplay="CENTER" prefHeight="75.0" prefWidth="200.0" styleClass="mainMenuButtons" stylesheets="@application.css" text="Load Save" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
+                  <Label fx:id="mainMenuCredits" alignment="CENTER" contentDisplay="CENTER" onMouseClicked="#switchToSceneCredits" prefHeight="75.0" prefWidth="200.0" styleClass="mainMenuButtons" text="Credits" wrapText="true" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+                  <Label fx:id="mainMenuFullScreen" alignment="CENTER" contentDisplay="CENTER" onMouseClicked="#toggleFullscreen" prefHeight="75.0" prefWidth="200.0" styleClass="mainMenuButtons" text="Toggle Fullscreen" wrapText="true" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+                  <Label fx:id="mainMenuExit" alignment="CENTER" contentDisplay="CENTER" onMouseClicked="#exitPrompt" prefHeight="75.0" prefWidth="200.0" styleClass="mainMenuButtons" text="Exit" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+                  <Label fx:id="mainMenuAboutUs" onMouseClicked="#switchToSceneMainMenuAboutUs" prefHeight="75.0" prefWidth="200.0" styleClass="mainMenuButtons" stylesheets="@application.css" text="About Us" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+               </children>
+            </GridPane>
+         </center>
+         <top>
+            <Label fx:id="mainMenuTitle" alignment="CENTER" contentDisplay="CENTER" prefHeight="58.0" prefWidth="800.0" styleClass="mainMenuTitle" stylesheets="@application.css" text="PLOW TO PROFIT" BorderPane.alignment="CENTER">
+               <font>
+                  <Font size="50.0" />
+               </font>
+            </Label>
+         </top>
+      </BorderPane>
+      <MediaView fx:id="mainMenuMusic" fitHeight="200.0" fitWidth="200.0" onMouseClicked="#initializeMainMenuMusic" visible="false" />
+   </children>
+</FlowPane>

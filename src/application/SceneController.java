@@ -15,6 +15,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
@@ -27,9 +28,6 @@ public class SceneController {
 	@FXML
 	private Button exitPromptButton;
 	
-	@FXML
-	private AnchorPane mainMenuPane;
-	
 	private File file;
 	private Media media;
 	private MediaPlayer mediaPlayer;
@@ -39,7 +37,7 @@ public class SceneController {
 	private Parent root;
 	
 	public void switchToSceneMainMenu(MouseEvent event) throws IOException {
-		root = FXMLLoader.load(getClass().getResource("mainMenu.fxml"));
+		root = FXMLLoader.load(getClass().getResource("SceneMainMenu.fxml"));
 		stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 		scene = new Scene(root);
 		stage.setScene(scene);
@@ -48,7 +46,15 @@ public class SceneController {
 	}
 	
 	public void switchToSceneCredits(MouseEvent event) throws IOException {
-		root = FXMLLoader.load(getClass().getResource("MainMenuCreditsScene.fxml"));
+		root = FXMLLoader.load(getClass().getResource("SceneMainMenuCredits.fxml"));
+		stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+		scene = new Scene(root);
+		stage.setScene(scene);
+		stage.show();
+	}
+	
+	public void switchToSceneMainMenuAboutUs(MouseEvent event) throws IOException {
+		root = FXMLLoader.load(getClass().getResource("SceneMainmenuAboutUs.fxml"));
 		stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 		scene = new Scene(root);
 		stage.setScene(scene);
