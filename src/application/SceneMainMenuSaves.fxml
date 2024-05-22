@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+
+<BorderPane prefHeight="768.0" prefWidth="1024.0" styleClass="mainMenuPane" stylesheets="@application.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.SceneController">
+   <top>
+      <Label styleClass="mainMenuTitle" text="Saves" BorderPane.alignment="CENTER" />
+   </top>
+   <bottom>
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="100.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label fx:id="btnGoBack" onMouseClicked="#switchToSceneMainMenu" onMousePressed="#switchToSceneMainMenu" styleClass="mainMenuButtons" text="Go Back" />
+            <Label fx:id="btnProceed" onMouseClicked="#switchToScenePrologue" styleClass="mainMenuButtons" text="Proceed" />
+         </children>
+      </HBox>
+   </bottom>
+</BorderPane>

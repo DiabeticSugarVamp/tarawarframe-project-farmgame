@@ -13,6 +13,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
@@ -41,11 +42,19 @@ public class SceneController {
 		stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 		scene = new Scene(root);
 		stage.setScene(scene);
-		this.initializeMainMenuMusic();
+		//this.initializeMainMenuMusic();
 		stage.show();
 	}
 	
-	public void switchToSceneCredits(MouseEvent event) throws IOException {
+	public void switchToSceneMainMenuSaves(MouseEvent event) throws IOException {
+		root = FXMLLoader.load(getClass().getResource("SceneMainMenuSaves.fxml"));
+		stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+		scene = new Scene(root);
+		stage.setScene(scene);
+		stage.show();
+	}
+	
+	public void switchToSceneMainMenuCredits(MouseEvent event) throws IOException {
 		root = FXMLLoader.load(getClass().getResource("SceneMainMenuCredits.fxml"));
 		stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 		scene = new Scene(root);
@@ -73,23 +82,92 @@ public class SceneController {
 		}
 	}
 	
-	public void toggleFullscreen(MouseEvent event) {
-		stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-		
-		if (!stage.isFullScreen()) {
-			stage.setFullScreen(true);
-		} else {
-			stage.setFullScreen(false);
-		}
-		
+	public void switchToScenePrologue(MouseEvent event) throws IOException {
+		root = FXMLLoader.load(getClass().getResource("ScenePrologue.fxml"));
+		stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+		scene = new Scene(root);
+		stage.setScene(scene);
+		stage.show();
 	}
 	
-	public void initializeMainMenuMusic() {
-		String mediaPath = "/assets/Effervescence.mp3";
-		Media media = new Media(getClass().getResource(mediaPath).toString());
-		mediaPlayer = new MediaPlayer(media);
-		mediaPlayer.play();
+	public void switchToSceneFarmNavigation(MouseEvent event) throws IOException {
+		root = FXMLLoader.load(getClass().getResource("SceneFarmNavigation.fxml"));
+		stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+		scene = new Scene(root);
+		stage.setScene(scene);
+		stage.show();
 	}
+	
+	public void switchToSceneFarmFields(MouseEvent event) throws IOException {
+		root = FXMLLoader.load(getClass().getResource("SceneFarmFields.fxml"));
+		stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+		scene = new Scene(root);
+		stage.setScene(scene);
+		stage.show();
+	}
+	
+	public void switchToSceneFarmAssets(MouseEvent event) throws IOException {
+		root = FXMLLoader.load(getClass().getResource("SceneFarmAssets.fxml"));
+		stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+		scene = new Scene(root);
+		stage.setScene(scene);
+		stage.show();
+	}
+	
+	public void switchToSceneGuild(MouseEvent event) throws IOException {
+		root = FXMLLoader.load(getClass().getResource("SceneGuild.fxml"));
+		stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+		scene = new Scene(root);
+		stage.setScene(scene);
+		stage.show();
+	}
+	
+	public void switchToSceneGuildBuyPlants(MouseEvent event) throws IOException {
+		root = FXMLLoader.load(getClass().getResource("SceneGuildBuyPlants.fxml"));
+		stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+		scene = new Scene(root);
+		stage.setScene(scene);
+		stage.show();
+	}
+	
+	public void switchToSceneGuildSellPlants(MouseEvent event) throws IOException {
+		root = FXMLLoader.load(getClass().getResource("SceneGuildSellPlants.fxml"));
+		stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+		scene = new Scene(root);
+		stage.setScene(scene);
+		stage.show();
+	}
+	
+	public void switchToSceneGuildUpgrades(MouseEvent event) throws IOException {
+		root = FXMLLoader.load(getClass().getResource("SceneGuildUpgrades.fxml"));
+		stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+		scene = new Scene(root);
+		stage.setScene(scene);
+		stage.show();
+	}
+	
+	/*
+	 * public void switchToScenePauseMenu(KeyEvent event) throws IOException {
+	 * Parent root = FXMLLoader.load(getClass().getResource("ScenePauseMenu.fxml"));
+	 * Stage stage = null;
+	 * 
+	 * // Check if the source is a Node if (event.getSource() instanceof Node) {
+	 * stage = (Stage) ((Node) event.getSource()).getScene().getWindow(); } // Check
+	 * if the source is a Scene else if (event.getSource() instanceof Scene) { stage
+	 * = (Stage) ((Scene) event.getSource()).getWindow(); }
+	 * 
+	 * if (stage != null) { Scene scene = new Scene(root); stage.setScene(scene);
+	 * stage.show(); } else { // Handle error: stage is null
+	 * System.err.println("Unable to determine the stage from the event source."); }
+	 * }
+	 */
+	
+	/*
+	 * public void initializeMainMenuMusic() { String mediaPath =
+	 * "/assets/Effervescence.mp3"; Media media = new
+	 * Media(getClass().getResource(mediaPath).toString()); mediaPlayer = new
+	 * MediaPlayer(media); mediaPlayer.play(); }
+	 */
 	
 	
 }

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane prefHeight="768.0" prefWidth="1024.0" styleClass="gamePane" stylesheets="@application.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.SceneController">
+   <bottom>
+      <VBox prefHeight="200.0" prefWidth="100.0" spacing="10.0" BorderPane.alignment="CENTER_LEFT">
+         <children>
+            <Label fx:id="sceneFarmNavOption1" onMouseClicked="#switchToSceneFarmFields" styleClass="gameBottomOptionText" text="1. Go to the fields" />
+            <Label fx:id="sceneFarmNavOption2" onMouseClicked="#switchToSceneGuild" styleClass="gameBottomOptionText" text="2. Go to the guild office" />
+            <Label fx:id="sceneFarmNavOption4" onMouseClicked="#switchToSceneFarmAssets" styleClass="gameBottomOptionText" text="3. Check assets" />
+            <Label fx:id="sceneFarmNavOption5" styleClass="gameBottomOptionText" text="4. End day" />
+         </children>
+         <BorderPane.margin>
+            <Insets left="5.0" />
+         </BorderPane.margin>
+      </VBox>
+   </bottom>
+   <top>
+      <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label styleClass="gameTopText" text="Day: " />
+            <Label styleClass="gameTopText" text="Actions:" />
+            <Label styleClass="gameTopText" text="Money:" />
+            <Label styleClass="gameTopText" text="Deadline:" />
+         </children></HBox>
+   </top>
+   <center>
+      <Label lineSpacing="10.0" prefHeight="196.0" prefWidth="679.0" styleClass="gameText" text="Nestled in rolling countryside, the tranquil farm is a haven of peace, where fields of golden wheat sway gently in the breeze. The farmhouse, with its rustic charm, is surrounded by blooming gardens and shaded by ancient oaks, offering a perfect retreat from the bustle of modern life." wrapText="true" BorderPane.alignment="CENTER" />
+   </center>
+</BorderPane>
