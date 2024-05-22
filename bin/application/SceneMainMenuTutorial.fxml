@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+
+
+<BorderPane prefHeight="768.0" prefWidth="1024.0" styleClass="mainMenuPane" stylesheets="@application.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/21" fx:controller="application.SceneController">
+   <bottom>
+      <Label onMouseClicked="#switchToSceneMainMenu" styleClass="mainMenuButtons" text="Back to Main Menu" BorderPane.alignment="CENTER" />
+   </bottom>
+   <top>
+      <Label styleClass="mainMenuTitle" text="TUTORIAL" BorderPane.alignment="CENTER" />
+   </top>
+   <center>
+      <Label lineSpacing="15.0" prefHeight="331.0" prefWidth="660.0" styleClass="mainMenuText" text="Welcome to Plow to Profit! You'll start by getting seeds and planting them on your farm. Cultivate your crops and sell them back to the guild for profit. Be mindful of your actions, as each activity (planting, watering, harvesting) uses up your limited daily actions. Running out of actions will automatically end the day. To maximize efficiency, invest in upgrades that maximizes the efficiency of your actions. Seeds, crops, and upgrades can all be traded from the guild. Every 14 days, the landlord will visit to collect rent, so plan your finances wisely.Your ultimate goal is to renovate your humble farmhouse into a grand mansion, marking your triumph in the game. Happy farming!" wrapText="true" BorderPane.alignment="CENTER" />
+   </center>
+</BorderPane>

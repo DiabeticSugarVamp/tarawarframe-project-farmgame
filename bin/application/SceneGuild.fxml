@@ -29,4 +29,7 @@
             <Label styleClass="gameTopText" text="Deadline:" />
          </children></HBox>
    </top>
+   <center>
+      <Label lineSpacing="10.0" prefHeight="219.0" prefWidth="691.0" styleClass="gameText" text="The busy guild office is a bustling center of activity, where professionals and clients meet to discuss projects and opportunities. Desks are cluttered with paperwork and laptops, and the air is filled with the hum of conversations and ringing phones. Staff members move efficiently between tasks, coordinating schedules and managing inquiries in a fast-paced, dynamic environment." wrapText="true" BorderPane.alignment="CENTER" />
+   </center>
 </BorderPane>

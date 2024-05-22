@@ -29,4 +29,7 @@
             <Label styleClass="gameTopText" text="Deadline:" />
          </children></HBox>
    </top>
+   <center>
+      <Label lineSpacing="10.0" prefHeight="196.0" prefWidth="679.0" styleClass="gameText" text="Nestled in rolling countryside, the tranquil farm is a haven of peace, where fields of golden wheat sway gently in the breeze. The farmhouse, with its rustic charm, is surrounded by blooming gardens and shaded by ancient oaks, offering a perfect retreat from the bustle of modern life." wrapText="true" BorderPane.alignment="CENTER" />
+   </center>
 </BorderPane>

@@ -70,6 +70,14 @@ public class SceneController {
 		stage.show();
 	}
 	
+	public void switchToSceneMainMenuTutorial(MouseEvent event) throws IOException {
+		root = FXMLLoader.load(getClass().getResource("SceneMainMenuTutorial.fxml"));
+		stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+		scene = new Scene(root);
+		stage.setScene(scene);
+		stage.show();
+	}
+	
 	public void exitPrompt(MouseEvent event) {
 		Alert alert = new Alert(AlertType.CONFIRMATION);
 		alert.setTitle("exit");
