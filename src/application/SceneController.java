@@ -29,10 +29,6 @@ public class SceneController {
 	@FXML
 	private Button exitPromptButton;
 	
-	private File file;
-	private Media media;
-	private MediaPlayer mediaPlayer;
-	
 	private Stage stage;
 	private Scene scene;
 	private Parent root;
