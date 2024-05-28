@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
@@ -11,8 +12,14 @@
    <bottom>
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="100.0" BorderPane.alignment="CENTER">
          <children>
-            <Label fx:id="btnGoBack" onMouseClicked="#switchToSceneMainMenu" onMousePressed="#switchToSceneMainMenu" styleClass="mainMenuButtons" text="Go Back" />
-            <Label fx:id="btnProceed" onMouseClicked="#switchToScenePrologue" styleClass="mainMenuButtons" text="Proceed" />
+            <Label fx:id="btnGoBack" onMouseClicked="#switchToSceneMainMenu" onMousePressed="#switchToSceneMainMenu" styleClass="mainMenuButtons" text="Go Back">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></Label>
+            <Label fx:id="btnProceed" onMouseClicked="#switchToScenePrologue" styleClass="mainMenuButtons" text="Proceed">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></Label>
          </children>
       </HBox>
    </bottom>

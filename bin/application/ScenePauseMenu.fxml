@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.FlowPane?>
@@ -24,8 +25,14 @@
          <center>
             <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="20.0" BorderPane.alignment="CENTER">
                <children>
-                  <Label fx:id="mainMenuStart" alignment="CENTER" contentDisplay="CENTER" prefHeight="75.0" prefWidth="220.0" styleClass="mainMenuButtons" stylesheets="@application.css" text="Save Current Game" wrapText="true" />
-                  <Label fx:id="mainMenuExit" alignment="CENTER" contentDisplay="CENTER" onMouseClicked="#exitPrompt" prefHeight="75.0" prefWidth="220.0" styleClass="mainMenuButtons" text="Back to Main Menu" wrapText="true" />
+                  <Label fx:id="mainMenuStart" alignment="CENTER" contentDisplay="CENTER" prefHeight="75.0" prefWidth="220.0" styleClass="mainMenuButtons" stylesheets="@application.css" text="Save Current Game" wrapText="true">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></Label>
+                  <Label fx:id="mainMenuExit" alignment="CENTER" contentDisplay="CENTER" onMouseClicked="#exitPrompt" prefHeight="75.0" prefWidth="220.0" styleClass="mainMenuButtons" text="Back to Main Menu" wrapText="true">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></Label>
                </children>
             </VBox>
          </center>

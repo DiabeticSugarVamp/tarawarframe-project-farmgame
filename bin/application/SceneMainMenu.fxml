@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -24,12 +25,30 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Label fx:id="mainMenuStart" alignment="CENTER" contentDisplay="CENTER" onMouseClicked="#switchToSceneMainMenuSaves" prefHeight="75.0" prefWidth="200.0" styleClass="mainMenuButtons" stylesheets="@application.css" text="New Game" wrapText="true" GridPane.halignment="CENTER" />
-                  <Label fx:id="mainMenuSaves" alignment="CENTER" contentDisplay="CENTER" onMouseClicked="#switchToSceneMainMenuSaves" prefHeight="75.0" prefWidth="200.0" styleClass="mainMenuButtons" stylesheets="@application.css" text="Load Save" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
-                  <Label fx:id="mainMenuCredits" alignment="CENTER" contentDisplay="CENTER" onMouseClicked="#switchToSceneMainMenuCredits" prefHeight="75.0" prefWidth="200.0" styleClass="mainMenuButtons" text="Credits" wrapText="true" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
-                  <Label fx:id="mainMenuExit" alignment="CENTER" contentDisplay="CENTER" onMouseClicked="#exitPrompt" prefHeight="75.0" prefWidth="200.0" styleClass="mainMenuButtons" text="Exit" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
-                  <Label fx:id="mainMenuAboutUs" onMouseClicked="#switchToSceneMainMenuAboutUs" prefHeight="75.0" prefWidth="200.0" styleClass="mainMenuButtons" stylesheets="@application.css" text="About Us" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
-                  <Label onMouseClicked="#switchToSceneMainMenuTutorial" prefHeight="75.0" prefWidth="200.0" styleClass="mainMenuButtons" text="Tutorial" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+                  <Label fx:id="mainMenuStart" alignment="CENTER" contentDisplay="CENTER" onMouseClicked="#switchToSceneMainMenuSaves" prefHeight="75.0" prefWidth="200.0" styleClass="mainMenuButtons" stylesheets="@application.css" text="New Game" wrapText="true" GridPane.halignment="CENTER">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></Label>
+                  <Label fx:id="mainMenuSaves" alignment="CENTER" contentDisplay="CENTER" onMouseClicked="#switchToSceneMainMenuSaves" prefHeight="75.0" prefWidth="200.0" styleClass="mainMenuButtons" stylesheets="@application.css" text="Load Save" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></Label>
+                  <Label fx:id="mainMenuCredits" alignment="CENTER" contentDisplay="CENTER" onMouseClicked="#switchToSceneMainMenuCredits" prefHeight="75.0" prefWidth="200.0" styleClass="mainMenuButtons" text="Credits" wrapText="true" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></Label>
+                  <Label fx:id="mainMenuExit" alignment="CENTER" contentDisplay="CENTER" onMouseClicked="#exitPrompt" prefHeight="75.0" prefWidth="200.0" styleClass="mainMenuButtons" text="Exit" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></Label>
+                  <Label fx:id="mainMenuAboutUs" onMouseClicked="#switchToSceneMainMenuAboutUs" prefHeight="75.0" prefWidth="200.0" styleClass="mainMenuButtons" stylesheets="@application.css" text="About Us" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></Label>
+                  <Label onMouseClicked="#switchToSceneMainMenuTutorial" prefHeight="75.0" prefWidth="200.0" styleClass="mainMenuButtons" text="Tutorial" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></Label>
                </children>
             </GridPane>
          </center>

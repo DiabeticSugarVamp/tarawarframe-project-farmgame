@@ -10,7 +10,8 @@
 }
 
 .gamePane {
-	-fx-background-color: black;
+	-fx-background-image: url('../assets/bgFarm.png');
+	-fx-background-size: cover;
 }
 
 .mainMenuTitle {
@@ -62,12 +63,50 @@
 
 .gameBottomOptionText {
 	-fx-padding: 0 0 0 20px;
-    -fx-border-insets: 0 0 0 20px;
-    -fx-background-insets: 0 0 0 20px;
+    -fx-border-insets: 20px 0 0 20px;
+    -fx-background-insets: 20px 0 0 20px;
+    -fx-border-radius: 10;
+	-fx-border-width: 2px;
+	-fx-border-style: solid;
+	-fx-border-color: yellow;
+	-fx-background-color: #196f3d;
 }
 
 .gameTopText {
 	-fx-padding: 20px 0 0 20px;
 	-fx-border-insets: 20px 0 0 20px;
 	-fx-background-insets: 20px 0 0 20px;
+	-fx-background-radius: 10;
+	-fx-padding: 0 12px 0 12px;
+	-fx-border-radius: 10;
+	-fx-border-width: 2px;
+	-fx-border-style: solid;
+	-fx-border-color: yellow;
+}
+
+#labelCurrentDay {
+	-fx-background-color: purple;
+}
+
+#labelActionPoints {
+	-fx-background-color: green;
+}
+
+#labelMoney {
+	-fx-background-color: white;
+}
+
+#labelDeadline {
+	-fx-background-color: red;
+}
+
+.GridPane {
+	-fx-background-color: brown;
+	-fx-padding: 20px 0 0 20px;
+	-fx-border-insets: 20px 0 0 20px;
+	-fx-background-insets: 20px 0 0 20px;
+	-fx-background-radius: 10;
+	-fx-padding: 0 12px 0 12px;
+	-fx-border-style: solid;
+	-fx-border-color: yellow;
 }

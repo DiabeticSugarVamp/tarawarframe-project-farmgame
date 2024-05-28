@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.BorderPane?>
 
-
-<BorderPane prefHeight="768.0" prefWidth="1024.0" styleClass="mainMenuPane" stylesheets="@application.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/21" fx:controller="application.SceneController">
+<BorderPane prefHeight="768.0" prefWidth="1024.0" styleClass="mainMenuPane" stylesheets="@application.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.SceneController">
    <bottom>
-      <Label onMouseClicked="#switchToSceneMainMenu" styleClass="mainMenuButtons" text="Back to Main Menu" BorderPane.alignment="CENTER" />
+      <Label onMouseClicked="#switchToSceneMainMenu" styleClass="mainMenuButtons" text="Back to Main Menu" BorderPane.alignment="CENTER">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Label>
    </bottom>
    <top>
       <Label styleClass="mainMenuTitle" text="TUTORIAL" BorderPane.alignment="CENTER" />

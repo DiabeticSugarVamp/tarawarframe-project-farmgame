@@ -19,8 +19,6 @@ public class Main extends Application {
 			
 			String css = this.getClass().getResource("application.css").toExternalForm();
 			
-			
-			
 			String iconPath = "/assets/icon.jpg";
 			Image icon = new Image(getClass().getResource(iconPath).toString());
 			stage.getIcons().add(icon);

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Spinner?>
 <?import javafx.scene.control.TextField?>
@@ -10,7 +11,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane prefHeight="768.0" prefWidth="1024.0" styleClass="gamePane" stylesheets="@application.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.SceneController">
+<BorderPane prefHeight="768.0" prefWidth="1024.0" styleClass="gamePane" stylesheets="@application.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ControllerSceneGuildBuyPlants">
    <top>
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
@@ -41,15 +42,24 @@
             <Spinner fx:id="buySilverSpinner" editable="true" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="1" />
             <Spinner fx:id="buyGoldSpinner" editable="true" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="2" />
             <Label styleClass="gameText" text="Total cost:" wrapText="true" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
-            <TextField fx:id="buyTotal" editable="false" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="300.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <TextField fx:id="buyTotal" editable="false" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="300.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+               <cursor>
+                  <Cursor fx:constant="DEFAULT" />
+               </cursor></TextField>
          </children>
       </GridPane>
    </center>
    <bottom>
       <VBox prefHeight="50.0" prefWidth="1024.0" BorderPane.alignment="CENTER_LEFT">
          <children>
-            <Label styleClass="gameBottomOptionText" stylesheets="@application.css" text="1. Buy items" />
-            <Label onMouseClicked="#switchToSceneGuild" styleClass="gameBottomOptionText" stylesheets="@application.css" text="2. Go back" />
+            <Label styleClass="gameBottomOptionText" stylesheets="@application.css" text="1. Buy items">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></Label>
+            <Label onMouseClicked="#switchToSceneGuild" styleClass="gameBottomOptionText" stylesheets="@application.css" text="2. Go back">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></Label>
          </children>
       </VBox>
    </bottom>

@@ -78,7 +78,7 @@ public class SceneController {
 		Alert alert = new Alert(AlertType.CONFIRMATION);
 		alert.setTitle("exit");
 		alert.setHeaderText("You are about to exit!");
-		alert.setContentText("Are you sure you want to exit the game?");
+		alert.setContentText("Any unsaved progress will be lost.");
 		
 		if (alert.showAndWait().get() == ButtonType.OK) {
 		stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -94,61 +94,6 @@ public class SceneController {
 		stage.show();
 	}
 	
-	public void switchToSceneFarmNavigation(MouseEvent event) throws IOException {
-		root = FXMLLoader.load(getClass().getResource("SceneFarmNavigation.fxml"));
-		stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-		scene = new Scene(root);
-		stage.setScene(scene);
-		stage.show();
-	}
-	
-	public void switchToSceneFarmFields(MouseEvent event) throws IOException {
-		root = FXMLLoader.load(getClass().getResource("SceneFarmFields.fxml"));
-		stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-		scene = new Scene(root);
-		stage.setScene(scene);
-		stage.show();
-	}
-	
-	public void switchToSceneFarmAssets(MouseEvent event) throws IOException {
-		root = FXMLLoader.load(getClass().getResource("SceneFarmAssets.fxml"));
-		stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-		scene = new Scene(root);
-		stage.setScene(scene);
-		stage.show();
-	}
-	
-	public void switchToSceneGuild(MouseEvent event) throws IOException {
-		root = FXMLLoader.load(getClass().getResource("SceneGuild.fxml"));
-		stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-		scene = new Scene(root);
-		stage.setScene(scene);
-		stage.show();
-	}
-	
-	public void switchToSceneGuildBuyPlants(MouseEvent event) throws IOException {
-		root = FXMLLoader.load(getClass().getResource("SceneGuildBuyPlants.fxml"));
-		stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-		scene = new Scene(root);
-		stage.setScene(scene);
-		stage.show();
-	}
-	
-	public void switchToSceneGuildSellPlants(MouseEvent event) throws IOException {
-		root = FXMLLoader.load(getClass().getResource("SceneGuildSellPlants.fxml"));
-		stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-		scene = new Scene(root);
-		stage.setScene(scene);
-		stage.show();
-	}
-	
-	public void switchToSceneGuildUpgrades(MouseEvent event) throws IOException {
-		root = FXMLLoader.load(getClass().getResource("SceneGuildUpgrades.fxml"));
-		stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-		scene = new Scene(root);
-		stage.setScene(scene);
-		stage.show();
-	}
 	
 	/*
 	 * public void switchToScenePauseMenu(KeyEvent event) throws IOException {

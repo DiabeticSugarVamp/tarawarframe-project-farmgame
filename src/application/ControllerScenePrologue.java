@@ -15,7 +15,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
-public class PrologueController {
+public class ControllerScenePrologue {
 	
 	@FXML
 	

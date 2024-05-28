@@ -1,19 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane prefHeight="768.0" prefWidth="1024.0" styleClass="gamePane" stylesheets="@application.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.SceneController">
+<BorderPane prefHeight="768.0" prefWidth="1024.0" styleClass="gamePane" stylesheets="@application.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ControllerSceneGuild">
    <bottom>
       <VBox prefHeight="200.0" prefWidth="100.0" spacing="10.0" BorderPane.alignment="CENTER_LEFT">
          <children>
-            <Label fx:id="sceneFarmNavOption1" onMouseClicked="#switchToSceneGuildBuyPlants" styleClass="gameBottomOptionText" text="1. Buy seeds" />
-            <Label fx:id="sceneFarmNavOption2" onMouseClicked="#switchToSceneGuildSellPlants" styleClass="gameBottomOptionText" text="2. Sell crops" />
-            <Label fx:id="sceneFarmNavOption4" onMouseClicked="#switchToSceneGuildUpgrades" styleClass="gameBottomOptionText" text="3. Buy farm equipment and property renovations" />
-            <Label fx:id="sceneFarmNavOption5" onMouseClicked="#switchToSceneFarmNavigation" styleClass="gameBottomOptionText" text="4. Go back to farm" />
+            <Label fx:id="sceneFarmNavOption1" onMouseClicked="#switchToSceneGuildBuyPlants" styleClass="gameBottomOptionText" text="1. Buy seeds">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></Label>
+            <Label fx:id="sceneFarmNavOption2" onMouseClicked="#switchToSceneGuildSellPlants" styleClass="gameBottomOptionText" text="2. Sell crops">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></Label>
+            <Label fx:id="sceneFarmNavOption4" onMouseClicked="#switchToSceneGuildUpgrades" styleClass="gameBottomOptionText" text="3. Buy farm equipment and property renovations">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></Label>
+            <Label fx:id="sceneFarmNavOption5" onMouseClicked="#switchToSceneFarmNavigation" styleClass="gameBottomOptionText" text="4. Go back to farm">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></Label>
          </children>
          <BorderPane.margin>
             <Insets left="5.0" />

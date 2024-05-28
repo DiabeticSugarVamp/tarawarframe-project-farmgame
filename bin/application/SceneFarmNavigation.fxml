@@ -1,19 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane prefHeight="768.0" prefWidth="1024.0" styleClass="gamePane" stylesheets="@application.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.SceneController">
+<BorderPane prefHeight="768.0" prefWidth="1024.0" styleClass="gamePane" stylesheets="@application.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ControllerSceneFarmNavigation">
    <bottom>
       <VBox prefHeight="200.0" prefWidth="100.0" spacing="10.0" BorderPane.alignment="CENTER_LEFT">
          <children>
-            <Label fx:id="sceneFarmNavOption1" onMouseClicked="#switchToSceneFarmFields" styleClass="gameBottomOptionText" text="1. Go to the fields" />
-            <Label fx:id="sceneFarmNavOption2" onMouseClicked="#switchToSceneGuild" styleClass="gameBottomOptionText" text="2. Go to the guild office" />
-            <Label fx:id="sceneFarmNavOption4" onMouseClicked="#switchToSceneFarmAssets" styleClass="gameBottomOptionText" text="3. Check assets" />
-            <Label fx:id="sceneFarmNavOption5" styleClass="gameBottomOptionText" text="4. End day" />
+            <Label fx:id="sceneFarmNavOptionFields" onMouseClicked="#switchToSceneFarmFields" styleClass="gameBottomOptionText" text="1. Go to the fields">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></Label>
+            <Label fx:id="sceneFarmNavOptionGuild" onMouseClicked="#switchToSceneGuild" styleClass="gameBottomOptionText" text="2. Go to the guild office">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></Label>
+            <Label fx:id="sceneFarmNavOptionAssets" onMouseClicked="#switchToSceneFarmAssets" styleClass="gameBottomOptionText" text="3. Check assets">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></Label>
+            <Label fx:id="sceneFarmNavOptionEnd" onMouseClicked="#endDay" styleClass="gameBottomOptionText" text="4. End day">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></Label>
          </children>
          <BorderPane.margin>
             <Insets left="5.0" />
@@ -21,12 +34,12 @@
       </VBox>
    </bottom>
    <top>
-      <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <Label styleClass="gameTopText" text="Day: " />
-            <Label styleClass="gameTopText" text="Actions:" />
-            <Label styleClass="gameTopText" text="Money:" />
-            <Label styleClass="gameTopText" text="Deadline:" />
+            <Label fx:id="labelCurrentDay" styleClass="gameTopText" text="Day:" />
+            <Label fx:id="labelActionPoints" styleClass="gameTopText" text="Actions:" />
+            <Label fx:id="labelMoney" styleClass="gameTopText" text="Money:" />
+            <Label fx:id="labelDeadline" styleClass="gameTopText" text="Deadline:" />
          </children></HBox>
    </top>
    <center>

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.image.Image?>
@@ -17,7 +18,10 @@
             <Label fx:id="aboutUsTitle" styleClass="mainMenuTitle" stylesheets="@application.css" text="About Us" BorderPane.alignment="CENTER" />
          </top>
          <bottom>
-            <Label fx:id="goBackToMainMenu" onMouseClicked="#switchToSceneMainMenu" styleClass="mainMenuButtons" stylesheets="@application.css" text="Back to Main Menu" BorderPane.alignment="CENTER" />
+            <Label fx:id="goBackToMainMenu" onMouseClicked="#switchToSceneMainMenu" styleClass="mainMenuButtons" stylesheets="@application.css" text="Back to Main Menu" BorderPane.alignment="CENTER">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></Label>
          </bottom>
          <center>
             <GridPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="750.0" BorderPane.alignment="CENTER">
