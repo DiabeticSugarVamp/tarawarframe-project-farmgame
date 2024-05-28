@@ -36,6 +36,11 @@
    <top>
       <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
+            <Label onMouseClicked="#switchToScenePauseMenu" prefHeight="90.0" prefWidth="134.0" styleClass="gameTopText" text="Options Menu" wrapText="true">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Label>
             <Label fx:id="labelCurrentDay" styleClass="gameTopText" text="Day:" />
             <Label fx:id="labelActionPoints" styleClass="gameTopText" text="Actions:" />
             <Label fx:id="labelMoney" styleClass="gameTopText" text="Money:" />

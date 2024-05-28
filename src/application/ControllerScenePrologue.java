@@ -50,6 +50,8 @@ public class ControllerScenePrologue {
 					+ "With each visit, you feel the weight of his expectations "
 					+ "pressing down upon you. In this bucolic haven, survival is "
 					+ "measured not in gold but in the sweat of your brow and the yield of your fields.");
+			
+			prologueButton.setText("You dream of grander things. . .");
 		}
 		
 		if (prologueCounter == 1) {
@@ -63,6 +65,7 @@ public class ControllerScenePrologue {
 					+ "succulent fruits. When harvest time comes, you gather the fruits of your "
 					+ "labor with hands as gentle as a lover’s touch, savoring each moment like "
 					+ "the first kiss of spring.");
+			prologueButton.setText("And so you toil. . .");
 		}
 		
 		if (prologueCounter == 2) {
@@ -72,6 +75,7 @@ public class ControllerScenePrologue {
 					+ "As the sun sets, you retire to your humble abode, weary but content, "
 					+ "knowing that you have sown the seeds of your destiny and will soon reap the "
 					+ "rewards of a life truly lived.");
+			prologueButton.setText("It is time to PLOW TO PROFIT");
 		}
 		
 		if (prologueCounter == 3) {

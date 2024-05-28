@@ -16,7 +16,6 @@ public class ControllerSceneFarmNavigation {
 	private Scene scene;
 	private Parent root;
 	
-	private boolean initializeStartingValues;
 	private int currentDay;
 	private int money;
 	private int actionPointsRemaining;
@@ -52,6 +51,14 @@ public class ControllerSceneFarmNavigation {
 			money -= 50;
 			deadline += 14;
 		}
+	}
+	
+	public void switchToScenePauseMenu(MouseEvent event) throws IOException {
+		root = FXMLLoader.load(getClass().getResource("ScenePauseMenu.fxml"));
+		stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+		scene = new Scene(root);
+		stage.setScene(scene);
+		stage.show();
 	}
 	
 	public void switchToSceneFarmFields(MouseEvent event) throws IOException {
