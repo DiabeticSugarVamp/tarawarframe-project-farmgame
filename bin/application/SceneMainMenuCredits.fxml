@@ -43,7 +43,7 @@
                   </Label>
                </bottom>
                <top>
-                  <Label fx:id="mainMenuCredits" onMouseClicked="#exitPrompt" prefHeight="37.0" prefWidth="157.0" styleClass="mainMenuButtons" text="Credits" BorderPane.alignment="CENTER" />
+                  <Label fx:id="mainMenuCredits" prefHeight="37.0" prefWidth="157.0" styleClass="mainMenuButtons" text="Credits" BorderPane.alignment="CENTER" />
                </top>
             </BorderPane>
          </content>
