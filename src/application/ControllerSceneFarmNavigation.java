@@ -1,6 +1,7 @@
 package application;
 
 import java.io.IOException;
+import dbpackage.*;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,18 +14,26 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ResourceBundle;
 
 public class ControllerSceneFarmNavigation implements Initializable {
     private Stage stage;
     private Scene scene;
     private Parent root;
+    
+    private Connection connection = Dbconnect.getConnection();
 
-    private int currentDay = 1; 
-    private int money = 100; 
-    private int actionPointsRemaining = 10; 
-    private int actionPointsTotal = 10; 
-    private int deadline = 14;
+    private int currentDay; 
+    private double money; 
+    private int actionPointsRemaining; 
+    private int actionPointsTotal; 
+    private int deadline;
+    
 
     @FXML
     private Label labelCurrentDay;
@@ -34,18 +43,60 @@ public class ControllerSceneFarmNavigation implements Initializable {
     private Label labelMoney;
     @FXML
     private Label labelDeadline;
+    
+    
+    public void getUser() throws SQLException {
+        Statement stmt = connection.createStatement();
+        ResultSet rs = stmt.executeQuery("SELECT * FROM profile");
+
+        if (rs.next()) { 
+            currentDay = rs.getInt("cur_day");
+            money = rs.getDouble("cur_money");
+            actionPointsRemaining = rs.getInt("cur_actions");
+            actionPointsTotal = rs.getInt("cur_actions"); 
+            deadline = rs.getInt("cur_deadline");
+            
+        }
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        try {
+            getUser();
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+            
+        }
+        
         setTopTexts(); 
     }
 
+
     public void endDay(MouseEvent e) {
+    	
         currentDay++;
         actionPointsRemaining = actionPointsTotal;
         deadline -= 1;
+        
         this.deadline();
+
+        String updateSql = "UPDATE profile SET cur_day = ?, cur_deadline = ?, cur_money = ? WHERE user_id = 1";
+        
+        try (PreparedStatement pstmt = connection.prepareStatement(updateSql)) {
+            pstmt.setInt(1, currentDay);
+            pstmt.setInt(2, deadline);
+            pstmt.setDouble(3, money);
+            pstmt.executeUpdate();
+            
+        } catch (SQLException e1) {
+            e1.printStackTrace();
+            
+        }
+        
         this.setTopTexts();
+        
+        
     }
 
     public void setTopTexts() {

@@ -36,10 +36,10 @@
    <top>
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <Label styleClass="gameTopText" text="Day: " />
-            <Label styleClass="gameTopText" text="Actions:" />
-            <Label styleClass="gameTopText" text="Money:" />
-            <Label styleClass="gameTopText" text="Deadline:" />
+            <Label fx:id="labelCurrentDay" styleClass="gameTopText" text="Day: " />
+            <Label fx:id="labelActionPoints" styleClass="gameTopText" text="Actions:" />
+            <Label fx:id="labelMoney" styleClass="gameTopText" text="Money:" />
+            <Label fx:id="labelDeadline" styleClass="gameTopText" text="Deadline:" />
          </children></HBox>
    </top>
    <center>

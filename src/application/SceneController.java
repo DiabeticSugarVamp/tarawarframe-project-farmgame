@@ -2,6 +2,7 @@ package application;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Optional;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -10,7 +11,11 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.DialogPane;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.input.KeyEvent;
@@ -75,16 +80,43 @@ public class SceneController {
 	}
 	
 	public void exitPrompt(MouseEvent event) {
-		Alert alert = new Alert(AlertType.CONFIRMATION);
-		alert.setTitle("exit");
-		alert.setHeaderText("You are about to exit!");
-		alert.setContentText("Any unsaved progress will be lost.");
-		
-		if (alert.showAndWait().get() == ButtonType.OK) {
-		stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-		stage.close();
-		}
-	}
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Exit");
+        alert.setHeaderText("You are about to exit!");
+        alert.setContentText("Any unsaved progress will be lost.");
+
+        DialogPane dialogPane = alert.getDialogPane();
+        dialogPane.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+        dialogPane.getStyleClass().add("alert");
+        
+        ImageView icon = new ImageView(new Image(getClass().getResourceAsStream("/assets/icon.jpg")));
+        icon.setFitHeight(48);
+        icon.setFitWidth(48); 
+        alert.setGraphic(icon); 
+
+        ButtonType okButtonType = new ButtonType("OK", ButtonData.OK_DONE);
+        ButtonType cancelButtonType = new ButtonType("Cancel", ButtonData.CANCEL_CLOSE);
+        alert.getButtonTypes().setAll(okButtonType, cancelButtonType);
+
+        Button okButton = (Button) alert.getDialogPane().lookupButton(okButtonType);
+        okButton.getStyleClass().add("button-ok");
+        Button cancelButton = (Button) alert.getDialogPane().lookupButton(cancelButtonType);
+        cancelButton.getStyleClass().add("button-cancel");
+
+        Optional<ButtonType> result = alert.showAndWait();
+        handleAlertResult(event, result, okButtonType);
+        
+        
+        
+        
+    }
+
+    private void handleAlertResult(MouseEvent event, Optional<ButtonType> result, ButtonType okButtonType) {
+        if (result.isPresent() && result.get() == okButtonType) {
+            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.close();
+        }
+    }
 	
 	public void switchToScenePrologue(MouseEvent event) throws IOException {
 		root = FXMLLoader.load(getClass().getResource("ScenePrologue.fxml"));

@@ -1,4 +1,6 @@
 /* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
+@import url('https://fonts.googleapis.com/css2?family=Jaro:opsz@6..72&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Jaro:opsz@6..72&family=Sora:wght@100..800&display=swap');
 
 #introDevelopersPane {
 	-fx-background-color: black;
@@ -140,4 +142,101 @@
 	-fx-padding: 0 12px 0 12px;
 	-fx-border-style: solid;
 	-fx-border-color: yellow;
+}
+
+
+.alert {
+    -fx-background-color: 
+        linear-gradient(from 0% 93% to 0% 100%, #464646 0%, #464646 100%),
+        #464646,
+        #9B9B9B,
+        radial-gradient(center 50% 50%, radius 100%, #9B9B9B, #9B9B9B);
+}
+
+.alert .label {
+	-fx-font-family: "Sora", sans-serif;
+  	-fx-font-weight: 400;
+  	-fx-font-size: 1.3em;
+  	-fx-font-style: normal;
+	
+}
+
+.alert .header-panel .label {
+	-fx-font-family: "Jaro", sans-serif;
+	-fx-font-size: 2.1em;
+  	-fx-font-weight: 400;
+  	-fx-font-style: normal;
+    -fx-text-fill: #292929;
+	
+}
+
+.alert .header-panel {
+    -fx-background-color: 
+        linear-gradient(from 0% 93% to 0% 100%, #4EA24C 0%, #4EA24C 100%),
+        #6C966A,
+        #89C186,
+        radial-gradient(center 50% 50%, radius 100%, #89C186, #62BE5D);
+    -fx-text-fill: yellow;
+}
+
+.button-cancel {
+    -fx-padding: 8 15 15 15;
+    -fx-background-insets: 0,0 0 5 0, 0 0 6 0, 0 0 7 0;
+    -fx-background-radius: 8;
+    -fx-background-color: 
+        linear-gradient(from 0% 93% to 0% 100%, #17A313 0%, #129016 100%),
+        #2D9D24,
+        #3AD844,
+        radial-gradient(center 50% 50%, radius 100%, #3AD83C, #2EC52C);
+    -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.75) , 4,0,0,1 );
+    -fx-font-weight: bold;
+    -fx-font-size: 1.1em;
+}
+
+.button-cancel:hover {
+    -fx-background-color: 
+        linear-gradient(from 0% 93% to 0% 100%, #17A313 0%, #129016 100%),
+        #2D9D24,
+        #3AD844,
+        radial-gradient(center 50% 50%, radius 100%, #4BEA55, #2EC52C);
+}
+.button-cancel:pressed {
+    -fx-padding: 10 15 13 15;
+    -fx-background-insets: 2 0 0 0,2 0 3 0, 2 0 4 0, 2 0 5 0;
+}
+.button-cancel Text {
+    -fx-fill: white;
+    -fx-effect: dropshadow( gaussian , #a30000 , 0,0,0,2 );
+}
+/* eyo */
+.button-ok {
+    -fx-padding: 8 15 15 15;
+    -fx-background-insets: 0,0 0 5 0, 0 0 6 0, 0 0 7 0;
+    -fx-background-radius: 8;
+    -fx-background-color: 
+        linear-gradient(from 0% 93% to 0% 100%, #A31313 0%, #901212 100%),
+        #9D2424,
+        #D83A3A,
+        radial-gradient(center 50% 50%, radius 100%, #D83A3A, #C52C2C);
+    -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.75) , 4,0,0,1 );
+    -fx-font-weight: bold;
+    -fx-font-size: 1.1em;
+    -fx-text-fill: white;
+    
+}
+
+.button-ok:hover {
+    -fx-background-color: 
+        linear-gradient(from 0% 93% to 0% 100%, #A31313 0%, #901212 100%),
+        #9D2424,
+        #D83A3A,
+        radial-gradient(center 50% 50%, radius 100%, #EA4B4B, #C52C2C);
+}
+.button-ok:pressed {
+    -fx-padding: 10 15 13 15;
+    -fx-background-insets: 2 0 0 0,2 0 3 0, 2 0 4 0, 2 0 5 0;
+}
+.button-ok Text {
+    -fx-fill: white;
+    -fx-effect: dropshadow( gaussian , #a30000 , 0,0,0,2 );
 }
