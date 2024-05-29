@@ -25,7 +25,7 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Label fx:id="mainMenuStart" alignment="CENTER" contentDisplay="CENTER" onMouseClicked="#switchToSceneMainMenuSaves" prefHeight="75.0" prefWidth="200.0" styleClass="mainMenuButtons" stylesheets="@application.css" text="New Game" wrapText="true" GridPane.halignment="CENTER">
+                  <Label fx:id="mainMenuStart" alignment="CENTER" contentDisplay="CENTER" onMouseClicked="#switchToSceneMainMenuCharacterCreation" prefHeight="75.0" prefWidth="200.0" styleClass="mainMenuButtons" stylesheets="@application.css" text="New Game" wrapText="true" GridPane.halignment="CENTER">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor></Label>

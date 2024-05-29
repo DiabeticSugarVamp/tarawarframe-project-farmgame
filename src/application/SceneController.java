@@ -47,6 +47,14 @@ public class SceneController {
 		stage.show();
 	}
 	
+	public void switchToSceneMainMenuCharacterCreation(MouseEvent event) throws IOException {
+		root = FXMLLoader.load(getClass().getResource("SceneMainMenuCharacterCreation.fxml"));
+		stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+		scene = new Scene(root);
+		stage.setScene(scene);
+		stage.show();
+	}
+	
 	public void switchToSceneMainMenuSaves(MouseEvent event) throws IOException {
 		root = FXMLLoader.load(getClass().getResource("SceneMainMenuSaves.fxml"));
 		stage = (Stage)((Node)event.getSource()).getScene().getWindow();
