@@ -10,7 +10,6 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.layout.VBox?>
 
 <BorderPane prefHeight="768.0" prefWidth="1024.0" styleClass="gamePane" stylesheets="@application.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ControllerSceneFarmFields">
    <top>
@@ -23,35 +22,6 @@
          </children>
       </HBox>
    </top>
-   <bottom>
-      <VBox prefHeight="200.0" prefWidth="1024.0" spacing="10.0" BorderPane.alignment="CENTER">
-         <children>
-            <Label styleClass="gameBottomOptionText" stylesheets="@application.css" text="1. Plant seeds (-1 action)">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor></Label>
-            <Label styleClass="gameBottomOptionText" stylesheets="@application.css" text="2. Harvest crops (-1 action)">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor></Label>
-            <Label styleClass="gameBottomOptionText" stylesheets="@application.css" text="3. Water crops (-1 action)">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor></Label>
-            <Label styleClass="gameBottomOptionText" stylesheets="@application.css" text="4. Use fertilizer (-1 action)">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor></Label>
-            <Label onMouseClicked="#switchToSceneFarmNavigation" styleClass="gameBottomOptionText" stylesheets="@application.css" text="5. Go back">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor></Label>
-         </children>
-         <BorderPane.margin>
-            <Insets top="10.0" />
-         </BorderPane.margin>
-      </VBox>
-   </bottom>
    <center>
       <GridPane maxWidth="-Infinity" prefWidth="500.0" styleClass="GridPane" BorderPane.alignment="CENTER">
          <columnConstraints>
@@ -131,4 +101,40 @@
          </children>
       </GridPane>
    </center>
+   <bottom>
+      <GridPane BorderPane.alignment="CENTER">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Label styleClass="mainMenuButtons" stylesheets="@application.css" text="Plant seeds (-1 action)" GridPane.halignment="CENTER">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></Label>
+            <Label styleClass="mainMenuButtons" stylesheets="@application.css" text="Harvest crops (-1 action)" GridPane.columnIndex="2" GridPane.halignment="CENTER">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></Label>
+            <Label styleClass="mainMenuButtons" stylesheets="@application.css" text="Water crops (-1 action)" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></Label>
+            <Label onMouseClicked="#switchToSceneFarmNavigation" styleClass="mainMenuButtons" stylesheets="@application.css" text="Go back" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></Label>
+         </children>
+         <BorderPane.margin>
+            <Insets bottom="20.0" top="10.0" />
+         </BorderPane.margin>
+      </GridPane>
+   </bottom>
 </BorderPane>

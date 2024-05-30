@@ -4,35 +4,12 @@
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.RowConstraints?>
 
 <BorderPane prefHeight="768.0" prefWidth="1024.0" styleClass="gamePane" stylesheets="@application.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ControllerSceneGuild">
-   <bottom>
-      <VBox prefHeight="200.0" prefWidth="100.0" spacing="10.0" BorderPane.alignment="CENTER_LEFT">
-         <children>
-            <Label fx:id="sceneFarmNavOption1" onMouseClicked="#switchToSceneGuildBuyPlants" styleClass="gameBottomOptionText" text="1. Buy seeds">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor></Label>
-            <Label fx:id="sceneFarmNavOption2" onMouseClicked="#switchToSceneGuildSellPlants" styleClass="gameBottomOptionText" text="2. Sell crops">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor></Label>
-            <Label fx:id="sceneFarmNavOption4" onMouseClicked="#switchToSceneGuildUpgrades" styleClass="gameBottomOptionText" text="3. Buy farm equipment and property renovations">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor></Label>
-            <Label fx:id="sceneFarmNavOption5" onMouseClicked="#switchToSceneFarmNavigation" styleClass="gameBottomOptionText" text="4. Go back to farm">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor></Label>
-         </children>
-         <BorderPane.margin>
-            <Insets left="5.0" />
-         </BorderPane.margin>
-      </VBox>
-   </bottom>
    <top>
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
@@ -45,4 +22,41 @@
    <center>
       <Label lineSpacing="10.0" prefHeight="219.0" prefWidth="691.0" styleClass="gameText" text="The busy guild office is a bustling center of activity, where professionals and clients meet to discuss projects and opportunities. Desks are cluttered with paperwork and laptops, and the air is filled with the hum of conversations and ringing phones. Staff members move efficiently between tasks, coordinating schedules and managing inquiries in a fast-paced, dynamic environment." wrapText="true" BorderPane.alignment="CENTER" />
    </center>
+   <bottom>
+      <GridPane vgap="20.0" BorderPane.alignment="CENTER">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Label fx:id="sceneFarmNavOption1" onMouseClicked="#switchToSceneGuildBuyPlants" styleClass="mainMenuButtons" text="1. Buy seeds" GridPane.halignment="CENTER">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Label>
+            <Label fx:id="sceneFarmNavOption2" onMouseClicked="#switchToSceneGuildSellPlants" styleClass="mainMenuButtons" text="2. Sell crops" GridPane.columnIndex="1" GridPane.halignment="CENTER">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Label>
+            <Label fx:id="sceneFarmNavOption4" onMouseClicked="#switchToSceneGuildUpgrades" styleClass="mainMenuButtons" text="3. Buy farm equipment and property renovations" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Label>
+            <Label fx:id="sceneFarmNavOption5" onMouseClicked="#switchToSceneFarmNavigation" styleClass="mainMenuButtons" text="4. Go back to farm" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Label>
+         </children>
+         <BorderPane.margin>
+            <Insets bottom="20.0" />
+         </BorderPane.margin>
+      </GridPane>
+   </bottom>
 </BorderPane>

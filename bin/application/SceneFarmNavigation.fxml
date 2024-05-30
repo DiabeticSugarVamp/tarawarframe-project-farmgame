@@ -4,35 +4,12 @@
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.RowConstraints?>
 
 <BorderPane prefHeight="768.0" prefWidth="1024.0" styleClass="gamePane" stylesheets="@application.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ControllerSceneFarmNavigation">
-   <bottom>
-      <VBox prefHeight="200.0" prefWidth="100.0" spacing="10.0" BorderPane.alignment="CENTER_LEFT">
-         <children>
-            <Label fx:id="sceneFarmNavOptionFields" onMouseClicked="#switchToSceneFarmFields" styleClass="gameBottomOptionText" text="1. Go to the fields">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor></Label>
-            <Label fx:id="sceneFarmNavOptionGuild" onMouseClicked="#switchToSceneGuild" styleClass="gameBottomOptionText" text="2. Go to the guild office">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor></Label>
-            <Label fx:id="sceneFarmNavOptionAssets" onMouseClicked="#switchToSceneFarmAssets" styleClass="gameBottomOptionText" text="3. Check assets">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor></Label>
-            <Label fx:id="sceneFarmNavOptionEnd" onMouseClicked="#endDay" styleClass="gameBottomOptionText" text="4. End day">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor></Label>
-         </children>
-         <BorderPane.margin>
-            <Insets left="5.0" />
-         </BorderPane.margin>
-      </VBox>
-   </bottom>
    <top>
       <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
@@ -50,4 +27,41 @@
    <center>
       <Label lineSpacing="10.0" prefHeight="196.0" prefWidth="679.0" styleClass="gameText" text="Nestled in rolling countryside, the tranquil farm is a haven of peace, where fields of golden wheat sway gently in the breeze. The farmhouse, with its rustic charm, is surrounded by blooming gardens and shaded by ancient oaks, offering a perfect retreat from the bustle of modern life." wrapText="true" BorderPane.alignment="CENTER" />
    </center>
+   <bottom>
+      <GridPane vgap="30.0" BorderPane.alignment="CENTER">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Label fx:id="sceneFarmNavOptionFields" onMouseClicked="#switchToSceneFarmFields" styleClass="mainMenuButtons" text="Go to the fields" GridPane.halignment="CENTER">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Label>
+            <Label fx:id="sceneFarmNavOptionGuild" onMouseClicked="#switchToSceneGuild" styleClass="mainMenuButtons" text="Go to the guild office" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Label>
+            <Label fx:id="sceneFarmNavOptionAssets" onMouseClicked="#switchToSceneFarmAssets" styleClass="mainMenuButtons" text="Check assets" GridPane.columnIndex="1" GridPane.halignment="CENTER">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Label>
+            <Label fx:id="sceneFarmNavOptionEnd" onMouseClicked="#endDay" styleClass="mainMenuButtons" text="End day" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Label>
+         </children>
+         <padding>
+            <Insets bottom="10.0" />
+         </padding>
+      </GridPane>
+   </bottom>
 </BorderPane>
