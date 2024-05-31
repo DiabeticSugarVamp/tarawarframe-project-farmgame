@@ -33,6 +33,7 @@ public class ControllerSceneFarmNavigation implements Initializable {
     private int actionPointsRemaining; 
     private int actionPointsTotal; 
     private int deadline;
+    private boolean isOwnedTractor;
     
 
     @FXML
@@ -138,6 +139,11 @@ public class ControllerSceneFarmNavigation implements Initializable {
     }
 
     public void switchToSceneGuild(MouseEvent event) throws IOException {
+    	
+    	if (!isOwnedTractor) {
+    		actionPointsRemaining--;
+    	}
+    	
         root = FXMLLoader.load(getClass().getResource("SceneGuild.fxml"));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);

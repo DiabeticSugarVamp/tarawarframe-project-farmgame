@@ -23,6 +23,7 @@ public class ControllerFarmNavigation {
 	private int actionPointsRemaining;
 	private int actionPointsTotal;
 	private int deadline;
+	private boolean isOwnedTruck;
 	
 	@FXML
 	Label labelCurrentDay;
@@ -82,10 +83,13 @@ public class ControllerFarmNavigation {
 		}
 		
 		public void switchToSceneGuild(MouseEvent event) throws IOException {
-			root = FXMLLoader.load(getClass().getResource("SceneGuild.fxml"));
-			stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-			scene = new Scene(root);
-			stage.setScene(scene);
-			stage.show();
+			if (isOwnedTruck) {
+				root = FXMLLoader.load(getClass().getResource("SceneGuild.fxml"));
+				stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+				scene = new Scene(root);
+				stage.setScene(scene);
+				stage.show();
+			}
+			
 		}
 }

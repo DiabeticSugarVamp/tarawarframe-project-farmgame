@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
@@ -8,8 +9,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-
-<BorderPane prefHeight="768.0" prefWidth="1024.0" styleClass="gamePane" stylesheets="@application.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/21" fx:controller="application.ControllerSceneMainMenuCharacterCreation">
+<BorderPane prefHeight="768.0" prefWidth="1024.0" styleClass="gamePane" stylesheets="@application.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ControllerSceneMainMenuCharacterCreation">
    <top>
       <Label styleClass="mainMenuTitle" text="CREATION" BorderPane.alignment="CENTER" />
    </top>
@@ -23,13 +23,19 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label fx:id="creationGoBack" onMouseClicked="#switchToScenePrologue" styleClass="mainMenuButtons" text="GO BACK" GridPane.halignment="CENTER">
+            <Label fx:id="creationGoBack" onMouseClicked="#switchToSceneMainMenu" styleClass="mainMenuButtons" text="GO BACK" GridPane.halignment="CENTER">
                <padding>
                   <Insets bottom="20.0" />
                </padding>
                <GridPane.margin>
                   <Insets bottom="20.0" />
                </GridPane.margin>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </Label>
             <Label fx:id="creationProceed" onMouseClicked="#switchToScenePrologue" styleClass="mainMenuButtons" text="PROCEED" GridPane.columnIndex="1" GridPane.halignment="CENTER">
                <padding>
@@ -38,6 +44,12 @@
                <GridPane.margin>
                   <Insets bottom="20.0" />
                </GridPane.margin>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </Label>
          </children>
       </GridPane>

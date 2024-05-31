@@ -27,7 +27,7 @@
             <Label prefHeight="83.0" prefWidth="299.0" styleClass="gameText" text="Super Watering Can: watering plants consumes no action." wrapText="true" GridPane.halignment="RIGHT" />
             <Label prefHeight="87.0" prefWidth="297.0" styleClass="gameText" text="Trusty Truck: travelling to the guild office consumes no action." wrapText="true" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
             <Label prefHeight="110.0" prefWidth="314.0" styleClass="gameText" text="Tractor: Harvesting crops consumes no action." wrapText="true" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
-            <Label prefHeight="110.0" prefWidth="299.0" styleClass="gameText" text="Midas Farm Gloves: -2 days to until crops are ready to harvest.  " wrapText="true" GridPane.halignment="RIGHT" GridPane.rowIndex="3" />
+            <Label prefHeight="110.0" prefWidth="299.0" styleClass="gameText" text="Midas Farm Gloves: planting seeds consumes no action.  " wrapText="true" GridPane.halignment="RIGHT" GridPane.rowIndex="3" />
             <Label fx:id="labelIsOwnedCan" styleClass="gameText" text="Not owned" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
             <Label fx:id="labelIsOwnedTruck" styleClass="gameText" text="Not owned" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
             <Label fx:id="labelIsOwnedTractor" prefHeight="21.0" prefWidth="119.0" styleClass="gameText" text="Not owned" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" />

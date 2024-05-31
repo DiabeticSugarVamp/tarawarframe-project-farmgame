@@ -9,6 +9,8 @@ import java.sql.Statement;
 import java.util.ResourceBundle;
 
 import dbpackage.Dbconnect;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -16,6 +18,9 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.Spinner;
+import javafx.scene.control.SpinnerValueFactory;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
@@ -31,7 +36,7 @@ public class ControllerSceneGuildBuyPlants implements Initializable {
     private int actionPointsRemaining; 
     private int actionPointsTotal; 
     private int deadline;
-
+    
     @FXML
     private Label labelCurrentDay;
     @FXML
@@ -40,7 +45,19 @@ public class ControllerSceneGuildBuyPlants implements Initializable {
     private Label labelMoney;
     @FXML
     private Label labelDeadline;
-
+    
+    @FXML
+    private Spinner<Integer> buyBronzeSpinner;
+    @FXML 
+    private Spinner<Integer> buySilverSpinner;
+    @FXML
+    private Spinner<Integer> buyGoldSpinner;
+    
+    int calculatedTotalValue;
+    @FXML
+    private TextField buyTotal;
+    
+    
     public void getUser() throws SQLException {
         Statement stmt = connection.createStatement();
         ResultSet rs = stmt.executeQuery("SELECT * FROM profile WHERE user_id = 1");
@@ -62,6 +79,63 @@ public class ControllerSceneGuildBuyPlants implements Initializable {
             e.printStackTrace();
         }
         setTopTexts();
+        
+        SpinnerValueFactory<Integer> bronzeValueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 100);
+        bronzeValueFactory.setValue(0);
+        buyBronzeSpinner.setValueFactory(bronzeValueFactory);
+        
+        SpinnerValueFactory<Integer> silverValueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 100);
+        silverValueFactory.setValue(0);
+        buySilverSpinner.setValueFactory(silverValueFactory);
+        
+        SpinnerValueFactory<Integer> goldValueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 100);
+        goldValueFactory.setValue(0);
+        buyGoldSpinner.setValueFactory(goldValueFactory);
+        
+        calculatedTotalValue = (buyBronzeSpinner.getValue() * 5) + 
+        		(buySilverSpinner.getValue() * 10) + 
+        		(buyGoldSpinner.getValue() * 15);
+        buyTotal.setText(Integer.toString(calculatedTotalValue));
+        
+        buyBronzeSpinner.valueProperty().addListener(new ChangeListener<Integer>() {
+
+			@Override
+			public void changed(ObservableValue<? extends Integer> arg0, Integer arg1, Integer arg2) {
+				
+				calculatedTotalValue = (buyBronzeSpinner.getValue() * 5) + 
+		        		(buySilverSpinner.getValue() * 10) + 
+		        		(buyGoldSpinner.getValue() * 15);
+				buyTotal.setText(Integer.toString(calculatedTotalValue));
+			}
+        	
+        });
+        
+        buySilverSpinner.valueProperty().addListener(new ChangeListener<Integer>() {
+
+			@Override
+			public void changed(ObservableValue<? extends Integer> arg0, Integer arg1, Integer arg2) {
+				
+				calculatedTotalValue = (buyBronzeSpinner.getValue() * 5) + 
+		        		(buySilverSpinner.getValue() * 10) + 
+		        		(buyGoldSpinner.getValue() * 15);
+				buyTotal.setText(Integer.toString(calculatedTotalValue));
+			}
+        	
+        });
+        
+        buyGoldSpinner.valueProperty().addListener(new ChangeListener<Integer>() {
+
+			@Override
+			public void changed(ObservableValue<? extends Integer> arg0, Integer arg1, Integer arg2) {
+				
+				calculatedTotalValue = (buyBronzeSpinner.getValue() * 5) + 
+		        		(buySilverSpinner.getValue() * 10) + 
+		        		(buyGoldSpinner.getValue() * 15);
+				buyTotal.setText(Integer.toString(calculatedTotalValue));
+			}
+        	
+        });
+        
     }
 
     public void setTopTexts() {

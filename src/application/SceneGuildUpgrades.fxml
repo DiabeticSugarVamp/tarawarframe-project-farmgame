@@ -30,23 +30,23 @@
             <Label prefHeight="42.0" prefWidth="356.0" styleClass="gameText" text="Super Watering Can: watering plants consumes no action." wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
             <Label prefHeight="42.0" prefWidth="400.0" styleClass="gameText" text="Trusty Truck: travelling to the guild office consumes no action." wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
             <Label prefWidth="400.0" styleClass="gameText" text="Tractor: Harvesting crops consumes no action." wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
-            <Label fx:id="buyCan" styleClass="gameText" text="Buy" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+            <Label fx:id="buyCan" styleClass="gameText" text="Buy ($150)" GridPane.halignment="CENTER" GridPane.rowIndex="1">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor></Label>
-            <Label fx:id="buyTruck" styleClass="gameText" text="Buy" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+            <Label fx:id="buyTruck" styleClass="gameText" text="Buy ($150)" GridPane.halignment="CENTER" GridPane.rowIndex="2">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor></Label>
-            <Label fx:id="buyTractor" styleClass="gameText" text="Buy" GridPane.halignment="CENTER" GridPane.rowIndex="3">
+            <Label fx:id="buyTractor" styleClass="gameText" text="Buy ($150)" GridPane.halignment="CENTER" GridPane.rowIndex="3">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor></Label>
-            <Label fx:id="buyGloves" styleClass="gameText" text="Buy" GridPane.halignment="CENTER" GridPane.rowIndex="4">
+            <Label fx:id="buyGloves" styleClass="gameText" text="Buy ($150)" GridPane.halignment="CENTER" GridPane.rowIndex="4">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor></Label>
-            <Label prefWidth="400.0" styleClass="gameText" text="Midas Farm Gloves: -2 days to until crops are ready to harvest.  " wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
+            <Label prefWidth="400.0" styleClass="gameText" text="Midas Farm Gloves: planting seeds consumes no action.  " wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
             <Label styleClass="gameText" text="Money:" wrapText="true" GridPane.halignment="CENTER" />
             <TextField editable="false" maxWidth="-Infinity" prefWidth="255.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
             <ImageView fitHeight="121.0" fitWidth="87.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
@@ -70,7 +70,7 @@
                   <Image url="@../assets/mansion.png" />
                </image>
             </ImageView>
-            <Label fx:id="buyMansion" styleClass="gameText" text="Buy" GridPane.halignment="CENTER" GridPane.rowIndex="5">
+            <Label fx:id="buyMansion" styleClass="gameText" text="Buy ($300)" GridPane.halignment="CENTER" GridPane.rowIndex="5">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>

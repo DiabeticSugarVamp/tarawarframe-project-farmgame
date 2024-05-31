@@ -35,9 +35,9 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label styleClass="gameText" text="Buy bronze crop seeds: " wrapText="true" GridPane.halignment="CENTER" />
-            <Label styleClass="gameText" text="Buy silver crop seeds:" wrapText="true" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
-            <Label styleClass="gameText" text="Buy gold crop seeds:" wrapText="true" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+            <Label styleClass="gameText" text="Buy bronze seeds ($5): " wrapText="true" GridPane.halignment="CENTER" />
+            <Label styleClass="gameText" text="Buy silver seeds ($10):" wrapText="true" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+            <Label styleClass="gameText" text="Buy gold seeds($15):" wrapText="true" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
             <Spinner fx:id="buyBronzeSpinner" editable="true" GridPane.columnIndex="1" GridPane.halignment="LEFT" />
             <Spinner fx:id="buySilverSpinner" editable="true" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="1" />
             <Spinner fx:id="buyGoldSpinner" editable="true" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="2" />
@@ -59,11 +59,11 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label styleClass="mainMenuButtons" stylesheets="@application.css" text="1. Buy items" GridPane.halignment="CENTER">
+            <Label styleClass="mainMenuButtons" stylesheets="@application.css" text="Buy items" GridPane.halignment="CENTER">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor></Label>
-            <Label onMouseClicked="#switchToSceneGuild" styleClass="mainMenuButtons" stylesheets="@application.css" text="2. Go back" GridPane.columnIndex="1" GridPane.halignment="CENTER">
+            <Label onMouseClicked="#switchToSceneGuild" styleClass="mainMenuButtons" stylesheets="@application.css" text="Go back" GridPane.columnIndex="1" GridPane.halignment="CENTER">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor></Label>

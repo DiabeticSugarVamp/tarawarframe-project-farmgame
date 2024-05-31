@@ -35,9 +35,9 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label styleClass="gameText" text="Sell bronze crop seeds: " wrapText="true" GridPane.halignment="CENTER" />
-            <Label styleClass="gameText" text="Sell silver crop seeds:" wrapText="true" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
-            <Label styleClass="gameText" text="Sell gold crop seeds:" wrapText="true" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+            <Label styleClass="gameText" text="Sell bronze crops ($8): " wrapText="true" GridPane.halignment="CENTER" />
+            <Label styleClass="gameText" text="Sell silver crops ($14):" wrapText="true" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+            <Label styleClass="gameText" text="Sell gold crops ($20):" wrapText="true" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
             <Spinner fx:id="sellBronzeSpinner" editable="true" GridPane.columnIndex="1" GridPane.halignment="LEFT" />
             <Spinner fx:id="sellSilverSpinner" editable="true" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="1" />
             <Spinner fx:id="sellGoldSpinner" editable="true" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="2" />

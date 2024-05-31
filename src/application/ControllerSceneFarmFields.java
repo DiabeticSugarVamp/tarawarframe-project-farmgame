@@ -31,6 +31,10 @@ public class ControllerSceneFarmFields implements Initializable {
     private int actionPointsRemaining; 
     private int actionPointsTotal; 
     private int deadline;
+    
+    private boolean isOwnedGloves;
+    private boolean isOwnedTractor;
+    private boolean isOwnedCan;
 
     @FXML
     private Label labelCurrentDay;
@@ -69,6 +73,24 @@ public class ControllerSceneFarmFields implements Initializable {
         labelActionPoints.setText("Actions: " + actionPointsRemaining);
         labelMoney.setText("Money: " + money);
         labelDeadline.setText("Deadline: " + deadline);
+    }
+    
+    public void plantSeeds(MouseEvent e) throws IOException {
+    	if (!isOwnedGloves) {
+    		
+    	}
+    }
+    
+    public void harvestCrops(MouseEvent e) throws IOException {
+    	if (!isOwnedTractor) {
+    		
+    	}
+    }
+    
+    public void waterCrops(MouseEvent e) throws IOException {
+    	if (!isOwnedCan) {
+    		
+    	}
     }
 
     public void switchToSceneFarmNavigation(MouseEvent event) throws IOException {
