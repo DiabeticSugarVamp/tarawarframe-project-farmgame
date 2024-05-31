@@ -1,35 +1,172 @@
 package application;
 
 import java.io.IOException;
+import java.net.URL;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.sql.PreparedStatement;
+import java.util.ResourceBundle;
 
+import dbpackage.Dbconnect;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
-public class ControllerSaveCreate {
+public class ControllerSaveCreate implements Initializable {
 	private Stage stage;
 	private Scene scene;
 	private Parent root;
+	private Connection connection = Dbconnect.getConnection();
 	
 	@FXML
-	Label btnGoBack;
+	private Label btnGoBack;
 	@FXML
-	Label saveSlot1;
+	private Label saveSlot1;
 	@FXML 
-	Label saveSlot2;
+	private Label saveSlot2;
 	@FXML 
-	Label saveSlot3;
-	
+	private Label saveSlot3;
+
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+	    updateSlotLabels();
+	}
+
+	public void saveCurrentSlot1(MouseEvent event) throws IOException {
+	    saveCurrent(event, 1);
+	}
+
+	public void saveCurrentSlot2(MouseEvent event) throws IOException {
+	    saveCurrent(event, 2);
+	}
+
+	public void saveCurrentSlot3(MouseEvent event) throws IOException {
+	    saveCurrent(event, 3);
+	}
+
+	private void saveCurrent(MouseEvent event, int slot) throws IOException {
+	    try {
+	        Statement stmt = connection.createStatement();
+	        ResultSet rs = stmt.executeQuery("SELECT * FROM temporarystatsholder WHERE user_id = 1");
+
+	        if (rs.next()) {
+	            int userId = rs.getInt("user_id");
+	            String username = rs.getString("username");
+	            int curDay = rs.getInt("cur_day");
+	            int curActions = rs.getInt("cur_actions");
+	            int curMoney = rs.getInt("cur_money");
+	            int curDeadline = rs.getInt("cur_deadline");
+
+	            String checkSlotQuery = "SELECT * FROM savedstats WHERE save_slots = ?";
+	            PreparedStatement checkSlotStmt = connection.prepareStatement(checkSlotQuery);
+	            checkSlotStmt.setInt(1, slot);
+	            ResultSet checkSlotRs = checkSlotStmt.executeQuery();
+
+	            if (checkSlotRs.next()) {
+
+	                Alert alert = new Alert(AlertType.CONFIRMATION, "Slot " + slot + " is already occupied. Do you want to overwrite it?", ButtonType.YES, ButtonType.NO);
+	                alert.showAndWait();
+
+	                if (alert.getResult() == ButtonType.NO) {
+	                    return;
+	                    
+	                }
+	            }
+
+	            String saveQuery = "INSERT INTO savedstats (user_id, username, cur_day, cur_actions, cur_money, cur_deadline, save_slots) " +
+	                    "VALUES (?,?,?,?,?,?,?) " +
+	                    "ON DUPLICATE KEY UPDATE username = VALUES(username), cur_day = VALUES(cur_day), cur_actions = VALUES(cur_actions), cur_money = VALUES(cur_money), cur_deadline = VALUES(cur_deadline)";
+	            
+	            PreparedStatement saveStmt = connection.prepareStatement(saveQuery);
+	            saveStmt.setInt(1, userId);
+	            saveStmt.setString(2, username);
+	            saveStmt.setInt(3, curDay);
+	            saveStmt.setInt(4, curActions);
+	            saveStmt.setInt(5, curMoney);
+	            saveStmt.setInt(6, curDeadline);
+	            saveStmt.setInt(7, slot);
+	            saveStmt.executeUpdate();
+
+	            saveStmt.close();
+	            checkSlotRs.close();
+	            checkSlotStmt.close();
+	        } else {
+	            System.out.println("No data found for user_id = 1 in temporarystatsholder");
+	            
+	        }
+
+	        rs.close();
+	        stmt.close();
+	        
+	        
+	        
+	        
+	        
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	        
+	        
+	    }
+
+	    updateSlotLabels();
+	    switchToScenePauseMenu(event);
+	}
+
+	private void updateSlotLabels() {
+	    try {
+	        String query = "SELECT * FROM savedstats";
+	        Statement stmt = connection.createStatement();
+	        ResultSet rs = stmt.executeQuery(query);
+
+	        while (rs.next()) {
+	            int slot = rs.getInt("save_slots");
+	            String username = rs.getString("username");
+	            int curDay = rs.getInt("cur_day");
+	            int curDeadline = rs.getInt("cur_deadline");
+
+	            String labelText = "User: " + username + ", Days: " + curDay + ", Deadline: " + curDeadline;
+	            switch (slot) {
+	                case 1:
+	                    saveSlot1.setText(labelText);
+	                    break;
+	                case 2:
+	                    saveSlot2.setText(labelText);
+	                    break;
+	                case 3:
+	                    saveSlot3.setText(labelText);
+	                    break;
+	                default:
+	                    System.out.println("Invalid slot: " + slot);
+	                    break;
+	            }
+	        }
+
+	        rs.close();
+	        stmt.close();
+	        
+	        
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	        
+	    }
+	}
+
 	public void switchToScenePauseMenu(MouseEvent event) throws IOException {
-		root = FXMLLoader.load(getClass().getResource("ScenePauseMenu.fxml"));
-		stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-		scene = new Scene(root);
-		stage.setScene(scene);
-		stage.show();
+	    root = FXMLLoader.load(getClass().getResource("ScenePauseMenu.fxml"));
+	    stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+	    scene = new Scene(root);
+	    stage.setScene(scene);
+	    stage.show();
 	}
 }

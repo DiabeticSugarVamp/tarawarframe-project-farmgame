@@ -48,7 +48,7 @@ public class ControllerSceneFarmNavigation implements Initializable {
     
     public void getUser() throws SQLException {
         Statement stmt = connection.createStatement();
-        ResultSet rs = stmt.executeQuery("SELECT * FROM profile");
+        ResultSet rs = stmt.executeQuery("SELECT * FROM temporarystatsholder");
 
         if (rs.next()) { 
             currentDay = rs.getInt("cur_day");
@@ -82,7 +82,7 @@ public class ControllerSceneFarmNavigation implements Initializable {
         
         this.deadline();
 
-        String updateSql = "UPDATE profile SET cur_day = ?, cur_deadline = ?, cur_money = ? WHERE user_id = 1";
+        String updateSql = "UPDATE temporarystatsholder SET cur_day = ?, cur_deadline = ?, cur_money = ? WHERE user_id = 1";
         
         try (PreparedStatement pstmt = connection.prepareStatement(updateSql)) {
             pstmt.setInt(1, currentDay);
@@ -105,6 +105,7 @@ public class ControllerSceneFarmNavigation implements Initializable {
         labelActionPoints.setText("Actions: " + actionPointsRemaining);
         labelMoney.setText("Money: " + money);
         labelDeadline.setText("Deadline: " + deadline);
+        
     }
 
     public void deadline() {
@@ -142,6 +143,7 @@ public class ControllerSceneFarmNavigation implements Initializable {
     	
     	if (!isOwnedTractor) {
     		actionPointsRemaining--;
+    		
     	}
     	
         root = FXMLLoader.load(getClass().getResource("SceneGuild.fxml"));

@@ -72,11 +72,15 @@ public class ControllerSceneMainMenuCharacterCreation {
 
 			
 		}else {
-			/*
-			String insertUser = "INSERT INTO profile (username) VALUES (?)";
+			
+			String insertUser = "UPDATE temporarystatsholder SET username = ?, cur_day = ?, cur_actions = ?, cur_money = ?, cur_deadline = ? WHERE user_id = 1";
 			
 			try (PreparedStatement pstmt = connection.prepareStatement(insertUser)) {
-	            pstmt.setString(1, charNameInputBox.getText());  
+	            pstmt.setString(1, charNameInputBox.getText());
+	            pstmt.setInt(2, 1);
+	            pstmt.setInt(3, 5);
+	            pstmt.setInt(4, 100);
+	            pstmt.setInt(5, 14);
 	            pstmt.executeUpdate();
 	            
 	        } catch (SQLException e1) {
@@ -84,7 +88,7 @@ public class ControllerSceneMainMenuCharacterCreation {
 	            
 	        }
 			
-			*/ //Turn this to normal after testing
+			//Turn this to normal after testing
 			
 			
 			root = FXMLLoader.load(getClass().getResource("ScenePrologue.fxml"));

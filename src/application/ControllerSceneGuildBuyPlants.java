@@ -60,7 +60,7 @@ public class ControllerSceneGuildBuyPlants implements Initializable {
     
     public void getUser() throws SQLException {
         Statement stmt = connection.createStatement();
-        ResultSet rs = stmt.executeQuery("SELECT * FROM profile WHERE user_id = 1");
+        ResultSet rs = stmt.executeQuery("SELECT * FROM temporarystatsholder WHERE user_id = 1");
 
         if (rs.next()) { 
             currentDay = rs.getInt("cur_day");
