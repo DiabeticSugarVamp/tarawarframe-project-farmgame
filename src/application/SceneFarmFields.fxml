@@ -25,8 +25,8 @@
    <center>
       <GridPane maxWidth="-Infinity" prefWidth="1000.0" styleClass="GridPane" BorderPane.alignment="CENTER">
          <columnConstraints>
-            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="582.0" minWidth="10.0" prefWidth="418.0" />
-            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="556.0" minWidth="10.0" prefWidth="219.0" />
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="582.0" minWidth="10.0" prefWidth="344.0" />
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="556.0" minWidth="10.0" prefWidth="303.0" />
             <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="330.0" minWidth="10.0" prefWidth="303.0" />
          </columnConstraints>
          <rowConstraints>
@@ -71,26 +71,50 @@
             </ImageView>
             <ImageView fitHeight="46.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../assets/bCrop.png" />
+                  <Image url="@../assets/fruitBronze.png" />
                </image>
                <GridPane.margin>
-                  <Insets right="400.0" />
+                  <Insets right="350.0" />
                </GridPane.margin>
             </ImageView>
             <ImageView fitHeight="46.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
                <image>
-                  <Image url="@../assets/sCrop.png" />
+                  <Image url="@../assets/fruitSilver.png" />
                </image>
                <GridPane.margin>
-                  <Insets right="400.0" />
+                  <Insets right="350.0" />
                </GridPane.margin>
             </ImageView>
             <ImageView fitHeight="46.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2">
                <image>
+                  <Image url="@../assets/fruitGold.png" />
+               </image>
+               <GridPane.margin>
+                  <Insets right="350.0" />
+               </GridPane.margin>
+            </ImageView>
+            <ImageView fitHeight="46.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
+               <image>
+                  <Image url="@../assets/bCrop.png" />
+               </image>
+               <GridPane.margin>
+                  <Insets right="280.0" />
+               </GridPane.margin>
+            </ImageView>
+            <ImageView fitHeight="46.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <image>
+                  <Image url="@../assets/sCrop.png" />
+               </image>
+               <GridPane.margin>
+                  <Insets right="280.0" />
+               </GridPane.margin>
+            </ImageView>
+            <ImageView fitHeight="46.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <image>
                   <Image url="@../assets/gCrop.png" />
                </image>
                <GridPane.margin>
-                  <Insets right="400.0" />
+                  <Insets right="280.0" />
                </GridPane.margin>
             </ImageView>
          </children>

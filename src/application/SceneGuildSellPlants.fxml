@@ -5,6 +5,8 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Spinner?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -46,6 +48,21 @@
                <cursor>
                   <Cursor fx:constant="DEFAULT" />
                </cursor></TextField>
+            <ImageView fitHeight="113.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assets/fruitBronze.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="113.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
+               <image>
+                  <Image url="@../assets/fruitSilver.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="113.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2">
+               <image>
+                  <Image url="@../assets/fruitGold.png" />
+               </image>
+            </ImageView>
          </children>
       </GridPane>
    </center>
