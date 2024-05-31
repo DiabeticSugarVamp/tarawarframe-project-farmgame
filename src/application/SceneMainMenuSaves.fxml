@@ -8,18 +8,14 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<BorderPane prefHeight="768.0" prefWidth="1024.0" styleClass="mainMenuPane" stylesheets="@application.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.SceneController">
+<BorderPane prefHeight="768.0" prefWidth="1024.0" styleClass="mainMenuPane" stylesheets="@application.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ControllerSaveCreate">
    <top>
-      <Label styleClass="mainMenuTitle" text="Saves" BorderPane.alignment="CENTER" />
+      <Label styleClass="mainMenuTitle" text="Create Save State" BorderPane.alignment="CENTER" />
    </top>
    <bottom>
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="100.0" BorderPane.alignment="CENTER">
          <children>
-            <Label fx:id="btnGoBack" onMouseClicked="#switchToSceneMainMenu" onMousePressed="#switchToSceneMainMenu" styleClass="mainMenuButtons" text="Go Back">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor></Label>
-            <Label fx:id="btnProceed" onMouseClicked="#switchToScenePrologue" styleClass="mainMenuButtons" text="Proceed">
+            <Label fx:id="btnGoBack" onMouseClicked="#switchToScenePauseMenu" onMousePressed="#switchToScenePauseMenu" styleClass="mainMenuButtons" text="Go Back">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor></Label>

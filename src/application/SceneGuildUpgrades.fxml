@@ -3,7 +3,6 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
@@ -48,7 +47,6 @@
                </cursor></Label>
             <Label prefWidth="400.0" styleClass="gameText" text="Midas Farm Gloves: planting seeds consumes no action.  " wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
             <Label styleClass="gameText" text="Money:" wrapText="true" GridPane.halignment="CENTER" />
-            <TextField editable="false" maxWidth="-Infinity" prefWidth="255.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
             <ImageView fitHeight="121.0" fitWidth="87.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <image>
                   <Image url="@../assets/can.png" />
@@ -80,6 +78,7 @@
                   <Image url="@../assets/tractor.png" />
                </image>
             </ImageView>
+            <Label fx:id="totalMoney" styleClass="gameText" text="Placeholder" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
          </children>
       </GridPane>
    </center>

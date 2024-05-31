@@ -29,7 +29,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Label>
-                  <Label fx:id="mainMenuStart" alignment="CENTER" contentDisplay="CENTER" prefHeight="75.0" prefWidth="220.0" styleClass="mainMenuButtons" stylesheets="@application.css" text="Save Current Game" wrapText="true">
+                  <Label fx:id="mainMenuStart" alignment="CENTER" contentDisplay="CENTER" onMouseClicked="#switchToSceneMainMenuSaves" prefHeight="75.0" prefWidth="220.0" styleClass="mainMenuButtons" stylesheets="@application.css" text="Save Current Game" wrapText="true">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor></Label>

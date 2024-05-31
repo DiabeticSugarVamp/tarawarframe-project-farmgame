@@ -29,7 +29,7 @@
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor></Label>
-                  <Label fx:id="mainMenuSaves" alignment="CENTER" contentDisplay="CENTER" onMouseClicked="#switchToSceneMainMenuSaves" prefHeight="75.0" prefWidth="200.0" styleClass="mainMenuButtons" stylesheets="@application.css" text="Load Save" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER">
+                  <Label fx:id="mainMenuSaves" alignment="CENTER" contentDisplay="CENTER" onMouseClicked="#switchToSceneMainMenuLoad" prefHeight="75.0" prefWidth="200.0" styleClass="mainMenuButtons" stylesheets="@application.css" text="Load Save" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor></Label>
