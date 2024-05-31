@@ -67,7 +67,7 @@
         </rowConstraints>
          <children>
             <Label styleClass="gameText" text="Name:" GridPane.halignment="CENTER" />
-            <TextField prefHeight="25.0" prefWidth="288.0" GridPane.columnIndex="1" />
+            <TextField fx:id="charNameInputBox" prefHeight="25.0" prefWidth="288.0" GridPane.columnIndex="1" />
          </children>
       </GridPane>
    </center>
