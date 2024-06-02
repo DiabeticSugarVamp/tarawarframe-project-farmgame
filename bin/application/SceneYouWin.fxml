@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+
+
+<BorderPane prefHeight="768.0" prefWidth="1028.0" styleClass="gamePane" stylesheets="@application.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/21" fx:controller="application.SceneController">
+   <top>
+      <Label styleClass="mainMenuTitle" text="YOU WIN!" BorderPane.alignment="CENTER" />
+   </top>
+   <bottom>
+      <Label onMouseClicked="#switchToSceneMainMenu" styleClass="mainMenuButtons" text="Go back to main menu" BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets bottom="20.0" />
+         </BorderPane.margin>
+      </Label>
+   </bottom>
+</BorderPane>
