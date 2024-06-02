@@ -40,13 +40,6 @@ public class SceneController{
 	private Scene scene;
 	private Parent root;
 	
-	@FXML
-	private MediaView mainMenuMusic;
-	
-	private File musicFile;
-	private Media media;
-	
-	
 	
 	public void switchToSceneIntro(MouseEvent event) throws IOException {
 		root = FXMLLoader.load(getClass().getResource("SceneIntro.fxml"));
