@@ -63,6 +63,8 @@ public class ControllerSaveLoad implements Initializable {
 
         try (Statement stmt = connection.createStatement();
              ResultSet rs = stmt.executeQuery(query);
+        	 ResultSet rsItems = stmt.executeQuery(query2);
+        	 PreparedStatement pstmtItems = connection.prepareStatement(insertQueryItems);
              PreparedStatement pstmt = connection.prepareStatement(insertQuery)) {
 
             if (rs.next()) {
@@ -72,17 +74,31 @@ public class ControllerSaveLoad implements Initializable {
                 pstmt.setInt(4, rs.getInt("cur_money"));
                 pstmt.setInt(5, rs.getInt("cur_deadline"));
                 pstmt.executeUpdate();  
+                
+                if(rsItems.next()) {
+                	pstmtItems.setInt(1, rsItems.getInt("seed_bronze"));
+                	pstmtItems.setInt(1, rsItems.getInt("seed_silver"));
+                	pstmtItems.setInt(1, rsItems.getInt("seed_gold"));
+                	pstmtItems.setInt(1, rsItems.getInt("crop_bronze"));
+                	pstmtItems.setInt(1, rsItems.getInt("crop_silver"));
+                	pstmtItems.setInt(1, rsItems.getInt("crop_gold"));
+                	pstmtItems.executeUpdate();
+                	
+                }
 
                 root = FXMLLoader.load(getClass().getResource("SceneFarmNavigation.fxml"));
                 stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 scene = new Scene(root);
                 stage.setScene(scene);
                 stage.show();
+                
             } else {
                 System.out.println("No data found for slot " + slot);
+                
             }
         } catch (SQLException e) {
             e.printStackTrace();
+            
         }
     }
 
@@ -111,6 +127,7 @@ public class ControllerSaveLoad implements Initializable {
                     default:
                         System.out.println("Invalid slot: " + slot);
                         break;
+                        
                 }
             }
         } catch (SQLException e) {

@@ -58,6 +58,7 @@ public class ControllerSceneFarmFields implements Initializable {
             actionPointsRemaining = rs.getInt("cur_actions");
             actionPointsTotal = rs.getInt("cur_actions"); 
             deadline = rs.getInt("cur_deadline");
+            
         }
     }
 
