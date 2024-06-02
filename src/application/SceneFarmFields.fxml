@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<BorderPane prefHeight="768.0" prefWidth="1024.0" styleClass="gamePane" stylesheets="@application.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ControllerSceneFarmFields">
+<BorderPane fx:id="sceneFarmFieldsPane" prefHeight="768.0" prefWidth="1024.0" styleClass="gamePane" stylesheets="@application.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ControllerSceneFarmFields">
    <top>
       <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
@@ -22,104 +22,6 @@
          </children>
       </HBox>
    </top>
-   <center>
-      <GridPane maxWidth="-Infinity" prefWidth="1000.0" styleClass="GridPane" BorderPane.alignment="CENTER">
-         <columnConstraints>
-            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="582.0" minWidth="10.0" prefWidth="344.0" />
-            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="556.0" minWidth="10.0" prefWidth="303.0" />
-            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="330.0" minWidth="10.0" prefWidth="303.0" />
-         </columnConstraints>
-         <rowConstraints>
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-         </rowConstraints>
-         <children>
-            <Label prefHeight="90.0" prefWidth="298.0" styleClass="gameText" text="Bronze crops ready to harvest:" wrapText="true" />
-            <Label prefHeight="75.0" prefWidth="297.0" styleClass="gameText" text="Silver crops ready to harvest:" wrapText="true" GridPane.rowIndex="1" />
-            <Label prefHeight="66.0" prefWidth="277.0" styleClass="gameText" text="Gold crops ready to harvest:" wrapText="true" GridPane.rowIndex="2" />
-            <Label styleClass="gameText" text="Bronze crops growing:" wrapText="true" GridPane.columnIndex="1" />
-            <Label styleClass="gameText" text="Silver crops growing:" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <Label styleClass="gameText" text="Gold crops growing:" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <Label prefHeight="60.0" prefWidth="217.0" styleClass="gameText" text="Bronze crop seeds:" wrapText="true" GridPane.columnIndex="2" />
-            <ImageView fitHeight="46.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true" rotate="-161.6" GridPane.columnIndex="2" GridPane.halignment="CENTER">
-               <image>
-                  <Image url="@../assets/bSeed.png" />
-               </image>
-               <GridPane.margin>
-                  <Insets right="270.0" />
-               </GridPane.margin>
-            </ImageView>
-            <Label prefHeight="60.0" prefWidth="217.0" styleClass="gameText" text="Silver crop seeds:" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-            <ImageView fitHeight="46.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1">
-               <image>
-                  <Image url="@../assets/sSeed.png" />
-               </image>
-               <GridPane.margin>
-                  <Insets right="270.0" />
-               </GridPane.margin>
-            </ImageView>
-            <Label prefHeight="60.0" prefWidth="193.0" styleClass="gameText" text="Gold crop seeds:" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-            <ImageView fitHeight="46.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2">
-               <image>
-                  <Image url="@../assets/gSeed.png" />
-               </image>
-               <GridPane.margin>
-                  <Insets right="270.0" />
-               </GridPane.margin>
-            </ImageView>
-            <ImageView fitHeight="46.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../assets/fruitBronze.png" />
-               </image>
-               <GridPane.margin>
-                  <Insets right="350.0" />
-               </GridPane.margin>
-            </ImageView>
-            <ImageView fitHeight="46.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
-               <image>
-                  <Image url="@../assets/fruitSilver.png" />
-               </image>
-               <GridPane.margin>
-                  <Insets right="350.0" />
-               </GridPane.margin>
-            </ImageView>
-            <ImageView fitHeight="46.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2">
-               <image>
-                  <Image url="@../assets/fruitGold.png" />
-               </image>
-               <GridPane.margin>
-                  <Insets right="350.0" />
-               </GridPane.margin>
-            </ImageView>
-            <ImageView fitHeight="46.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
-               <image>
-                  <Image url="@../assets/bCrop.png" />
-               </image>
-               <GridPane.margin>
-                  <Insets right="280.0" />
-               </GridPane.margin>
-            </ImageView>
-            <ImageView fitHeight="46.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
-               <image>
-                  <Image url="@../assets/sCrop.png" />
-               </image>
-               <GridPane.margin>
-                  <Insets right="280.0" />
-               </GridPane.margin>
-            </ImageView>
-            <ImageView fitHeight="46.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="2">
-               <image>
-                  <Image url="@../assets/gCrop.png" />
-               </image>
-               <GridPane.margin>
-                  <Insets right="280.0" />
-               </GridPane.margin>
-            </ImageView>
-         </children>
-      </GridPane>
-   </center>
    <bottom>
       <GridPane BorderPane.alignment="CENTER">
         <columnConstraints>
@@ -156,4 +58,122 @@
          </BorderPane.margin>
       </GridPane>
    </bottom>
+   <center>
+      <GridPane hgap="5.0" maxWidth="-Infinity" prefWidth="760.0" BorderPane.alignment="CENTER">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <GridPane styleClass="GridPane">
+              <columnConstraints>
+                <ColumnConstraints />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <ImageView fitHeight="90.0" fitWidth="71.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fitHeight="48.0" fitWidth="65.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../assets/fruitBronze.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="48.0" fitWidth="65.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
+                     <image>
+                        <Image url="@../assets/fruitSilver.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="48.0" fitWidth="65.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2">
+                     <image>
+                        <Image url="@../assets/fruitGold.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="lblHarvestBronze" styleClass="fieldsColumnText" text="Bronze crops ready to harvest:" wrapText="true" GridPane.columnIndex="1" />
+                  <Label fx:id="lblHarvestSilver" styleClass="fieldsColumnText" text="Silver crops ready to harvest:" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Label fx:id="lblHarvestGold" styleClass="fieldsColumnText" text="Gold crops ready to harvest:" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+               </children>
+            </GridPane>
+            <GridPane styleClass="GridPane" GridPane.columnIndex="1">
+               <columnConstraints>
+                  <ColumnConstraints />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <children>
+                  <ImageView fitHeight="90.0" fitWidth="71.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fitHeight="48.0" fitWidth="65.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../assets/bCrop.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="48.0" fitWidth="65.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
+                     <image>
+                        <Image url="@../assets/sCrop.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="48.0" fitWidth="65.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2">
+                     <image>
+                        <Image url="@../assets/gCrop.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="lblGrowingBronze" styleClass="fieldsColumnText" text="Bronze crops growing:" wrapText="true" GridPane.columnIndex="1" />
+                  <Label fx:id="lblGrowingSilver" styleClass="fieldsColumnText" text="Silver crops growing:" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Label fx:id="lblGrowingGold" styleClass="fieldsColumnText" text="Gold crops growing:" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+               </children>
+            </GridPane>
+            <GridPane styleClass="GridPane" GridPane.columnIndex="2">
+               <columnConstraints>
+                  <ColumnConstraints />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <children>
+                  <ImageView fitHeight="90.0" fitWidth="71.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fitHeight="48.0" fitWidth="65.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../assets/bSeed.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="48.0" fitWidth="65.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
+                     <image>
+                        <Image url="@../assets/sSeed.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="48.0" fitWidth="65.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2">
+                     <image>
+                        <Image url="@../assets/gSeed.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="lblSeedsBronze" styleClass="fieldsColumnText" text="Bronze seeds:" wrapText="true" GridPane.columnIndex="1" />
+                  <Label fx:id="lblSeedsSilver" styleClass="fieldsColumnText" text="Silver seeds:" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Label fx:id="lblSeedsGold" styleClass="fieldsColumnText" text="Gold seeds:" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+               </children>
+            </GridPane>
+            <Label fx:id="btnGoToInventories" onMouseClicked="#switchToSceneFarmInventories" styleClass="mainMenuButtons" text="Check the inventories" GridPane.columnIndex="3" GridPane.halignment="CENTER">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></Label>
+         </children>
+         <BorderPane.margin>
+            <Insets bottom="20.0" right="30.0" />
+         </BorderPane.margin>
+      </GridPane>
+   </center>
 </BorderPane>

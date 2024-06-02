@@ -2,24 +2,12 @@
 
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.effect.Bloom?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.shape.Sphere?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="introDevelopersPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" stylesheets="@application.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.SceneController">
+<AnchorPane fx:id="sceneIntroPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1020.0" styleClass="gamePane" stylesheets="@application.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.SceneController">
    <children>
-      <Label fx:id="taraWarframeEntertainment" layoutX="33.0" layoutY="247.0" prefHeight="87.0" prefWidth="838.0" text="TARA WARFRAME ENTERTAINMENT" textFill="WHITE">
-         <font>
-            <Font name="Bell MT" size="41.0" />
-         </font>
-      </Label>
-      <Sphere layoutX="83.0" layoutY="205.0" radius="50">
-         <effect>
-            <Bloom />
-         </effect>
-      </Sphere>
-      <Label fx:id="switchToMainMenu" layoutX="376.0" layoutY="500.0" onMouseClicked="#switchToSceneMainMenu" prefHeight="57.0" prefWidth="93.0" text="Proceed" textFill="#ffe100" wrapText="true">
+      <Label fx:id="switchToMainMenu" layoutX="464.0" layoutY="685.0" onMouseClicked="#switchToSceneMainMenu" prefHeight="57.0" prefWidth="93.0" styleClass="button-ok" text="PROCEED" textFill="#ffe100" wrapText="true">
          <font>
             <Font name="Britannic Bold" size="24.0" />
          </font>

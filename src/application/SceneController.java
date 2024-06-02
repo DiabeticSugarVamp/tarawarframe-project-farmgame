@@ -38,6 +38,16 @@ public class SceneController {
 	private Scene scene;
 	private Parent root;
 	
+	
+	public void switchToSceneIntro(MouseEvent event) throws IOException {
+		root = FXMLLoader.load(getClass().getResource("SceneIntro.fxml"));
+		stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+		scene = new Scene(root);
+		stage.setScene(scene);
+		//this.initializeMainMenuMusic();
+		stage.show();
+	}
+	
 	public void switchToSceneMainMenu(MouseEvent event) throws IOException {
 		root = FXMLLoader.load(getClass().getResource("SceneMainMenu.fxml"));
 		stage = (Stage)((Node)event.getSource()).getScene().getWindow();

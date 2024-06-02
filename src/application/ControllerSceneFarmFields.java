@@ -44,10 +44,13 @@ public class ControllerSceneFarmFields implements Initializable {
     private Label labelMoney;
     @FXML
     private Label labelDeadline;
+    
+    @FXML
+    private Label btnGoToInvetories;
 
     public void getUser() throws SQLException {
         Statement stmt = connection.createStatement();
-        ResultSet rs = stmt.executeQuery("SELECT * FROM temporarystatsholder WHERE user_id = 1");
+        ResultSet rs = stmt.executeQuery("SELECT * FROM profile WHERE user_id = 1");
 
         if (rs.next()) { 
             currentDay = rs.getInt("cur_day");
@@ -95,6 +98,14 @@ public class ControllerSceneFarmFields implements Initializable {
 
     public void switchToSceneFarmNavigation(MouseEvent event) throws IOException {
         root = FXMLLoader.load(getClass().getResource("SceneFarmNavigation.fxml"));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+    
+    public void switchToSceneFarmInventories(MouseEvent event) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("SceneFarmInventories.fxml"));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);

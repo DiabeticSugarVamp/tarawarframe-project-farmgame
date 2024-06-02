@@ -25,10 +25,12 @@
       </HBox>
    </top>
    <center>
-      <GridPane BorderPane.alignment="CENTER">
+      <GridPane maxWidth="-Infinity" prefWidth="800.0" styleClass="GridPane" BorderPane.alignment="CENTER">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
         </columnConstraints>
         <rowConstraints>
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -37,33 +39,39 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label styleClass="gameText" text="Buy bronze seeds ($5): " wrapText="true" GridPane.halignment="CENTER" />
-            <Label styleClass="gameText" text="Buy silver seeds ($10):" wrapText="true" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
-            <Label styleClass="gameText" text="Buy gold seeds($15):" wrapText="true" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
-            <Spinner fx:id="buyBronzeSpinner" editable="true" GridPane.columnIndex="1" GridPane.halignment="LEFT" />
-            <Spinner fx:id="buySilverSpinner" editable="true" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="1" />
-            <Spinner fx:id="buyGoldSpinner" editable="true" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="2" />
-            <Label styleClass="gameText" text="Total cost:" wrapText="true" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
-            <TextField fx:id="buyTotal" editable="false" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="300.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+            <Label styleClass="gameText" text="Buy bronze seeds ($5): " wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
+            <Label styleClass="gameText" text="Buy silver seeds ($10):" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+            <Label styleClass="gameText" text="Buy gold seeds($15):" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+            <Spinner fx:id="buyBronzeSpinner" editable="true" GridPane.columnIndex="2" GridPane.halignment="CENTER" />
+            <Spinner fx:id="buySilverSpinner" editable="true" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+            <Spinner fx:id="buyGoldSpinner" editable="true" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+            <Label styleClass="gameText" text="Total cost:" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
+            <TextField fx:id="buyTotal" editable="false" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="206.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3">
                <cursor>
                   <Cursor fx:constant="DEFAULT" />
                </cursor></TextField>
-            <ImageView fitHeight="150.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="150.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER">
                <image>
                   <Image url="@../assets/bSeed.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="150.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
+            <ImageView fitHeight="150.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="1">
                <image>
                   <Image url="@../assets/sSeed.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="150.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2">
+            <ImageView fitHeight="150.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="2">
                <image>
                   <Image url="@../assets/gSeed.png" />
                </image>
             </ImageView>
+            <Label fx:id="lblOwnSeedBronze" styleClass="gameText" text="Bronze seeds owned:" wrapText="true" GridPane.columnIndex="3" />
+            <Label fx:id="lblOwnSeedSilver" styleClass="gameText" text="Silver seeds owned:" wrapText="true" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+            <Label fx:id="lblOwnSeedGold" styleClass="gameText" text="Gold seeds owned:" wrapText="true" GridPane.columnIndex="3" GridPane.rowIndex="2" />
          </children>
+         <BorderPane.margin>
+            <Insets bottom="20.0" />
+         </BorderPane.margin>
       </GridPane>
    </center>
    <bottom>

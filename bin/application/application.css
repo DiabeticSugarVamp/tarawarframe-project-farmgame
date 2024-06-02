@@ -16,6 +16,28 @@
 	-fx-background-size: cover;
 }
 
+#sceneFarmFieldsPane {
+	-fx-background-image: url('../assets/bgSceneFarmFields.gif')
+}
+
+#sceneFarmInventoriesPane {
+	-fx-background-image: url('../assets/bgSceneFarmInventories.gif');
+}
+
+#sceneGuildPane {
+	-fx-background-image: url('../assets/bgSceneGuild.gif');
+}
+
+#sceneIntroPane {
+	-fx-background-image: url('../assets/bgTaraWarframe.png');
+	-fx-background-size: stretch;
+}
+
+#sceneTitleDropPane {
+	-fx-background-image: url('../assets/bgTitleDrop.png');
+	-fx-background-size: cover;
+}
+
 .mainMenuTitle {
 	-fx-text-fill: yellow;
 	-fx-font-family: "Bauhaus 93";
@@ -88,10 +110,14 @@
 	-fx-font-size: 25;
 }
 
-.gameText, .gameBottomOptionText, .gameTopText {
+.gameText, .gameBottomOptionText, .gameTopText, .fieldsColumnText {
 	-fx-font-family: "Lucida Console";
 	-fx-text-fill: yellow;
 	-fx-font-size: 20px; 	
+}
+
+.fieldsColumnText {
+	-fx-font-size: 14px;
 }
 
 .gameBottomOptionText {
