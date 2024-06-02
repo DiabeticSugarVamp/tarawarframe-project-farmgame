@@ -48,9 +48,9 @@
 	-fx-background-size: contain  ;
 }
 
-#bgFrameTest {
-	-fx-background-image: url('../assets/bgGuildSell.gif');	
-	-fx-background-size: contain ;
+#guildUpgradesPane {
+	-fx-background-image: url('../assets/bgGuildUpgrades.gif');	
+	-fx-background-size: contain;
 }
 
 .mainMenuTitle {
