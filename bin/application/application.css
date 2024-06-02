@@ -38,11 +38,26 @@
 	-fx-background-size: cover;
 }
 
+#guildBuyPane {
+	-fx-background-image: url('../assets/bgGuildBuy.gif');
+	-fx-background-size: cover;
+}
+
+#guildSellPane {
+	-fx-background-image: url('../assets/bgGuildSell.gif');	
+	-fx-background-size: contain  ;
+}
+
+#bgFrameTest {
+	-fx-background-image: url('../assets/bgGuildSell.gif');	
+	-fx-background-size: contain ;
+}
+
 .mainMenuTitle {
 	-fx-text-fill: yellow;
 	-fx-font-family: "Bauhaus 93";
 	-fx-font-size: 50;
-	-fx-alignment: center;
+	-fx-alignment: center;	
 	-fx-text-alignment: center;
 }
 

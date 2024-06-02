@@ -1,12 +1,15 @@
 package application;
 
 import java.io.File;
-import java.io.IOException;
-import java.util.Optional;
 
+import java.io.IOException;
+import java.net.URL;
+import java.util.Optional;
+import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -27,9 +30,8 @@ import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 import javafx.stage.Stage;
 
-public class SceneController {
-	@FXML
-	private MediaView mainMenuMusic;
+public class SceneController{
+	
 	
 	@FXML
 	private Button exitPromptButton;
@@ -38,13 +40,19 @@ public class SceneController {
 	private Scene scene;
 	private Parent root;
 	
+	@FXML
+	private MediaView mainMenuMusic;
+	
+	private File musicFile;
+	private Media media;
+	
+	
 	
 	public void switchToSceneIntro(MouseEvent event) throws IOException {
 		root = FXMLLoader.load(getClass().getResource("SceneIntro.fxml"));
 		stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 		scene = new Scene(root);
 		stage.setScene(scene);
-		//this.initializeMainMenuMusic();
 		stage.show();
 	}
 	
@@ -53,7 +61,6 @@ public class SceneController {
 		stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 		scene = new Scene(root);
 		stage.setScene(scene);
-		//this.initializeMainMenuMusic();
 		stage.show();
 	}
 	
@@ -125,8 +132,6 @@ public class SceneController {
         handleAlertResult(event, result, okButtonType);
         
         
-        
-        
     }
 
     private void handleAlertResult(MouseEvent event, Optional<ButtonType> result, ButtonType okButtonType) {
@@ -143,30 +148,5 @@ public class SceneController {
 		stage.setScene(scene);
 		stage.show();
 	}
-	
-	
-	/*
-	 * public void switchToScenePauseMenu(KeyEvent event) throws IOException {
-	 * Parent root = FXMLLoader.load(getClass().getResource("ScenePauseMenu.fxml"));
-	 * Stage stage = null;
-	 * 
-	 * // Check if the source is a Node if (event.getSource() instanceof Node) {
-	 * stage = (Stage) ((Node) event.getSource()).getScene().getWindow(); } // Check
-	 * if the source is a Scene else if (event.getSource() instanceof Scene) { stage
-	 * = (Stage) ((Scene) event.getSource()).getWindow(); }
-	 * 
-	 * if (stage != null) { Scene scene = new Scene(root); stage.setScene(scene);
-	 * stage.show(); } else { // Handle error: stage is null
-	 * System.err.println("Unable to determine the stage from the event source."); }
-	 * }
-	 */
-	
-	/*
-	 * public void initializeMainMenuMusic() { String mediaPath =
-	 * "/assets/Effervescence.mp3"; Media media = new
-	 * Media(getClass().getResource(mediaPath).toString()); mediaPlayer = new
-	 * MediaPlayer(media); mediaPlayer.play(); }
-	 */
-	
 	
 }
