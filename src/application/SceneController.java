@@ -47,13 +47,13 @@ public class SceneController{
 	private Media media;
 	
 	
-	
 	public void switchToSceneIntro(MouseEvent event) throws IOException {
 		root = FXMLLoader.load(getClass().getResource("SceneIntro.fxml"));
 		stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 		scene = new Scene(root);
 		stage.setScene(scene);
 		stage.show();
+		
 	}
 	
 	public void switchToSceneMainMenu(MouseEvent event) throws IOException {
