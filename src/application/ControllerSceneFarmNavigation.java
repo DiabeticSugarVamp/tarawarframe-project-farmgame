@@ -44,6 +44,8 @@ public class ControllerSceneFarmNavigation implements Initializable {
     private Label labelMoney;
     @FXML
     private Label labelDeadline;
+    @FXML
+    private Label playerName;
     
     
     public void getUser() throws SQLException {
@@ -51,6 +53,7 @@ public class ControllerSceneFarmNavigation implements Initializable {
         ResultSet rs = stmt.executeQuery("SELECT * FROM temporarystatsholder");
 
         if (rs.next()) { 
+        	playerName.setText(rs.getString("username"));
             currentDay = rs.getInt("cur_day");
             money = rs.getDouble("cur_money");
             actionPointsRemaining = rs.getInt("cur_actions");

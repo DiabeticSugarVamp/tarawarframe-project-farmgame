@@ -57,6 +57,9 @@ public class ControllerSaveLoad implements Initializable {
     private void loadSlot(MouseEvent event, int slot) throws IOException {
         String query = "SELECT * FROM savedstats WHERE save_slots = " + slot;
         String insertQuery = "UPDATE temporarystatsholder SET username = ?, cur_day = ?, cur_actions = ?, cur_money = ?, cur_deadline = ? WHERE user_id = 1";
+        
+        String query2 = "SELECT * FROM saveditems WHERE save_slots = " + slot;
+        String insertQueryItems = "UPDATE tempitems SET seed_bronze = ?, seed_silver = ?, seed_gold = ?, crop_bronze = ?, crop_silver = ?, crop_gold = ? WHERE temp_id = 1";
 
         try (Statement stmt = connection.createStatement();
              ResultSet rs = stmt.executeQuery(query);
@@ -68,7 +71,7 @@ public class ControllerSaveLoad implements Initializable {
                 pstmt.setInt(3, rs.getInt("cur_actions"));
                 pstmt.setInt(4, rs.getInt("cur_money"));
                 pstmt.setInt(5, rs.getInt("cur_deadline"));
-                pstmt.executeUpdate();  // Execute the update query
+                pstmt.executeUpdate();  
 
                 root = FXMLLoader.load(getClass().getResource("SceneFarmNavigation.fxml"));
                 stage = (Stage) ((Node) event.getSource()).getScene().getWindow();

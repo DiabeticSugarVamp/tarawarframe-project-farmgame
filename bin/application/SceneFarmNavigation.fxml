@@ -86,7 +86,7 @@
                         <Image url="@../assets/imagePrologue2.jpg" />
                      </image>
                   </ImageView>
-                  <Label styleClass="gameText" text="PLAYERNAME" GridPane.columnIndex="1" />
+                  <Label fx:id="playerName" styleClass="gameText" text="PLAYERNAME" GridPane.columnIndex="1" />
                </children>
             </GridPane>
          </children>

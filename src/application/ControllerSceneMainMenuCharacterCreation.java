@@ -66,7 +66,6 @@ public class ControllerSceneMainMenuCharacterCreation {
 
 	        Button okButton = (Button) alert.getDialogPane().lookupButton(okButtonType);
 	        okButton.getStyleClass().add("button-ok");
-	       
 
 	        alert.showAndWait();
 
@@ -74,6 +73,7 @@ public class ControllerSceneMainMenuCharacterCreation {
 		}else {
 			
 			String insertUser = "UPDATE temporarystatsholder SET username = ?, cur_day = ?, cur_actions = ?, cur_money = ?, cur_deadline = ? WHERE user_id = 1";
+			String insertDefItems = "UPDATE tempitems SET seed_bronze = ?, seed_silver = ?, seed_gold = ? WHERE temp_id = 1";
 			
 			try (PreparedStatement pstmt = connection.prepareStatement(insertUser)) {
 	            pstmt.setString(1, charNameInputBox.getText());
@@ -87,6 +87,16 @@ public class ControllerSceneMainMenuCharacterCreation {
 	            e1.printStackTrace();
 	            
 	        }
+			
+			try(PreparedStatement pstmt = connection.prepareStatement(insertDefItems)){
+				pstmt.setInt(1, 5);
+				pstmt.setInt(2, 3);
+				pstmt.setInt(3, 1);
+				
+			} catch (SQLException e2) {
+				e2.printStackTrace();
+				
+			}
 			
 			//Turn this to normal after testing
 			

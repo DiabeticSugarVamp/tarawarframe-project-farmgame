@@ -59,14 +59,24 @@ public class ControllerSaveCreate implements Initializable {
 	    try {
 	        Statement stmt = connection.createStatement();
 	        ResultSet rs = stmt.executeQuery("SELECT * FROM temporarystatsholder WHERE user_id = 1");
+	        
+	        Statement stmtItems = connection.createStatement();
+	        ResultSet rsItems = stmtItems.executeQuery("SELECT * FROM tempitems WHERE temp_id = 1");
 
-	        if (rs.next()) {
+	        if (rs.next() && rsItems.next()) {
 	            int userId = rs.getInt("user_id");
 	            String username = rs.getString("username");
 	            int curDay = rs.getInt("cur_day");
 	            int curActions = rs.getInt("cur_actions");
 	            int curMoney = rs.getInt("cur_money");
 	            int curDeadline = rs.getInt("cur_deadline");
+	            
+	            int seedBronze = rsItems.getInt("seed_bronze");
+	            int seedSilver = rsItems.getInt("seed_silver");
+	            int seedGold = rsItems.getInt("seed_gold");
+	            int cropBronze = rsItems.getInt("crop_bronze");
+	            int cropSilver = rsItems.getInt("crop_silver");
+	            int cropGold = rsItems.getInt("crop_gold");
 
 	            String checkSlotQuery = "SELECT * FROM savedstats WHERE save_slots = ?";
 	            PreparedStatement checkSlotStmt = connection.prepareStatement(checkSlotQuery);
@@ -88,7 +98,13 @@ public class ControllerSaveCreate implements Initializable {
 	                    "VALUES (?,?,?,?,?,?,?) " +
 	                    "ON DUPLICATE KEY UPDATE username = VALUES(username), cur_day = VALUES(cur_day), cur_actions = VALUES(cur_actions), cur_money = VALUES(cur_money), cur_deadline = VALUES(cur_deadline)";
 	            
+	            String saveQueryItems = "INSERT INTO saveditems (seed_bronze, seed_silver, seed_gold, crop_bronze, crop_silver, crop_gold, save_slots) " +
+	                    "VALUES (?,?,?,?,?,?,?) " +
+	                    "ON DUPLICATE KEY UPDATE seed_bronze = VALUES(seed_bronze), seed_silver = VALUES(seed_silver), seed_gold = VALUES(seed_gold), crop_bronze = VALUES(crop_bronze), crop_silver = VALUES(crop_silver), crop_gold = VALUES(crop_gold)";
+	            
 	            PreparedStatement saveStmt = connection.prepareStatement(saveQuery);
+	            PreparedStatement saveStmtItems = connection.prepareStatement(saveQueryItems);
+	            
 	            saveStmt.setInt(1, userId);
 	            saveStmt.setString(2, username);
 	            saveStmt.setInt(3, curDay);
@@ -97,10 +113,22 @@ public class ControllerSaveCreate implements Initializable {
 	            saveStmt.setInt(6, curDeadline);
 	            saveStmt.setInt(7, slot);
 	            saveStmt.executeUpdate();
+	            
+	            saveStmtItems.setInt(1, seedBronze);
+	            saveStmtItems.setInt(2, seedSilver);
+	            saveStmtItems.setInt(3, seedGold);
+	            saveStmtItems.setInt(4, cropBronze);
+	            saveStmtItems.setInt(5, cropSilver);
+	            saveStmtItems.setInt(6, cropGold);
+	            saveStmtItems.setInt(7, slot);
+	            saveStmtItems.executeUpdate();
+	            
 
+	            saveStmtItems.close();
 	            saveStmt.close();
 	            checkSlotRs.close();
 	            checkSlotStmt.close();
+	            
 	        } else {
 	            System.out.println("No data found for user_id = 1 in temporarystatsholder");
 	            
@@ -108,6 +136,7 @@ public class ControllerSaveCreate implements Initializable {
 
 	        rs.close();
 	        stmt.close();
+	        stmtItems.close();
 	        
 	        
 	        
