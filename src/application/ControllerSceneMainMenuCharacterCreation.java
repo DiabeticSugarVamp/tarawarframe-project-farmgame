@@ -1,20 +1,25 @@
 package application;
 
 import java.io.IOException;
+import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Optional;
+import java.util.ResourceBundle;
 
 import dbpackage.Dbconnect;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DialogPane;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ButtonBar.ButtonData;
@@ -23,7 +28,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
-public class ControllerSceneMainMenuCharacterCreation {
+public class ControllerSceneMainMenuCharacterCreation implements Initializable{
 	
 	private Connection connection = Dbconnect.getConnection();
 	
@@ -34,12 +39,57 @@ public class ControllerSceneMainMenuCharacterCreation {
 	@FXML
 	private TextField charNameInputBox;
 	
+	@FXML 
+	private ChoiceBox<String> avatarChoiceBox;
+	
+	@FXML
+	private ImageView avatar;
+	
+	Image avatarAndre = new Image(getClass().getResourceAsStream("/assets/imageDevAndre.png"));
+	Image avatarCarl = new Image(getClass().getResourceAsStream("/assets/imageDevCarl.png"));
+	Image avatarIsrael = new Image(getClass().getResourceAsStream("/assets/imageDevIsrael.png"));
+	Image avatarKen = new Image(getClass().getResourceAsStream("/assets/imageDevKen.png"));
+	Image avatarNat = new Image(getClass().getResourceAsStream("/assets/imageDevNat.png"));
+	
+	private String[] avatarsStr = {"avatarAndre", "avatarCarl", "avatarIsrael", "avatarKen", "avatarNat"};
+	
+	private Image[] avatars = {avatarAndre,
+								avatarCarl,
+								avatarIsrael,
+								avatarKen,
+								avatarNat};
+	
+	@Override
+	public void initialize(URL arg0, ResourceBundle arg1) {
+		// TODO Auto-generated method stub
+		avatarChoiceBox.getItems().addAll(avatarsStr);
+		avatarChoiceBox.getSelectionModel().selectFirst();
+		avatarChoiceBox.setOnAction(this::setAvatar);
+	}
+	
+	public void setAvatar(ActionEvent event) {
+		String myAvatar = avatarChoiceBox.getValue();
+		int avatarCounter = 0;
+		
+		while (true) {
+			String avatarName = avatarsStr[avatarCounter];
+			Image avatarToSet = avatars[avatarCounter];
+			
+			if (avatarName.equals(myAvatar)) {
+				avatar.setImage(avatarToSet);
+				break;
+				
+			}
+			avatarCounter++;
+		}
+		
+	}
+	
 	public void switchToSceneMainMenu(MouseEvent event) throws IOException {
 		root = FXMLLoader.load(getClass().getResource("SceneMainMenu.fxml"));
 		stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 		scene = new Scene(root);
 		stage.setScene(scene);
-		//this.initializeMainMenuMusic();
 		stage.show();
 	}
 	
@@ -102,6 +152,8 @@ public class ControllerSceneMainMenuCharacterCreation {
 		
 	
 	}
+
+	
 	
 
 	
