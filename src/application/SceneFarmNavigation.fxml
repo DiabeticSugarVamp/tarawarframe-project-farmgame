@@ -12,7 +12,7 @@
 
 <BorderPane prefHeight="768.0" prefWidth="1024.0" styleClass="gamePane" stylesheets="@application.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ControllerSceneFarmNavigation">
    <center>
-      <Label lineSpacing="10.0" prefHeight="196.0" prefWidth="679.0" styleClass="gameText" text="Nestled in rolling countryside, the tranquil farm is a haven of peace, where fields of golden wheat sway gently in the breeze. The farmhouse, with its rustic charm, is surrounded by blooming gardens and shaded by ancient oaks, offering a perfect retreat from the bustle of modern life." wrapText="true" BorderPane.alignment="CENTER" />
+      <Label lineSpacing="10.0" prefHeight="196.0" prefWidth="608.0" styleClass="gameText" text="Nestled in rolling countryside, the tranquil farm is a haven of peace, where fields of golden wheat sway gently in the breeze. The farmhouse, with its rustic charm, is surrounded by blooming gardens and shaded by ancient oaks, offering a perfect retreat from the bustle of modern life." wrapText="true" BorderPane.alignment="CENTER" />
    </center>
    <bottom>
       <GridPane vgap="30.0" BorderPane.alignment="CENTER">
@@ -45,6 +45,30 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Label>
+            <ImageView fitHeight="55.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER">
+               <image>
+                  <Image url="@../assets/icons/iconFields.png" />
+               </image>
+               <GridPane.margin>
+                  <Insets right="180.0" />
+               </GridPane.margin>
+            </ImageView>
+            <ImageView fitHeight="55.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+               <image>
+                  <Image url="@../assets/icons/iconGuild.png" />
+               </image>
+               <GridPane.margin>
+                  <Insets right="220.0" />
+               </GridPane.margin>
+            </ImageView>
+            <ImageView fitHeight="55.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER">
+               <image>
+                  <Image url="@../assets/icons/iconAssets.png" />
+               </image>
+               <GridPane.margin>
+                  <Insets right="160.0" />
+               </GridPane.margin>
+            </ImageView>
          </children>
          <padding>
             <Insets bottom="10.0" />
@@ -81,7 +105,7 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <ImageView fitHeight="61.0" fitWidth="92.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="RIGHT">
+                  <ImageView fitHeight="55.0" fitWidth="71.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER">
                      <image>
                         <Image url="@../assets/imagePrologue2.jpg" />
                      </image>
@@ -89,6 +113,38 @@
                   <Label fx:id="playerName" styleClass="gameText" text="PLAYERNAME" GridPane.columnIndex="1" />
                </children>
             </GridPane>
+            <ImageView fitHeight="55.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.halignment="LEFT">
+               <image>
+                  <Image url="@../assets/icons/iconDeadline.png" />
+               </image>
+               <GridPane.margin>
+                  <Insets left="20.0" />
+               </GridPane.margin>
+            </ImageView>
+            <ImageView fitHeight="55.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <image>
+                  <Image url="@../assets/icons/iconStamina.png" />
+               </image>
+               <GridPane.margin>
+                  <Insets left="20.0" />
+               </GridPane.margin>
+            </ImageView>
+            <ImageView fitHeight="55.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
+               <image>
+                  <Image url="@../assets/icons/iconDay.png" />
+               </image>
+               <GridPane.margin>
+                  <Insets left="20.0" />
+               </GridPane.margin>
+            </ImageView>
+            <ImageView fitHeight="55.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="1">
+               <image>
+                  <Image url="@../assets/icons/iconPlowCoins.png" />
+               </image>
+               <GridPane.margin>
+                  <Insets left="20.0" />
+               </GridPane.margin>
+            </ImageView>
          </children>
          <BorderPane.margin>
             <Insets top="5.0" />
