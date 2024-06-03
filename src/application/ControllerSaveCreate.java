@@ -55,13 +55,31 @@ public class ControllerSaveCreate implements Initializable {
 	    saveCurrent(event, 3);
 	}
 
-	private void saveCurrent(MouseEvent event, int slot) throws IOException {
+	public void saveCurrent(MouseEvent event, int slot) throws IOException {
 	    try {
 	        Statement stmt = connection.createStatement();
 	        ResultSet rs = stmt.executeQuery("SELECT * FROM temporarystatsholder WHERE user_id = 1");
 	        
 	        Statement stmtItems = connection.createStatement();
 	        ResultSet rsItems = stmtItems.executeQuery("SELECT * FROM tempitems WHERE temp_id = 1");
+	        
+	        String insertBronzeQuery = "INSERT INTO savedgrowingbronze (grown_day, seed_planted_num, day_planted, save_slots) " +
+	                                    "SELECT grown_day, seed_planted_num, day_planted, ? FROM tempgrowingbronze";
+	        PreparedStatement insertBronzeStmt = connection.prepareStatement(insertBronzeQuery);
+	        insertBronzeStmt.setInt(1, slot);
+	        insertBronzeStmt.executeUpdate();
+
+	        String insertSilverQuery = "INSERT INTO savedgrowingsilver (grown_day, seed_planted_num, day_planted, save_slots) " +
+	                                    "SELECT grown_day, seed_planted_num, day_planted, ? FROM tempgrowingsilver";
+	        PreparedStatement insertSilverStmt = connection.prepareStatement(insertSilverQuery);
+	        insertSilverStmt.setInt(1, slot);
+	        insertSilverStmt.executeUpdate();
+
+	        String insertGoldQuery = "INSERT INTO savedgrowinggold (grown_day, seed_planted_num, day_planted, save_slots) " +
+	                                    "SELECT grown_day, seed_planted_num, day_planted, ? FROM tempgrowinggold";
+	        PreparedStatement insertGoldStmt = connection.prepareStatement(insertGoldQuery);
+	        insertGoldStmt.setInt(1, slot);
+	        insertGoldStmt.executeUpdate();
 
 	        if (rs.next() && rsItems.next()) {
 	            int userId = rs.getInt("user_id");
@@ -152,7 +170,7 @@ public class ControllerSaveCreate implements Initializable {
 	    switchToScenePauseMenu(event);
 	}
 
-	private void updateSlotLabels() {
+	public void updateSlotLabels() {
 	    try {
 	        String query = "SELECT * FROM savedstats";
 	        Statement stmt = connection.createStatement();

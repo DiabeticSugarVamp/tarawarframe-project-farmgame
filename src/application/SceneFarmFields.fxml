@@ -36,15 +36,15 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label fx:id="btnPlantSeeds" styleClass="mainMenuButtons" stylesheets="@application.css" text="Plant seeds (-1 action)" GridPane.halignment="CENTER">
+            <Label fx:id="btnPlantSeeds" onMouseClicked="#plantSeeds" styleClass="mainMenuButtons" stylesheets="@application.css" text="Plant seeds (-1 action)" GridPane.halignment="CENTER">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor></Label>
-            <Label fx:id="btnHarvestCrops" styleClass="mainMenuButtons" stylesheets="@application.css" text="Harvest crops (-1 action)" GridPane.columnIndex="2" GridPane.halignment="CENTER">
+            <Label fx:id="btnHarvestCrops" onMouseClicked="#harvestCrops" styleClass="mainMenuButtons" stylesheets="@application.css" text="Harvest crops (-1 action)" GridPane.columnIndex="2" GridPane.halignment="CENTER">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor></Label>
-            <Label fx:id="btnWaterCrops" styleClass="mainMenuButtons" stylesheets="@application.css" text="Water crops (-1 action)" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+            <Label fx:id="btnWaterCrops" onMouseClicked="#waterCrops" styleClass="mainMenuButtons" stylesheets="@application.css" text="Water crops (-1 action)" GridPane.halignment="CENTER" GridPane.rowIndex="2">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor></Label>

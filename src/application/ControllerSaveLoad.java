@@ -35,11 +35,7 @@ public class ControllerSaveLoad implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        try {
-        	loadSlotLabel();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        loadSlotLabels();
     }
 
     public void loadSlot1(MouseEvent event) throws IOException {
@@ -54,55 +50,61 @@ public class ControllerSaveLoad implements Initializable {
         loadSlot(event, 3);
     }
 
-    private void loadSlot(MouseEvent event, int slot) throws IOException {
-        String query = "SELECT * FROM savedstats WHERE save_slots = " + slot;
+    public void loadSlot(MouseEvent event, int slot) throws IOException {
+        String query = "SELECT * FROM savedstats WHERE save_slots = ?";
         String insertQuery = "UPDATE temporarystatsholder SET username = ?, cur_day = ?, cur_actions = ?, cur_money = ?, cur_deadline = ? WHERE user_id = 1";
-        
-        String query2 = "SELECT * FROM saveditems WHERE save_slots = " + slot;
+        String query2 = "SELECT * FROM saveditems WHERE save_slots = ?";
         String insertQueryItems = "UPDATE tempitems SET seed_bronze = ?, seed_silver = ?, seed_gold = ?, crop_bronze = ?, crop_silver = ?, crop_gold = ? WHERE temp_id = 1";
 
-        try (Statement stmt = connection.createStatement();
-             ResultSet rs = stmt.executeQuery(query);
-        	 ResultSet rsItems = stmt.executeQuery(query2);
-        	 PreparedStatement pstmtItems = connection.prepareStatement(insertQueryItems);
-             PreparedStatement pstmt = connection.prepareStatement(insertQuery)) {
+        try (
+            PreparedStatement pstmtSelect = connection.prepareStatement(query);
+            PreparedStatement pstmtUpdate = connection.prepareStatement(insertQuery);
+            PreparedStatement pstmtSelectItems = connection.prepareStatement(query2);
+            PreparedStatement pstmtUpdateItems = connection.prepareStatement(insertQueryItems)
+            		
+        ) {
+            pstmtSelect.setInt(1, slot);
+            ResultSet rs = pstmtSelect.executeQuery();
 
             if (rs.next()) {
-                pstmt.setString(1, rs.getString("username"));
-                pstmt.setInt(2, rs.getInt("cur_day"));
-                pstmt.setInt(3, rs.getInt("cur_actions"));
-                pstmt.setInt(4, rs.getInt("cur_money"));
-                pstmt.setInt(5, rs.getInt("cur_deadline"));
-                pstmt.executeUpdate();  
+                pstmtUpdate.setString(1, rs.getString("username"));
+                pstmtUpdate.setInt(2, rs.getInt("cur_day"));
+                pstmtUpdate.setInt(3, rs.getInt("cur_actions"));
+                pstmtUpdate.setInt(4, rs.getInt("cur_money"));
+                pstmtUpdate.setInt(5, rs.getInt("cur_deadline"));
+                pstmtUpdate.executeUpdate();
                 
-                if(rsItems.next()) {
-                	pstmtItems.setInt(1, rsItems.getInt("seed_bronze"));
-                	pstmtItems.setInt(1, rsItems.getInt("seed_silver"));
-                	pstmtItems.setInt(1, rsItems.getInt("seed_gold"));
-                	pstmtItems.setInt(1, rsItems.getInt("crop_bronze"));
-                	pstmtItems.setInt(1, rsItems.getInt("crop_silver"));
-                	pstmtItems.setInt(1, rsItems.getInt("crop_gold"));
-                	pstmtItems.executeUpdate();
-                	
-                }
-
-                root = FXMLLoader.load(getClass().getResource("SceneFarmNavigation.fxml"));
-                stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                scene = new Scene(root);
-                stage.setScene(scene);
-                stage.show();
-                
-            } else {
-                System.out.println("No data found for slot " + slot);
                 
             }
+            rs.close();
+
+            pstmtSelectItems.setInt(1, slot);
+            ResultSet rsItems = pstmtSelectItems.executeQuery();
+
+            if (rsItems.next()) {
+                pstmtUpdateItems.setInt(1, rsItems.getInt("seed_bronze"));
+                pstmtUpdateItems.setInt(2, rsItems.getInt("seed_silver"));
+                pstmtUpdateItems.setInt(3, rsItems.getInt("seed_gold"));
+                pstmtUpdateItems.setInt(4, rsItems.getInt("crop_bronze"));
+                pstmtUpdateItems.setInt(5, rsItems.getInt("crop_silver"));
+                pstmtUpdateItems.setInt(6, rsItems.getInt("crop_gold"));
+                pstmtUpdateItems.executeUpdate();
+                
+                
+            }
+            rsItems.close();
+
+            root = FXMLLoader.load(getClass().getResource("SceneFarmNavigation.fxml"));
+            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
         } catch (SQLException e) {
             e.printStackTrace();
-            
         }
     }
 
-    private void loadSlotLabel() throws IOException {
+    public void loadSlotLabels() {
         String query = "SELECT * FROM savedstats WHERE save_slots IN (1, 2, 3)";
         try (Statement stmt = connection.createStatement();
              ResultSet rs = stmt.executeQuery(query)) {
@@ -127,7 +129,6 @@ public class ControllerSaveLoad implements Initializable {
                     default:
                         System.out.println("Invalid slot: " + slot);
                         break;
-                        
                 }
             }
         } catch (SQLException e) {

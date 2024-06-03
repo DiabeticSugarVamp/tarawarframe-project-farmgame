@@ -142,6 +142,7 @@ public class ControllerSceneMainMenuCharacterCreation implements Initializable{
 				pstmt.setInt(1, 5);
 				pstmt.setInt(2, 3);
 				pstmt.setInt(3, 1);
+				pstmt.executeUpdate();
 				
 			} catch (SQLException e2) {
 				e2.printStackTrace();
