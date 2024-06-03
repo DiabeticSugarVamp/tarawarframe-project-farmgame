@@ -15,12 +15,32 @@
 
 <BorderPane fx:id="guildBuyPane" prefHeight="768.0" prefWidth="1024.0" styleClass="gamePane" stylesheets="@application.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ControllerSceneGuildBuyPlants">
    <top>
-      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" opacity="0.9" prefHeight="100.0" prefWidth="900.0" styleClass="GridPane" BorderPane.alignment="CENTER">
          <children>
+            <ImageView fitHeight="55.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assets/icons/iconDay.png" />
+               </image>
+            </ImageView>
             <Label fx:id="labelCurrentDay" styleClass="gameTopText" text="Day: " />
+            <ImageView fitHeight="55.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assets/icons/iconStamina.png" />
+               </image>
+            </ImageView>
             <Label fx:id="labelActionPoints" styleClass="gameTopText" text="Actions: " />
+            <ImageView fitHeight="55.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assets/icons/iconPlowCoins.png" />
+               </image>
+            </ImageView>
             <Label fx:id="labelMoney" styleClass="gameTopText" text="Money: " />
-            <Label fx:id="labelDeadline" styleClass="gameTopText" text="Next Deadline: " />
+            <ImageView fitHeight="55.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assets/icons/iconDeadline.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="labelDeadline" styleClass="gameTopText" text="Deadline:" />
          </children>
       </HBox>
    </top>
@@ -65,7 +85,7 @@
                   <Image url="@../assets/gSeed.png" />
                </image>
             </ImageView>
-            <Label fx:id="lblOwnSeedBronze" styleClass="gameText" text="Bronze seeds owned:" wrapText="true" GridPane.columnIndex="3" />
+            <Label fx:id="lblOwnSeedBronze" opacity="0.9" styleClass="gameText" text="Bronze seeds owned:" wrapText="true" GridPane.columnIndex="3" />
             <Label fx:id="lblOwnSeedSilver" styleClass="gameText" text="Silver seeds owned:" wrapText="true" GridPane.columnIndex="3" GridPane.rowIndex="1" />
             <Label fx:id="lblOwnSeedGold" styleClass="gameText" text="Gold seeds owned:" wrapText="true" GridPane.columnIndex="3" GridPane.rowIndex="2" />
          </children>

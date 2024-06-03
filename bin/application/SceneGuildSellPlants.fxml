@@ -15,17 +15,49 @@
 
 <BorderPane fx:id="guildSellPane" prefHeight="768.0" prefWidth="1024.0" styleClass="gamePane" stylesheets="@application.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ControllerSceneGuildSellPlants">
    <top>
-      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" opacity="0.9" prefHeight="100.0" prefWidth="900.0" styleClass="GridPane" BorderPane.alignment="CENTER">
          <children>
-            <Label fx:id="labelActionPoints" styleClass="gameTopText" text="Actions: " />
-            <Label fx:id="labelMoney" styleClass="gameTopText" text="Money: " />
-            <Label fx:id="labelDeadline" styleClass="gameTopText" text="Next Deadline: " />
+            <ImageView fitHeight="55.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assets/icons/iconDay.png" />
+               </image>
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+            </ImageView>
             <Label fx:id="labelCurrentDay" styleClass="gameTopText" text="Day: " />
+            <ImageView fitHeight="55.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assets/icons/iconStamina.png" />
+               </image>
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+            </ImageView>
+            <Label fx:id="labelActionPoints" styleClass="gameTopText" text="Actions: " />
+            <ImageView fitHeight="55.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assets/icons/iconPlowCoins.png" />
+               </image>
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+            </ImageView>
+            <Label fx:id="labelMoney" styleClass="gameTopText" text="Money: " />
+            <ImageView fitHeight="55.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assets/icons/iconDeadline.png" />
+               </image>
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+            </ImageView>
+            <Label fx:id="labelDeadline" styleClass="gameTopText" text="Deadline:" />
          </children>
       </HBox>
    </top>
    <center>
-      <GridPane maxWidth="-Infinity" opacity="0.91" prefWidth="800.0" styleClass="GridPane" BorderPane.alignment="CENTER">
+      <GridPane maxWidth="-Infinity" opacity="0.9" prefWidth="800.0" styleClass="GridPane" BorderPane.alignment="CENTER">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
