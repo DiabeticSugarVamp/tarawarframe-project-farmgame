@@ -68,6 +68,7 @@ public class ControllerSceneFarmNavigation implements Initializable {
         try {
             getUser();
             
+            
         } catch (SQLException e) {
             e.printStackTrace();
             
@@ -79,13 +80,37 @@ public class ControllerSceneFarmNavigation implements Initializable {
 
     public void endDay(MouseEvent e) {
     	
+    	try {
+        	resetWateredColumn("tempgrowingbronze", currentDay);
+        	resetWateredColumn("tempgrowingsilver", currentDay);
+        	resetWateredColumn("tempgrowinggold", currentDay);
+        	
+			
+		} catch (SQLException e1) {
+			
+			e1.printStackTrace();
+		}
+    	
         currentDay++;
         actionPointsRemaining = actionPointsTotal;
         deadline -= 1;
         
+        try {
+			removeUnwateredCrops("tempgrowingbronze");
+			removeUnwateredCrops("tempgrowingsilver");
+	        removeUnwateredCrops("tempgrowinggold");
+	        
+		} catch (SQLException e1) {
+			
+			e1.printStackTrace();
+		}
+        
+        
         this.deadline();
 
         String updateSql = "UPDATE temporarystatsholder SET cur_day = ?, cur_deadline = ?, cur_money = ? WHERE user_id = 1";
+  
+        
         
         try (PreparedStatement pstmt = connection.prepareStatement(updateSql)) {
             pstmt.setInt(1, currentDay);
@@ -115,6 +140,21 @@ public class ControllerSceneFarmNavigation implements Initializable {
         if (deadline == 0) {
             money -= 50;
             deadline += 14;
+        }
+    }
+    
+    private void resetWateredColumn(String tableName, int day) throws SQLException {
+        String query = "UPDATE " + tableName + " SET watered = 0 WHERE day_planted = ?";
+        try (PreparedStatement pstmt = connection.prepareStatement(query)) {
+            pstmt.setInt(1, day);
+            pstmt.executeUpdate();
+        }
+    }
+    
+    private void removeUnwateredCrops(String tableName) throws SQLException {
+        String query = "DELETE FROM " + tableName + " WHERE " + currentDay + " - day_watered > 2";
+        try (PreparedStatement pstmt = connection.prepareStatement(query)) {
+            pstmt.executeUpdate();
         }
     }
 

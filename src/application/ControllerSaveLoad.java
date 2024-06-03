@@ -51,37 +51,60 @@ public class ControllerSaveLoad implements Initializable {
     }
 
     public void loadSlot(MouseEvent event, int slot) throws IOException {
-        String query = "SELECT * FROM savedstats WHERE save_slots = ?";
-        String insertQuery = "UPDATE temporarystatsholder SET username = ?, cur_day = ?, cur_actions = ?, cur_money = ?, cur_deadline = ? WHERE user_id = 1";
-        String query2 = "SELECT * FROM saveditems WHERE save_slots = ?";
-        String insertQueryItems = "UPDATE tempitems SET seed_bronze = ?, seed_silver = ?, seed_gold = ?, crop_bronze = ?, crop_silver = ?, crop_gold = ? WHERE temp_id = 1";
+        String selectStatsQuery = "SELECT * FROM savedstats WHERE save_slots = ?";
+        String selectItemsQuery = "SELECT * FROM saveditems WHERE save_slots = ?";
+        String selectGrowingBronzeQuery = "SELECT * FROM savedgrowingbronze WHERE save_slots = ?";
+        String selectGrowingSilverQuery = "SELECT * FROM savedgrowingsilver WHERE save_slots = ?";
+        String selectGrowingGoldQuery = "SELECT * FROM savedgrowinggold WHERE save_slots = ?";
+
+        String updateStatsQuery = "UPDATE temporarystatsholder SET username = ?, cur_day = ?, cur_actions = ?, cur_money = ?, cur_deadline = ? WHERE user_id = 1";
+        String updateItemsQuery = "UPDATE tempitems SET seed_bronze = ?, seed_silver = ?, seed_gold = ?, crop_bronze = ?, crop_silver = ?, crop_gold = ? WHERE temp_id = 1";
+        String insertGrowingBronzeQuery = "INSERT INTO tempgrowingbronze (day_planted, grown_day, seed_planted_num, watered, day_watered) VALUES (?, ?, ?, ?, ?) ON DUPLICATE KEY UPDATE grown_day = VALUES(grown_day), seed_planted_num = VALUES(seed_planted_num), watered = VALUES(watered), day_watered = VALUES(day_watered)";
+        String insertGrowingSilverQuery = "INSERT INTO tempgrowingsilver (day_planted, grown_day, seed_planted_num, watered, day_watered) VALUES (?, ?, ?, ?, ?) ON DUPLICATE KEY UPDATE grown_day = VALUES(grown_day), seed_planted_num = VALUES(seed_planted_num), watered = VALUES(watered), day_watered = VALUES(day_watered)";
+        String insertGrowingGoldQuery = "INSERT INTO tempgrowinggold (day_planted, grown_day, seed_planted_num, watered, day_watered) VALUES (?, ?, ?, ?, ?) ON DUPLICATE KEY UPDATE grown_day = VALUES(grown_day), seed_planted_num = VALUES(seed_planted_num), watered = VALUES(watered), day_watered = VALUES(day_watered)";
+        String deleteGrowingBronzeQuery = "DELETE FROM tempgrowingbronze";
+        String deleteGrowingSilverQuery = "DELETE FROM tempgrowingsilver";
+        String deleteGrowingGoldQuery = "DELETE FROM tempgrowinggold";
 
         try (
-            PreparedStatement pstmtSelect = connection.prepareStatement(query);
-            PreparedStatement pstmtUpdate = connection.prepareStatement(insertQuery);
-            PreparedStatement pstmtSelectItems = connection.prepareStatement(query2);
-            PreparedStatement pstmtUpdateItems = connection.prepareStatement(insertQueryItems)
-            		
+            PreparedStatement pstmtSelectStats = connection.prepareStatement(selectStatsQuery);
+            PreparedStatement pstmtSelectItems = connection.prepareStatement(selectItemsQuery);
+            PreparedStatement pstmtSelectGrowingBronze = connection.prepareStatement(selectGrowingBronzeQuery);
+            PreparedStatement pstmtSelectGrowingSilver = connection.prepareStatement(selectGrowingSilverQuery);
+            PreparedStatement pstmtSelectGrowingGold = connection.prepareStatement(selectGrowingGoldQuery);
+            PreparedStatement pstmtUpdateStats = connection.prepareStatement(updateStatsQuery);
+            PreparedStatement pstmtUpdateItems = connection.prepareStatement(updateItemsQuery);
+            PreparedStatement pstmtInsertGrowingBronze = connection.prepareStatement(insertGrowingBronzeQuery);
+            PreparedStatement pstmtInsertGrowingSilver = connection.prepareStatement(insertGrowingSilverQuery);
+            PreparedStatement pstmtInsertGrowingGold = connection.prepareStatement(insertGrowingGoldQuery);
+            PreparedStatement pstmtDeleteGrowingBronze = connection.prepareStatement(deleteGrowingBronzeQuery);
+            PreparedStatement pstmtDeleteGrowingSilver = connection.prepareStatement(deleteGrowingSilverQuery);
+            PreparedStatement pstmtDeleteGrowingGold = connection.prepareStatement(deleteGrowingGoldQuery)
         ) {
-            pstmtSelect.setInt(1, slot);
-            ResultSet rs = pstmtSelect.executeQuery();
+            // Delete existing growing data
+        	pstmtDeleteGrowingBronze.executeUpdate();
+            pstmtDeleteGrowingSilver.executeUpdate();
+            pstmtDeleteGrowingGold.executeUpdate();
 
-            if (rs.next()) {
-                pstmtUpdate.setString(1, rs.getString("username"));
-                pstmtUpdate.setInt(2, rs.getInt("cur_day"));
-                pstmtUpdate.setInt(3, rs.getInt("cur_actions"));
-                pstmtUpdate.setInt(4, rs.getInt("cur_money"));
-                pstmtUpdate.setInt(5, rs.getInt("cur_deadline"));
-                pstmtUpdate.executeUpdate();
-                
-                
+            // Select saved stats
+            pstmtSelectStats.setInt(1, slot);
+            ResultSet rsStats = pstmtSelectStats.executeQuery();
+            if (rsStats.next()) {
+                // Update temporary stats
+                pstmtUpdateStats.setString(1, rsStats.getString("username"));
+                pstmtUpdateStats.setInt(2, rsStats.getInt("cur_day"));
+                pstmtUpdateStats.setInt(3, rsStats.getInt("cur_actions"));
+                pstmtUpdateStats.setDouble(4, rsStats.getDouble("cur_money"));
+                pstmtUpdateStats.setInt(5, rsStats.getInt("cur_deadline"));
+                pstmtUpdateStats.executeUpdate();
             }
-            rs.close();
+            rsStats.close();
 
+            // Select saved items
             pstmtSelectItems.setInt(1, slot);
             ResultSet rsItems = pstmtSelectItems.executeQuery();
-
             if (rsItems.next()) {
+                // Update temporary items
                 pstmtUpdateItems.setInt(1, rsItems.getInt("seed_bronze"));
                 pstmtUpdateItems.setInt(2, rsItems.getInt("seed_silver"));
                 pstmtUpdateItems.setInt(3, rsItems.getInt("seed_gold"));
@@ -89,11 +112,49 @@ public class ControllerSaveLoad implements Initializable {
                 pstmtUpdateItems.setInt(5, rsItems.getInt("crop_silver"));
                 pstmtUpdateItems.setInt(6, rsItems.getInt("crop_gold"));
                 pstmtUpdateItems.executeUpdate();
-                
-                
             }
             rsItems.close();
 
+            // Select saved growing data for bronze
+            pstmtSelectGrowingBronze.setInt(1, slot);
+            ResultSet rsGrowingBronze = pstmtSelectGrowingBronze.executeQuery();
+            while (rsGrowingBronze.next()) {
+                pstmtInsertGrowingBronze.setInt(1, rsGrowingBronze.getInt("day_planted"));
+                pstmtInsertGrowingBronze.setInt(2, rsGrowingBronze.getInt("grown_day"));
+                pstmtInsertGrowingBronze.setInt(3, rsGrowingBronze.getInt("seed_planted_num"));
+                pstmtInsertGrowingBronze.setInt(4, rsGrowingBronze.getInt("watered"));
+                pstmtInsertGrowingBronze.setInt(5, rsGrowingBronze.getInt("day_watered"));
+                pstmtInsertGrowingBronze.executeUpdate();
+            }
+            rsGrowingBronze.close();
+
+            // Select saved growing data for silver
+            pstmtSelectGrowingSilver.setInt(1, slot);
+            ResultSet rsGrowingSilver = pstmtSelectGrowingSilver.executeQuery();
+            while (rsGrowingSilver.next()) {
+                pstmtInsertGrowingSilver.setInt(1, rsGrowingSilver.getInt("day_planted"));
+                pstmtInsertGrowingSilver.setInt(2, rsGrowingSilver.getInt("grown_day"));
+                pstmtInsertGrowingSilver.setInt(3, rsGrowingSilver.getInt("seed_planted_num"));
+                pstmtInsertGrowingSilver.setInt(4, rsGrowingSilver.getInt("watered"));
+                pstmtInsertGrowingSilver.setInt(5, rsGrowingSilver.getInt("day_watered"));
+                pstmtInsertGrowingSilver.executeUpdate();
+            }
+            rsGrowingSilver.close();
+
+            // Select saved growing data for gold
+            pstmtSelectGrowingGold.setInt(1, slot);
+            ResultSet rsGrowingGold = pstmtSelectGrowingGold.executeQuery();
+            while (rsGrowingGold.next()) {
+                pstmtInsertGrowingGold.setInt(1, rsGrowingGold.getInt("day_planted"));
+                pstmtInsertGrowingGold.setInt(2, rsGrowingGold.getInt("grown_day"));
+                pstmtInsertGrowingGold.setInt(3, rsGrowingGold.getInt("seed_planted_num"));
+                pstmtInsertGrowingGold.setInt(4, rsGrowingGold.getInt("watered"));
+                pstmtInsertGrowingGold.setInt(5, rsGrowingGold.getInt("day_watered"));
+                pstmtInsertGrowingGold.executeUpdate();
+            }
+            rsGrowingGold.close();
+
+            // Load SceneFarmNavigation
             root = FXMLLoader.load(getClass().getResource("SceneFarmNavigation.fxml"));
             stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             scene = new Scene(root);
