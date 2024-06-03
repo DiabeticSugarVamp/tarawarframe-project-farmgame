@@ -85,6 +85,24 @@ public class ControllerSceneMainMenuCharacterCreation implements Initializable{
 		
 	}
 	
+	private void deleteTempGrowingData() throws SQLException {
+        String deleteGrowingBronzeQuery = "DELETE FROM tempgrowingbronze";
+        String deleteGrowingSilverQuery = "DELETE FROM tempgrowingsilver";
+        String deleteGrowingGoldQuery = "DELETE FROM tempgrowinggold";
+        
+        try (PreparedStatement pstmtDeleteGrowingBronze = connection.prepareStatement(deleteGrowingBronzeQuery);
+             PreparedStatement pstmtDeleteGrowingSilver = connection.prepareStatement(deleteGrowingSilverQuery);
+             PreparedStatement pstmtDeleteGrowingGold = connection.prepareStatement(deleteGrowingGoldQuery)) {
+            
+            pstmtDeleteGrowingBronze.executeUpdate();
+            pstmtDeleteGrowingSilver.executeUpdate();
+            pstmtDeleteGrowingGold.executeUpdate();
+            
+        } catch (SQLException e) {
+            throw e;
+        }
+    }
+	
 	public void switchToSceneMainMenu(MouseEvent event) throws IOException {
 		root = FXMLLoader.load(getClass().getResource("SceneMainMenu.fxml"));
 		stage = (Stage)((Node)event.getSource()).getScene().getWindow();
@@ -125,38 +143,45 @@ public class ControllerSceneMainMenuCharacterCreation implements Initializable{
 			String insertUser = "UPDATE temporarystatsholder SET username = ?, cur_day = ?, cur_actions = ?, cur_money = ?, cur_deadline = ? WHERE user_id = 1";
 			String insertDefItems = "UPDATE tempitems SET seed_bronze = ?, seed_silver = ?, seed_gold = ? WHERE temp_id = 1";
 			
-			try (PreparedStatement pstmt = connection.prepareStatement(insertUser)) {
-	            pstmt.setString(1, charNameInputBox.getText());
-	            pstmt.setInt(2, 1);
-	            pstmt.setInt(3, 5);
-	            pstmt.setInt(4, 100);
-	            pstmt.setInt(5, 14);
-	            pstmt.executeUpdate();
-	            
-	        } catch (SQLException e1) {
-	            e1.printStackTrace();
-	            
-	        }
-			
-			try(PreparedStatement pstmt = connection.prepareStatement(insertDefItems)){
-				pstmt.setInt(1, 5);
-				pstmt.setInt(2, 3);
-				pstmt.setInt(3, 1);
-				pstmt.executeUpdate();
-				
-			} catch (SQLException e2) {
-				e2.printStackTrace();
-				
-			}
-			
-			//Turn this to normal after testing
-			
-			
-			root = FXMLLoader.load(getClass().getResource("ScenePrologue.fxml"));
-			stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-			scene = new Scene(root);
-			stage.setScene(scene);
-			stage.show();
+			try {
+                // Delete tempgrowing data
+                deleteTempGrowingData();
+                
+                // Insert new user data
+                try (PreparedStatement pstmt = connection.prepareStatement(insertUser)) {
+                    pstmt.setString(1, charNameInputBox.getText());
+                    pstmt.setInt(2, 1);
+                    pstmt.setInt(3, 5);
+                    pstmt.setInt(4, 100);
+                    pstmt.setInt(5, 14);
+                    pstmt.executeUpdate();
+                    
+                } catch (SQLException e1) {
+                    e1.printStackTrace();
+                }
+                
+                // Insert default items data
+                try (PreparedStatement pstmt = connection.prepareStatement(insertDefItems)) {
+                    pstmt.setInt(1, 5);
+                    pstmt.setInt(2, 3);
+                    pstmt.setInt(3, 1);
+                    pstmt.executeUpdate();
+                    
+                } catch (SQLException e2) {
+                    e2.printStackTrace();
+                }
+                
+                // Switch to ScenePrologue
+                root = FXMLLoader.load(getClass().getResource("ScenePrologue.fxml"));
+                stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+                scene = new Scene(root);
+                stage.setScene(scene);
+                stage.show();
+                
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        
 			
 		}
 		

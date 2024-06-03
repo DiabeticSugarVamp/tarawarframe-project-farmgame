@@ -63,6 +63,21 @@ public class ControllerSaveCreate implements Initializable {
             Statement stmtItems = connection.createStatement();
             ResultSet rsItems = stmtItems.executeQuery("SELECT * FROM tempitems WHERE temp_id = 1");
             
+            String deleteBronzeQuery = "DELETE FROM savedgrowingbronze WHERE save_slots = ?";
+            PreparedStatement deleteBronzeStmt = connection.prepareStatement(deleteBronzeQuery);
+            deleteBronzeStmt.setInt(1, slot);
+            deleteBronzeStmt.executeUpdate();
+
+            String deleteSilverQuery = "DELETE FROM savedgrowingsilver WHERE save_slots = ?";
+            PreparedStatement deleteSilverStmt = connection.prepareStatement(deleteSilverQuery);
+            deleteSilverStmt.setInt(1, slot);
+            deleteSilverStmt.executeUpdate();
+
+            String deleteGoldQuery = "DELETE FROM savedgrowinggold WHERE save_slots = ?";
+            PreparedStatement deleteGoldStmt = connection.prepareStatement(deleteGoldQuery);
+            deleteGoldStmt.setInt(1, slot);
+            deleteGoldStmt.executeUpdate();
+            
             String insertBronzeQuery = "INSERT INTO savedgrowingbronze (grown_day, seed_planted_num, day_planted, day_watered, watered, save_slots) " +
                                         "SELECT grown_day, seed_planted_num, day_planted, day_watered, watered, ? FROM tempgrowingbronze " +
                                         "ON DUPLICATE KEY UPDATE grown_day=VALUES(grown_day), seed_planted_num=VALUES(seed_planted_num), day_watered=VALUES(day_watered), watered=VALUES(watered), save_slots=VALUES(save_slots)";
