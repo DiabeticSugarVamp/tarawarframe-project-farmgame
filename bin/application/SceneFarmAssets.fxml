@@ -32,22 +32,22 @@
             <Label fx:id="labelIsOwnedTruck" styleClass="gameText" text="Not owned" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
             <Label fx:id="labelIsOwnedTractor" prefHeight="21.0" prefWidth="119.0" styleClass="gameText" text="Not owned" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
             <Label fx:id="labelIsOwnedGloves" styleClass="gameText" text="Not owned" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
-            <ImageView fitHeight="150.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="75.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../assets/can.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="100.0" fitWidth="91.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
+            <ImageView fitHeight="75.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
                <image>
                   <Image url="@../assets/truck.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="150.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2">
+            <ImageView fitHeight="75.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2">
                <image>
-                  <Image url="@../assets/can.png" />
+                  <Image url="@../assets/tractor.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="150.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="3">
+            <ImageView fitHeight="75.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="3">
                <image>
                   <Image url="@../assets/midasGlove.png" />
                </image>
