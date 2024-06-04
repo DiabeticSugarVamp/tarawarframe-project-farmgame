@@ -61,7 +61,7 @@ public class ControllerSceneMainMenuCharacterCreation implements Initializable{
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		// TODO Auto-generated method stub
+	
 		avatarChoiceBox.getItems().addAll(avatarsStr);
 		avatarChoiceBox.getSelectionModel().selectFirst();
 		avatarChoiceBox.setOnAction(this::setAvatar);
@@ -98,9 +98,13 @@ public class ControllerSceneMainMenuCharacterCreation implements Initializable{
             pstmtDeleteGrowingSilver.executeUpdate();
             pstmtDeleteGrowingGold.executeUpdate();
             
+            
         } catch (SQLException e) {
             throw e;
+            
+            
         }
+        
     }
 	
 	public void switchToSceneMainMenu(MouseEvent event) throws IOException {
@@ -144,10 +148,10 @@ public class ControllerSceneMainMenuCharacterCreation implements Initializable{
 			String insertDefItems = "UPDATE tempitems SET seed_bronze = ?, seed_silver = ?, seed_gold = ? WHERE temp_id = 1";
 			
 			try {
-                // Delete tempgrowing data
+                
                 deleteTempGrowingData();
                 
-                // Insert new user data
+                
                 try (PreparedStatement pstmt = connection.prepareStatement(insertUser)) {
                     pstmt.setString(1, charNameInputBox.getText());
                     pstmt.setInt(2, 1);
@@ -158,9 +162,10 @@ public class ControllerSceneMainMenuCharacterCreation implements Initializable{
                     
                 } catch (SQLException e1) {
                     e1.printStackTrace();
+                    
                 }
                 
-                // Insert default items data
+                
                 try (PreparedStatement pstmt = connection.prepareStatement(insertDefItems)) {
                     pstmt.setInt(1, 5);
                     pstmt.setInt(2, 3);
@@ -169,9 +174,11 @@ public class ControllerSceneMainMenuCharacterCreation implements Initializable{
                     
                 } catch (SQLException e2) {
                     e2.printStackTrace();
+                    
+                    
                 }
                 
-                // Switch to ScenePrologue
+                
                 root = FXMLLoader.load(getClass().getResource("ScenePrologue.fxml"));
                 stage = (Stage)((Node)event.getSource()).getScene().getWindow();
                 scene = new Scene(root);
@@ -180,6 +187,8 @@ public class ControllerSceneMainMenuCharacterCreation implements Initializable{
                 
             } catch (SQLException ex) {
                 ex.printStackTrace();
+                
+                
             }
         
 			

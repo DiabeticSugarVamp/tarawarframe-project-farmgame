@@ -98,6 +98,13 @@ public class ControllerSaveCreate implements Initializable {
             PreparedStatement insertGoldStmt = connection.prepareStatement(insertGoldQuery);
             insertGoldStmt.setInt(1, slot);
             insertGoldStmt.executeUpdate();
+            
+            String insertReadyToHarvestQuery = "INSERT INTO savedreadytoharvest (crop_bronze, crop_silver, crop_gold, save_slots) " +
+                    "SELECT crop_bronze, crop_silver, crop_gold, ? FROM tempreadytoharvest " +
+                    "ON DUPLICATE KEY UPDATE crop_bronze=VALUES(crop_bronze), crop_silver=VALUES(crop_silver), crop_gold=VALUES(crop_gold), save_slots=VALUES(save_slots)";
+            PreparedStatement insertReadyToHarvestStmt = connection.prepareStatement(insertReadyToHarvestQuery);
+            insertReadyToHarvestStmt.setInt(1, slot);
+            insertReadyToHarvestStmt.executeUpdate();
 
             if (rs.next() && rsItems.next()) {
                 int userId = rs.getInt("user_id");
@@ -122,10 +129,15 @@ public class ControllerSaveCreate implements Initializable {
                 if (checkSlotRs.next()) {
                     Alert alert = new Alert(AlertType.CONFIRMATION, "Slot " + slot + " is already occupied. Do you want to overwrite it?", ButtonType.YES, ButtonType.NO);
                     alert.showAndWait();
+                    
 
                     if (alert.getResult() == ButtonType.NO) {
                         return;
+                        
+                        
                     }
+                    
+                    
                 }
 
                 String saveQuery = "INSERT INTO savedstats (user_id, username, cur_day, cur_actions, cur_money, cur_deadline, save_slots) " +
@@ -164,6 +176,8 @@ public class ControllerSaveCreate implements Initializable {
                 
             } else {
                 System.out.println("No data found for user_id = 1 in temporarystatsholder");
+                
+                
             }
 
             rs.close();
@@ -172,10 +186,14 @@ public class ControllerSaveCreate implements Initializable {
             
         } catch (SQLException e) {
             e.printStackTrace();
+            
+            
         }
 
         updateSlotLabels();
         switchToScenePauseMenu(event);
+        
+        
     }
 
     public void updateSlotLabels() {
@@ -195,15 +213,21 @@ public class ControllerSaveCreate implements Initializable {
                     case 1:
                         saveSlot1.setText(labelText);
                         break;
+                        
                     case 2:
                         saveSlot2.setText(labelText);
                         break;
+                        
                     case 3:
                         saveSlot3.setText(labelText);
                         break;
+                        
+                        
                     default:
                         System.out.println("Invalid slot: " + slot);
                         break;
+                        
+                        
                 }
             }
 
@@ -212,7 +236,11 @@ public class ControllerSaveCreate implements Initializable {
             
         } catch (SQLException e) {
             e.printStackTrace();
+            
+            
         }
+        
+        
     }
 
     public void switchToScenePauseMenu(MouseEvent event) throws IOException {
@@ -221,5 +249,7 @@ public class ControllerSaveCreate implements Initializable {
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
+        
+        
     }
 }

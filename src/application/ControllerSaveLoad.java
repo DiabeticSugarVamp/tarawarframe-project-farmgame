@@ -38,19 +38,19 @@ public class ControllerSaveLoad implements Initializable {
         loadSlotLabels();
     }
 
-    public void loadSlot1(MouseEvent event) throws IOException {
+    public void loadSlot1(MouseEvent event) throws IOException, SQLException {
         loadSlot(event, 1);
     }
 
-    public void loadSlot2(MouseEvent event) throws IOException {
+    public void loadSlot2(MouseEvent event) throws IOException, SQLException {
         loadSlot(event, 2);
     }
 
-    public void loadSlot3(MouseEvent event) throws IOException {
+    public void loadSlot3(MouseEvent event) throws IOException, SQLException {
         loadSlot(event, 3);
     }
 
-    public void loadSlot(MouseEvent event, int slot) throws IOException {
+    public void loadSlot(MouseEvent event, int slot) throws IOException, SQLException {
         String selectStatsQuery = "SELECT * FROM savedstats WHERE save_slots = ?";
         String selectItemsQuery = "SELECT * FROM saveditems WHERE save_slots = ?";
         String selectGrowingBronzeQuery = "SELECT * FROM savedgrowingbronze WHERE save_slots = ?";
@@ -65,6 +65,33 @@ public class ControllerSaveLoad implements Initializable {
         String deleteGrowingBronzeQuery = "DELETE FROM tempgrowingbronze";
         String deleteGrowingSilverQuery = "DELETE FROM tempgrowingsilver";
         String deleteGrowingGoldQuery = "DELETE FROM tempgrowinggold";
+        
+        String selectHarvest = "SELECT crop_bronze, crop_silver, crop_gold FROM savedreadytoharvest WHERE save_slots = ?";
+        PreparedStatement pstmtSelectHarvest = connection.prepareStatement(selectHarvest);
+        pstmtSelectHarvest.setInt(1, slot); // Set the value of the slot
+        ResultSet rsHarvest = pstmtSelectHarvest.executeQuery();
+
+       
+        if (rsHarvest.next()) {
+            
+            int cropBronze = rsHarvest.getInt("crop_bronze");
+            int cropSilver = rsHarvest.getInt("crop_silver");
+            int cropGold = rsHarvest.getInt("crop_gold");
+
+           
+            String updateHarvest = "INSERT INTO tempreadytoharvest (crop_bronze, crop_silver, crop_gold) VALUES (?, ?, ?) " +
+                                   "ON DUPLICATE KEY UPDATE crop_bronze = VALUES(crop_bronze), crop_silver = VALUES(crop_silver), crop_gold = VALUES(crop_gold)";
+            PreparedStatement pstmtUpdateHarvest = connection.prepareStatement(updateHarvest);
+            pstmtUpdateHarvest.setInt(1, cropBronze);
+            pstmtUpdateHarvest.setInt(2, cropSilver);
+            pstmtUpdateHarvest.setInt(3, cropGold);
+            pstmtUpdateHarvest.executeUpdate();
+        }
+
+        
+        rsHarvest.close();
+        pstmtSelectHarvest.close();
+        
 
         try (
             PreparedStatement pstmtSelectStats = connection.prepareStatement(selectStatsQuery);
@@ -72,6 +99,7 @@ public class ControllerSaveLoad implements Initializable {
             PreparedStatement pstmtSelectGrowingBronze = connection.prepareStatement(selectGrowingBronzeQuery);
             PreparedStatement pstmtSelectGrowingSilver = connection.prepareStatement(selectGrowingSilverQuery);
             PreparedStatement pstmtSelectGrowingGold = connection.prepareStatement(selectGrowingGoldQuery);
+        		
             PreparedStatement pstmtUpdateStats = connection.prepareStatement(updateStatsQuery);
             PreparedStatement pstmtUpdateItems = connection.prepareStatement(updateItemsQuery);
             PreparedStatement pstmtInsertGrowingBronze = connection.prepareStatement(insertGrowingBronzeQuery);
@@ -79,32 +107,36 @@ public class ControllerSaveLoad implements Initializable {
             PreparedStatement pstmtInsertGrowingGold = connection.prepareStatement(insertGrowingGoldQuery);
             PreparedStatement pstmtDeleteGrowingBronze = connection.prepareStatement(deleteGrowingBronzeQuery);
             PreparedStatement pstmtDeleteGrowingSilver = connection.prepareStatement(deleteGrowingSilverQuery);
-            PreparedStatement pstmtDeleteGrowingGold = connection.prepareStatement(deleteGrowingGoldQuery)
-        ) {
-            // Delete existing growing data
+            PreparedStatement pstmtDeleteGrowingGold = connection.prepareStatement(deleteGrowingGoldQuery)) {
+        	
+        	
+            
         	pstmtDeleteGrowingBronze.executeUpdate();
             pstmtDeleteGrowingSilver.executeUpdate();
             pstmtDeleteGrowingGold.executeUpdate();
 
-            // Select saved stats
+            
             pstmtSelectStats.setInt(1, slot);
             ResultSet rsStats = pstmtSelectStats.executeQuery();
             if (rsStats.next()) {
-                // Update temporary stats
+                
                 pstmtUpdateStats.setString(1, rsStats.getString("username"));
                 pstmtUpdateStats.setInt(2, rsStats.getInt("cur_day"));
                 pstmtUpdateStats.setInt(3, rsStats.getInt("cur_actions"));
                 pstmtUpdateStats.setDouble(4, rsStats.getDouble("cur_money"));
                 pstmtUpdateStats.setInt(5, rsStats.getInt("cur_deadline"));
                 pstmtUpdateStats.executeUpdate();
+                
             }
+            
+            
             rsStats.close();
 
-            // Select saved items
+            
             pstmtSelectItems.setInt(1, slot);
             ResultSet rsItems = pstmtSelectItems.executeQuery();
             if (rsItems.next()) {
-                // Update temporary items
+               
                 pstmtUpdateItems.setInt(1, rsItems.getInt("seed_bronze"));
                 pstmtUpdateItems.setInt(2, rsItems.getInt("seed_silver"));
                 pstmtUpdateItems.setInt(3, rsItems.getInt("seed_gold"));
@@ -112,10 +144,12 @@ public class ControllerSaveLoad implements Initializable {
                 pstmtUpdateItems.setInt(5, rsItems.getInt("crop_silver"));
                 pstmtUpdateItems.setInt(6, rsItems.getInt("crop_gold"));
                 pstmtUpdateItems.executeUpdate();
+                
             }
+            
             rsItems.close();
 
-            // Select saved growing data for bronze
+            
             pstmtSelectGrowingBronze.setInt(1, slot);
             ResultSet rsGrowingBronze = pstmtSelectGrowingBronze.executeQuery();
             while (rsGrowingBronze.next()) {
@@ -125,10 +159,13 @@ public class ControllerSaveLoad implements Initializable {
                 pstmtInsertGrowingBronze.setInt(4, rsGrowingBronze.getInt("watered"));
                 pstmtInsertGrowingBronze.setInt(5, rsGrowingBronze.getInt("day_watered"));
                 pstmtInsertGrowingBronze.executeUpdate();
+                
             }
+            
+            
             rsGrowingBronze.close();
 
-            // Select saved growing data for silver
+           
             pstmtSelectGrowingSilver.setInt(1, slot);
             ResultSet rsGrowingSilver = pstmtSelectGrowingSilver.executeQuery();
             while (rsGrowingSilver.next()) {
@@ -138,10 +175,12 @@ public class ControllerSaveLoad implements Initializable {
                 pstmtInsertGrowingSilver.setInt(4, rsGrowingSilver.getInt("watered"));
                 pstmtInsertGrowingSilver.setInt(5, rsGrowingSilver.getInt("day_watered"));
                 pstmtInsertGrowingSilver.executeUpdate();
+                
             }
+            
             rsGrowingSilver.close();
 
-            // Select saved growing data for gold
+            
             pstmtSelectGrowingGold.setInt(1, slot);
             ResultSet rsGrowingGold = pstmtSelectGrowingGold.executeQuery();
             while (rsGrowingGold.next()) {
@@ -151,18 +190,26 @@ public class ControllerSaveLoad implements Initializable {
                 pstmtInsertGrowingGold.setInt(4, rsGrowingGold.getInt("watered"));
                 pstmtInsertGrowingGold.setInt(5, rsGrowingGold.getInt("day_watered"));
                 pstmtInsertGrowingGold.executeUpdate();
+                
+                
             }
+            
             rsGrowingGold.close();
 
-            // Load SceneFarmNavigation
+           
             root = FXMLLoader.load(getClass().getResource("SceneFarmNavigation.fxml"));
             stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             scene = new Scene(root);
             stage.setScene(scene);
             stage.show();
+            
+            
         } catch (SQLException e) {
             e.printStackTrace();
+            
+            
         }
+        
     }
 
     public void loadSlotLabels() {
@@ -181,20 +228,31 @@ public class ControllerSaveLoad implements Initializable {
                     case 1:
                         saveSlot1.setText(labelText);
                         break;
+                        
                     case 2:
                         saveSlot2.setText(labelText);
                         break;
+                        
                     case 3:
                         saveSlot3.setText(labelText);
                         break;
+                        
                     default:
                         System.out.println("Invalid slot: " + slot);
                         break;
+                        
                 }
+                
+                
             }
+            
+            
         } catch (SQLException e) {
             e.printStackTrace();
+            
+            
         }
+        
     }
 
     public void switchToSceneMainMenu(MouseEvent event) throws IOException {
@@ -203,5 +261,6 @@ public class ControllerSaveLoad implements Initializable {
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
+        
     }
 }
