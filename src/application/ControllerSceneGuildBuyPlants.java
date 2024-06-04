@@ -72,6 +72,8 @@ public class ControllerSceneGuildBuyPlants implements Initializable {
             actionPointsRemaining = rs.getInt("cur_actions");
             actionPointsTotal = rs.getInt("cur_actions");
             deadline = rs.getInt("cur_deadline");
+            
+            
         }
     }
 
@@ -79,8 +81,11 @@ public class ControllerSceneGuildBuyPlants implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         try {
             getUser();
+            
         } catch (SQLException e) {
             e.printStackTrace();
+            
+            
         }
         setTopTexts();
 
@@ -102,6 +107,7 @@ public class ControllerSceneGuildBuyPlants implements Initializable {
             @Override
             public void changed(ObservableValue<? extends Integer> arg0, Integer arg1, Integer arg2) {
                 updateTotalValue();
+                
             }
         });
 
@@ -109,6 +115,7 @@ public class ControllerSceneGuildBuyPlants implements Initializable {
             @Override
             public void changed(ObservableValue<? extends Integer> arg0, Integer arg1, Integer arg2) {
                 updateTotalValue();
+                
             }
         });
 
@@ -116,6 +123,7 @@ public class ControllerSceneGuildBuyPlants implements Initializable {
             @Override
             public void changed(ObservableValue<? extends Integer> arg0, Integer arg1, Integer arg2) {
                 updateTotalValue();
+                
             }
         });
 
@@ -127,6 +135,7 @@ public class ControllerSceneGuildBuyPlants implements Initializable {
                 (buySilverSpinner.getValue() * 10) +
                 (buyGoldSpinner.getValue() * 15);
         buyTotal.setText(Integer.toString(calculatedTotalValue));
+        
     }
 
     public void buyTotalItems(MouseEvent event) {
@@ -135,14 +144,17 @@ public class ControllerSceneGuildBuyPlants implements Initializable {
             updateUserMoney();
             updateTempItems();
 
-            // Go back to the guild scene
+           
             try {
                 switchToSceneGuild(event);
+                
             } catch (IOException e) {
                 e.printStackTrace();
+                
             }
         } else {
             showAlert("Insufficient Funds", "You do not have enough money to make this purchase.");
+            
         }
     }
 
@@ -151,10 +163,13 @@ public class ControllerSceneGuildBuyPlants implements Initializable {
         try (PreparedStatement pstmt = connection.prepareStatement(updateSql)) {
             pstmt.setDouble(1, money);
             pstmt.executeUpdate();
+            
         } catch (SQLException e) {
             e.printStackTrace();
+            
         }
         setTopTexts();
+        
     }
 
     private void updateTempItems() {
@@ -164,8 +179,10 @@ public class ControllerSceneGuildBuyPlants implements Initializable {
             pstmt.setInt(2, buySilverSpinner.getValue());
             pstmt.setInt(3, buyGoldSpinner.getValue());
             pstmt.executeUpdate();
+            
         } catch (SQLException e) {
             e.printStackTrace();
+            
         }
     }
 
@@ -175,6 +192,7 @@ public class ControllerSceneGuildBuyPlants implements Initializable {
         alert.setHeaderText(null);
         alert.setContentText(content);
         alert.showAndWait();
+        
     }
 
     public void setTopTexts() {
@@ -182,6 +200,7 @@ public class ControllerSceneGuildBuyPlants implements Initializable {
         labelActionPoints.setText("Actions: " + actionPointsRemaining);
         labelMoney.setText("Money: " + money);
         labelDeadline.setText("Deadline: " + deadline);
+        
     }
 
     public void switchToSceneGuild(MouseEvent event) throws IOException {
@@ -190,5 +209,6 @@ public class ControllerSceneGuildBuyPlants implements Initializable {
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
+        
     }
 }

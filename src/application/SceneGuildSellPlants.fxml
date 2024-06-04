@@ -116,7 +116,7 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label styleClass="mainMenuButtons" stylesheets="@application.css" text="Sell items" GridPane.halignment="CENTER">
+            <Label fx:id="btnSellItems" onMouseClicked="#sellTotalItems" styleClass="mainMenuButtons" stylesheets="@application.css" text="Sell items" GridPane.halignment="CENTER">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor></Label>
