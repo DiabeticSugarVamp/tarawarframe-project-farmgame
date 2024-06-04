@@ -527,7 +527,7 @@ public class ControllerSceneFarmFields implements Initializable {
                 pstmtReadyToHarvest.setInt(3, readyGold);
                 pstmtReadyToHarvest.executeUpdate();
 
-                // Remove harvested crops
+                
                 pstmtDeleteBronze.setInt(1, currentDay);
                 pstmtDeleteBronze.executeUpdate();
                 pstmtDeleteSilver.setInt(1, currentDay);
@@ -535,14 +535,11 @@ public class ControllerSceneFarmFields implements Initializable {
                 pstmtDeleteGold.setInt(1, currentDay);
                 pstmtDeleteGold.executeUpdate();
 
-                // Update the total growing count
-                //totalBronzeGrowing -= readyBronze;
-                //totalSilverGrowing -= readySilver;
-                //totalGoldGrowing -= readyGold;
+                
             }
         }
 
-        // Update the labels
+        
         lblGrowingBronze.setText("Bronze crops growing: " + totalBronzeGrowing);
         lblGrowingSilver.setText("Silver crops growing: " + totalSilverGrowing);
         lblGrowingGold.setText("Gold crops growing: " + totalGoldGrowing);

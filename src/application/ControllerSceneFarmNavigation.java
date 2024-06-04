@@ -79,9 +79,9 @@ public class ControllerSceneFarmNavigation implements Initializable {
 
     public void endDay(MouseEvent e) {
         try {
-            resetWateredColumn("tempgrowingbronze", currentDay);
-            resetWateredColumn("tempgrowingsilver", currentDay);
-            resetWateredColumn("tempgrowinggold", currentDay);
+        	resetWateredColumn("tempgrowingbronze");
+            resetWateredColumn("tempgrowingsilver");
+            resetWateredColumn("tempgrowinggold");
             
         } catch (SQLException e1) {
             e1.printStackTrace();
@@ -96,9 +96,9 @@ public class ControllerSceneFarmNavigation implements Initializable {
         	addToReadyToHarvest("tempgrowingbronze", currentDay);
             addToReadyToHarvest("tempgrowingsilver", currentDay);
             addToReadyToHarvest("tempgrowinggold", currentDay);
-            removeUnwateredCrops("tempgrowingbronze");
-            removeUnwateredCrops("tempgrowingsilver");
-            removeUnwateredCrops("tempgrowinggold");
+            removeUnwateredCrops("tempgrowingbronze", currentDay);
+            removeUnwateredCrops("tempgrowingsilver", currentDay);
+            removeUnwateredCrops("tempgrowinggold", currentDay);
         } catch (SQLException e1) {
             e1.printStackTrace();
         }
@@ -169,20 +169,17 @@ public class ControllerSceneFarmNavigation implements Initializable {
         }
     }
     
-    private void resetWateredColumn(String tableName, int day) throws SQLException {
-        String query = "UPDATE " + tableName + " SET watered = 0 WHERE day_planted = ?";
+    private void resetWateredColumn(String tableName) throws SQLException {
+        String query = "UPDATE " + tableName + " SET watered = 0";
         try (PreparedStatement pstmt = connection.prepareStatement(query)) {
-            pstmt.setInt(1, day);
             pstmt.executeUpdate();
-            
-            
         }
     }
     
-    private void removeUnwateredCrops(String tableName) throws SQLException {
-        String query = "DELETE FROM " + tableName + " WHERE grown_day <= ?";
+    private void removeUnwateredCrops(String tableName, int currentDay) throws SQLException {
+        String query = "DELETE FROM " + tableName + " WHERE watered = 0 AND ? - day_watered > 1";
         try (PreparedStatement pstmt = connection.prepareStatement(query)) {
-            pstmt.setInt(1, currentDay);
+            pstmt.setInt(1, currentDay); 
             pstmt.executeUpdate();
         }
     }
