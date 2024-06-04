@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+
+
+<BorderPane fx:id="endLosePane" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" stylesheets="@application.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/21" fx:controller="application.ControllerSceneEndLose">
+   <bottom>
+      <Label onMouseClicked="#switchToSceneMainMenu" text="Click here to go back to main menu" textFill="WHITE" BorderPane.alignment="CENTER">
+         <padding>
+            <Insets bottom="20.0" />
+         </padding>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <font>
+            <Font name="Papyrus" size="20.0" />
+         </font>
+      </Label>
+   </bottom>
+</BorderPane>

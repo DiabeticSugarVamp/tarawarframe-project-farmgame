@@ -53,6 +53,16 @@
 	-fx-background-size: contain;
 }
 
+#endWinPane {
+	-fx-background-image: url('../assets/bgYouWin.png');	
+	-fx-background-size: contain;
+}
+
+#endLosePane {
+	-fx-background-image: url('../assets/bgYouLose.png');	
+	-fx-background-size: contain;
+}
+
 .mainMenuTitle {
 	-fx-text-fill: yellow;
 	-fx-font-family: "Bauhaus 93";

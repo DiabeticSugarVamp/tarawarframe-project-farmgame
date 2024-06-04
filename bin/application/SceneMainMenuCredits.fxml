@@ -14,11 +14,11 @@
 <AnchorPane fx:id="mainMenuPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" styleClass="mainMenuPane" stylesheets="@application.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.SceneController">
    <children>
       <MediaView fx:id="mainMenuMusic" fitHeight="200.0" fitWidth="200.0" layoutX="23.0" layoutY="35.0" />
-      <ScrollPane hbarPolicy="NEVER" prefHeight="768.0" prefWidth="1024.0" styleClass="mainMenuPane" stylesheets="@application.css">
+      <ScrollPane hbarPolicy="NEVER" prefHeight="768.0" prefWidth="1024.0" styleClass="mainMenuPane" stylesheets="@application.css" vvalue="1.0">
          <content>
-            <BorderPane prefHeight="768.0" prefWidth="1024.0" styleClass="mainMenuPane">
+            <BorderPane prefHeight="1000.0" prefWidth="1024.0" styleClass="mainMenuPane">
                <center>
-                  <GridPane BorderPane.alignment="CENTER">
+                  <GridPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="1000.0" prefWidth="800.0" styleClass="GridPane" BorderPane.alignment="CENTER">
                     <columnConstraints>
                       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                     </columnConstraints>
@@ -26,10 +26,29 @@
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <Label styleClass="mainMenuButtons" stylesheets="@application.css" text="Effervescence - Scott Buckley (Menu Music)" GridPane.halignment="CENTER" />
+                        <Label alignment="CENTER" prefHeight="66.0" prefWidth="169.0" styleClass="mainMenuText" stylesheets="@application.css" text="Background Images" GridPane.halignment="CENTER" />
+                        <Label styleClass="gameText" text="https://shubibubi.itch.io/cozy-farm" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
+                        <Label styleClass="gameText" text="https://limezu.itch.io/moderninteriors" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+                        <Label alignment="CENTER" prefHeight="66.0" prefWidth="169.0" styleClass="mainMenuText" stylesheets="@application.css" text="Avatars" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
+                        <Label styleClass="gameText" text="https://sutemo.itch.io/female-character" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
+                        <Label styleClass="gameText" text="https://sutemo.itch.io/female-mature-anime-sprite" GridPane.halignment="CENTER" GridPane.rowIndex="6" />
+                        <Label alignment="CENTER" prefHeight="66.0" prefWidth="169.0" styleClass="mainMenuText" stylesheets="@application.css" text="Icons" GridPane.halignment="CENTER" GridPane.rowIndex="7" />
+                        <Label styleClass="gameText" text="https://shikashipx.itch.io/shikashis-fantasy-icons-pack" GridPane.halignment="CENTER" GridPane.rowIndex="9" />
+                        <Label styleClass="gameText" text="Roberto Nathaniel Camacho III and Kenichi Lei Calica" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+                        <Label styleClass="gameText" text="Andre Victor Arcilla and Carl Angelo Jamero" GridPane.halignment="CENTER" GridPane.rowIndex="8" />
                      </children>
+                     <BorderPane.margin>
+                        <Insets bottom="20.0" />
+                     </BorderPane.margin>
                   </GridPane>
                </center>
                <bottom>
@@ -43,7 +62,7 @@
                   </Label>
                </bottom>
                <top>
-                  <Label fx:id="mainMenuCredits" prefHeight="37.0" prefWidth="157.0" styleClass="mainMenuButtons" text="Credits" BorderPane.alignment="CENTER" />
+                  <Label fx:id="mainMenuCredits" prefHeight="58.0" prefWidth="246.0" styleClass="mainMenuTitle" text="Credits" BorderPane.alignment="CENTER" />
                </top>
             </BorderPane>
          </content>

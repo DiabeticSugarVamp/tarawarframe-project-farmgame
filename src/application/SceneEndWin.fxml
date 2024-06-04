@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+
+
+<BorderPane fx:id="endWinPane" maxHeight="-Infinity" maxWidth="-Infinity" onMouseClicked="#switchToSceneMainMenu" prefHeight="768.0" prefWidth="1024.0" stylesheets="@application.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/21" fx:controller="application.ControllerSceneEndWin">
+   <bottom>
+      <Label text="Click to go back to main menu" BorderPane.alignment="CENTER">
+         <font>
+            <Font name="Papyrus" size="20.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <padding>
+            <Insets bottom="20.0" />
+         </padding>
+      </Label>
+   </bottom>
+</BorderPane>
