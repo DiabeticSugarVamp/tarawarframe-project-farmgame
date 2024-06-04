@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 03, 2024 at 08:29 PM
+-- Generation Time: Jun 04, 2024 at 04:08 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -41,8 +41,8 @@ CREATE TABLE `savedgrowingbronze` (
 --
 
 INSERT INTO `savedgrowingbronze` (`save_slots`, `day_planted`, `grown_day`, `seed_planted_num`, `watered`, `day_watered`) VALUES
-(2, 8, 10, 2, 0, 8),
-(3, 23, 25, 2, 1, 23);
+(2, 1, 3, 3, 1, 1),
+(3, 28, 30, 1, 1, 29);
 
 -- --------------------------------------------------------
 
@@ -64,7 +64,9 @@ CREATE TABLE `savedgrowinggold` (
 --
 
 INSERT INTO `savedgrowinggold` (`save_slots`, `day_planted`, `grown_day`, `seed_planted_num`, `watered`, `day_watered`) VALUES
-(3, 23, 30, 2, 1, 23);
+(2, 1, 8, 1, 1, 1),
+(3, 26, 33, 2, 1, 29),
+(3, 28, 35, 1, 1, 29);
 
 -- --------------------------------------------------------
 
@@ -86,7 +88,9 @@ CREATE TABLE `savedgrowingsilver` (
 --
 
 INSERT INTO `savedgrowingsilver` (`save_slots`, `day_planted`, `grown_day`, `seed_planted_num`, `watered`, `day_watered`) VALUES
-(3, 23, 27, 2, 1, 23);
+(2, 1, 5, 3, 1, 1),
+(3, 26, 30, 2, 1, 29),
+(3, 28, 32, 1, 1, 29);
 
 -- --------------------------------------------------------
 
@@ -110,8 +114,28 @@ CREATE TABLE `saveditems` (
 
 INSERT INTO `saveditems` (`save_slots`, `seed_bronze`, `seed_silver`, `seed_gold`, `crop_bronze`, `crop_silver`, `crop_gold`) VALUES
 (1, 3, 1, 0, 0, 0, 0),
-(2, 0, 0, 0, 0, 0, 0),
-(3, 8, 8, 8, 0, 0, 0);
+(2, 2, 0, 0, 0, 0, 0),
+(3, 43, 43, 43, 0, 0, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `savedreadytoharvest`
+--
+
+CREATE TABLE `savedreadytoharvest` (
+  `save_slots` int(1) NOT NULL,
+  `crop_bronze` int(3) NOT NULL,
+  `crop_silver` int(3) NOT NULL,
+  `crop_gold` int(3) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `savedreadytoharvest`
+--
+
+INSERT INTO `savedreadytoharvest` (`save_slots`, `crop_bronze`, `crop_silver`, `crop_gold`) VALUES
+(3, 2, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -136,8 +160,8 @@ CREATE TABLE `savedstats` (
 
 INSERT INTO `savedstats` (`save_slots`, `user_id`, `username`, `cur_day`, `cur_actions`, `cur_money`, `cur_deadline`, `time_stamp`) VALUES
 (1, 1, 'Carl1', 15, 3, 50, 14, '2024-06-03 14:30:13'),
-(2, 2, 'Angelo', 9, 5, 100, 6, '2024-06-03 18:09:21'),
-(3, 3, 'Ahh yes', 23, 3, 50, 6, '2024-06-03 18:08:48');
+(2, 2, 'Drealord', 1, 2, 100, 14, '2024-06-03 18:52:34'),
+(3, 3, 'Ahh yes', 29, 5, 950, 14, '2024-06-04 00:24:54');
 
 -- --------------------------------------------------------
 
@@ -158,7 +182,7 @@ CREATE TABLE `tempgrowingbronze` (
 --
 
 INSERT INTO `tempgrowingbronze` (`day_planted`, `grown_day`, `seed_planted_num`, `watered`, `day_watered`) VALUES
-(23, 25, 2, 1, 23);
+(28, 30, 1, 1, 29);
 
 -- --------------------------------------------------------
 
@@ -179,7 +203,8 @@ CREATE TABLE `tempgrowinggold` (
 --
 
 INSERT INTO `tempgrowinggold` (`day_planted`, `grown_day`, `seed_planted_num`, `watered`, `day_watered`) VALUES
-(23, 30, 2, 1, 23);
+(26, 33, 2, 1, 29),
+(28, 35, 1, 1, 29);
 
 -- --------------------------------------------------------
 
@@ -200,7 +225,8 @@ CREATE TABLE `tempgrowingsilver` (
 --
 
 INSERT INTO `tempgrowingsilver` (`day_planted`, `grown_day`, `seed_planted_num`, `watered`, `day_watered`) VALUES
-(23, 27, 2, 1, 23);
+(26, 30, 2, 1, 29),
+(28, 32, 1, 1, 29);
 
 -- --------------------------------------------------------
 
@@ -223,7 +249,7 @@ CREATE TABLE `tempitems` (
 --
 
 INSERT INTO `tempitems` (`temp_id`, `seed_bronze`, `seed_silver`, `seed_gold`, `crop_bronze`, `crop_silver`, `crop_gold`) VALUES
-(1, 8, 8, 8, 0, 0, 0);
+(1, 43, 43, 43, 2, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -246,7 +272,27 @@ CREATE TABLE `temporarystatsholder` (
 --
 
 INSERT INTO `temporarystatsholder` (`user_id`, `username`, `cur_day`, `cur_actions`, `cur_money`, `cur_deadline`, `time_stamp`) VALUES
-(1, 'Ahh yes', 23, 3, 50, 6, '2024-06-03 18:23:22');
+(1, 'Ahh yes', 29, 5, 950, 14, '2024-06-04 02:07:04');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tempreadytoharvest`
+--
+
+CREATE TABLE `tempreadytoharvest` (
+  `temp_id` int(1) NOT NULL DEFAULT 1,
+  `crop_bronze` int(3) NOT NULL,
+  `crop_silver` int(3) NOT NULL,
+  `crop_gold` int(3) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tempreadytoharvest`
+--
+
+INSERT INTO `tempreadytoharvest` (`temp_id`, `crop_bronze`, `crop_silver`, `crop_gold`) VALUES
+(1, 0, 0, 0);
 
 --
 -- Indexes for dumped tables
@@ -274,6 +320,12 @@ ALTER TABLE `savedgrowingsilver`
 -- Indexes for table `saveditems`
 --
 ALTER TABLE `saveditems`
+  ADD PRIMARY KEY (`save_slots`);
+
+--
+-- Indexes for table `savedreadytoharvest`
+--
+ALTER TABLE `savedreadytoharvest`
   ADD PRIMARY KEY (`save_slots`);
 
 --
@@ -311,6 +363,12 @@ ALTER TABLE `tempitems`
 --
 ALTER TABLE `temporarystatsholder`
   ADD PRIMARY KEY (`user_id`);
+
+--
+-- Indexes for table `tempreadytoharvest`
+--
+ALTER TABLE `tempreadytoharvest`
+  ADD PRIMARY KEY (`temp_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
