@@ -41,11 +41,11 @@
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor></Label>
-                  <Label fx:id="mainMenuAboutUs" onMouseClicked="#switchToSceneMainMenuAboutUs" prefHeight="75.0" prefWidth="200.0" styleClass="mainMenuButtons" stylesheets="@application.css" text="About Us" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+                  <Label fx:id="mainMenuAboutUs" alignment="CENTER" onMouseClicked="#switchToSceneMainMenuAboutUs" prefHeight="75.0" prefWidth="200.0" styleClass="mainMenuButtons" stylesheets="@application.css" text="About Us" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor></Label>
-                  <Label onMouseClicked="#switchToSceneMainMenuTutorial" prefHeight="75.0" prefWidth="200.0" styleClass="mainMenuButtons" text="Tutorial" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+                  <Label alignment="CENTER" onMouseClicked="#switchToSceneMainMenuTutorial" prefHeight="75.0" prefWidth="200.0" styleClass="mainMenuButtons" text="Tutorial" GridPane.halignment="CENTER" GridPane.rowIndex="2">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor></Label>

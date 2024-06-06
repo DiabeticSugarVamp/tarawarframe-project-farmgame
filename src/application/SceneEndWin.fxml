@@ -6,10 +6,9 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-
-<BorderPane fx:id="endWinPane" maxHeight="-Infinity" maxWidth="-Infinity" onMouseClicked="#switchToSceneMainMenu" prefHeight="768.0" prefWidth="1024.0" stylesheets="@application.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/21" fx:controller="application.ControllerSceneEndWin">
+<BorderPane fx:id="endWinPane" maxHeight="-Infinity" maxWidth="-Infinity" onMouseClicked="#switchToSceneMainMenu" prefHeight="768.0" prefWidth="1024.0" stylesheets="@application.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ControllerSceneEndWin">
    <bottom>
-      <Label text="Click to go back to main menu" BorderPane.alignment="CENTER">
+      <Label text="Click to go back to main menu" textFill="WHITE" BorderPane.alignment="CENTER">
          <font>
             <Font name="Papyrus" size="20.0" />
          </font>

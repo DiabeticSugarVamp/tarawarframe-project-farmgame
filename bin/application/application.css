@@ -55,24 +55,44 @@
 
 #endWinPane {
 	-fx-background-image: url('../assets/bgYouWin.png');	
-	-fx-background-size: contain;
+	-fx-background-size: stretch;
 }
 
 #endLosePane {
 	-fx-background-image: url('../assets/bgYouLose.png');	
-	-fx-background-size: contain;
+	-fx-background-size: auto;
+}
+
+#rentNotifPane {
+	-fx-background-image: url('../assets/bgLandlordNotif.png');	
+	-fx-background-size: stretch;
+}
+
+#rentNotifDay2Pane {
+	-fx-background-image: url('../assets/bgLandlordNotifDay2.png');	
+	-fx-background-size: stretch;
+}
+
+#rentNotifDay7Pane {
+	-fx-background-image: url('../assets/bgLandlordNotifDay7.png');	
+	-fx-background-size: stretch;
+}
+
+#dayEndPane {
+	-fx-background-image: url('../assets/bgDayEnd.png');	
+	-fx-background-size: stretch;
 }
 
 .mainMenuTitle {
 	-fx-text-fill: yellow;
-	-fx-font-family: "Bauhaus 93";
+	-fx-font-family: "Bauhaus 93", sans-serif;
 	-fx-font-size: 50;
 	-fx-alignment: center;	
 	-fx-text-alignment: center;
 }
 
 .mainMenuText {
-	-fx-font-family: "Lucida Console";
+	-fx-font-family: "Lucida Console", sans-serif;
 	-fx-text-fill: yellow;
 	-fx-background-color: brown;
 	-fx-border-style: solid;
@@ -130,13 +150,13 @@
 }
 
 .scenePrologueText {
-	-fx-font-family: "Lucida Console";
+	-fx-font-family: "Lucida Console", sans-serif;
 	-fx-text-fill: yellow;
 	-fx-font-size: 25;
 }
 
 .gameText, .gameBottomOptionText, .gameTopText, .fieldsColumnText {
-	-fx-font-family: "Lucida Console";
+	-fx-font-family: "Lucida Console", sans-serif;
 	-fx-text-fill: yellow;
 	-fx-font-size: 20px; 	
 }
@@ -177,7 +197,7 @@
 }
 
 #labelMoney {
-	-fx-background-color: white;
+	-fx-background-color: maroon;
 }
 
 #labelDeadline {
