@@ -105,7 +105,7 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <ImageView fitHeight="55.0" fitWidth="71.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER">
+                  <ImageView fx:id="charAvatar" fitHeight="55.0" fitWidth="71.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER">
                      <image>
                         <Image url="@../assets/imagePrologue2.jpg" />
                      </image>

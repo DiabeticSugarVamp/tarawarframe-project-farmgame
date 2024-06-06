@@ -71,8 +71,6 @@ public class ControllerSceneGuildSellPlants implements Initializable {
             actionPointsRemaining = rs.getInt("cur_actions");
             actionPointsTotal = rs.getInt("cur_actions");
             deadline = rs.getInt("cur_deadline");
-            
-            
         }
     }
 
@@ -82,7 +80,6 @@ public class ControllerSceneGuildSellPlants implements Initializable {
             getUser();
         } catch (SQLException e) {
             e.printStackTrace();
-            
         }
         setTopTexts();
 
@@ -104,47 +101,33 @@ public class ControllerSceneGuildSellPlants implements Initializable {
         sellTotal.setText(Integer.toString(calculatedTotalValue));
 
         sellBronzeSpinner.valueProperty().addListener(new ChangeListener<Integer>() {
-
             @Override
             public void changed(ObservableValue<? extends Integer> arg0, Integer arg1, Integer arg2) {
-
                 calculatedTotalValue = (sellBronzeSpinner.getValue() * 8) +
                         (sellSilverSpinner.getValue() * 14) +
                         (sellGoldSpinner.getValue() * 20);
                 sellTotal.setText(Integer.toString(calculatedTotalValue));
-                
-                
             }
-
         });
 
         sellSilverSpinner.valueProperty().addListener(new ChangeListener<Integer>() {
-
             @Override
             public void changed(ObservableValue<? extends Integer> arg0, Integer arg1, Integer arg2) {
-
                 calculatedTotalValue = (sellBronzeSpinner.getValue() * 8) +
                         (sellSilverSpinner.getValue() * 14) +
                         (sellGoldSpinner.getValue() * 20);
                 sellTotal.setText(Integer.toString(calculatedTotalValue));
-                
-                
             }
-
         });
 
         sellGoldSpinner.valueProperty().addListener(new ChangeListener<Integer>() {
-
             @Override
             public void changed(ObservableValue<? extends Integer> arg0, Integer arg1, Integer arg2) {
-
                 calculatedTotalValue = (sellBronzeSpinner.getValue() * 8) +
                         (sellSilverSpinner.getValue() * 14) +
                         (sellGoldSpinner.getValue() * 20);
                 sellTotal.setText(Integer.toString(calculatedTotalValue));
-                
             }
-
         });
     }
 
@@ -167,7 +150,6 @@ public class ControllerSceneGuildSellPlants implements Initializable {
                     // Show an alert indicating insufficient crops
                     System.out.println("You do not have enough crops to sell.");
                     return;
-                    
                 }
 
                 // Update tempitems table
@@ -194,35 +176,30 @@ public class ControllerSceneGuildSellPlants implements Initializable {
                 sellSilverSpinner.getValueFactory().setValue(0);
                 sellGoldSpinner.getValueFactory().setValue(0);
 
+                // Switch to SceneGuild.fxml
+                switchToSceneGuild(null);
+
             } else {
                 // Show an alert indicating no crops available
                 System.out.println("You do not have any crops to sell.");
-                
-                
             }
-        } catch (SQLException e) {
+        } catch (SQLException | IOException e) {
             e.printStackTrace();
-            
-            
         }
     }
-
 
     public void setTopTexts() {
         labelCurrentDay.setText(" " + currentDay);
         labelActionPoints.setText(" " + actionPointsRemaining);
         labelMoney.setText(" " + money);
         labelDeadline.setText(" " + deadline);
-        
     }
 
     public void switchToSceneGuild(MouseEvent event) throws IOException {
         root = FXMLLoader.load(getClass().getResource("SceneGuild.fxml"));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage = (Stage) ((Node) ((event != null) ? event.getSource() : labelMoney)).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
-        
-        
     }
 }

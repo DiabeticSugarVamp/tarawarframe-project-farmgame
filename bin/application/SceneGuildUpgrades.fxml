@@ -68,7 +68,7 @@
                   <Image url="@../assets/mansion.png" />
                </image>
             </ImageView>
-            <Label fx:id="buyMansion" styleClass="gameText" text="Buy ($300)" GridPane.halignment="CENTER" GridPane.rowIndex="5">
+            <Label fx:id="buyMansion" onMouseClicked="#buyMansion" styleClass="gameText" text="Buy ($300)" GridPane.halignment="CENTER" GridPane.rowIndex="5">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>

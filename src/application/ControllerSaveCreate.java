@@ -108,6 +108,7 @@ public class ControllerSaveCreate implements Initializable {
 
             if (rs.next() && rsItems.next()) {
                 int userId = rs.getInt("user_id");
+                String avatar = rs.getString("avatar");
                 String username = rs.getString("username");
                 int curDay = rs.getInt("cur_day");
                 int curActions = rs.getInt("cur_actions");
@@ -140,9 +141,9 @@ public class ControllerSaveCreate implements Initializable {
                     
                 }
 
-                String saveQuery = "INSERT INTO savedstats (user_id, username, cur_day, cur_actions, cur_money, cur_deadline, save_slots) " +
-                        "VALUES (?,?,?,?,?,?,?) " +
-                        "ON DUPLICATE KEY UPDATE username = VALUES(username), cur_day = VALUES(cur_day), cur_actions = VALUES(cur_actions), cur_money = VALUES(cur_money), cur_deadline = VALUES(cur_deadline)";
+                String saveQuery = "INSERT INTO savedstats (avatar, user_id, username, cur_day, cur_actions, cur_money, cur_deadline, save_slots) " +
+                        "VALUES (?,?,?,?,?,?,?,?) " +
+                        "ON DUPLICATE KEY UPDATE avatar = VALUES(avatar), username = VALUES(username), cur_day = VALUES(cur_day), cur_actions = VALUES(cur_actions), cur_money = VALUES(cur_money), cur_deadline = VALUES(cur_deadline)";
                 
                 String saveQueryItems = "INSERT INTO saveditems (seed_bronze, seed_silver, seed_gold, crop_bronze, crop_silver, crop_gold, save_slots) " +
                         "VALUES (?,?,?,?,?,?,?) " +
@@ -151,13 +152,14 @@ public class ControllerSaveCreate implements Initializable {
                 PreparedStatement saveStmt = connection.prepareStatement(saveQuery);
                 PreparedStatement saveStmtItems = connection.prepareStatement(saveQueryItems);
                 
-                saveStmt.setInt(1, userId);
-                saveStmt.setString(2, username);
-                saveStmt.setInt(3, curDay);
-                saveStmt.setInt(4, curActions);
-                saveStmt.setInt(5, curMoney);
-                saveStmt.setInt(6, curDeadline);
-                saveStmt.setInt(7, slot);
+                saveStmt.setString(1, avatar);
+                saveStmt.setInt(2, userId);
+                saveStmt.setString(3, username);
+                saveStmt.setInt(4, curDay);
+                saveStmt.setInt(5, curActions);
+                saveStmt.setInt(6, curMoney);
+                saveStmt.setInt(7, curDeadline);
+                saveStmt.setInt(8, slot);
                 saveStmt.executeUpdate();
                 
                 saveStmtItems.setInt(1, seedBronze);

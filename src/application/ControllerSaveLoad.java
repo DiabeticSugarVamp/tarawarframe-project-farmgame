@@ -57,7 +57,7 @@ public class ControllerSaveLoad implements Initializable {
         String selectGrowingSilverQuery = "SELECT * FROM savedgrowingsilver WHERE save_slots = ?";
         String selectGrowingGoldQuery = "SELECT * FROM savedgrowinggold WHERE save_slots = ?";
 
-        String updateStatsQuery = "UPDATE temporarystatsholder SET username = ?, cur_day = ?, cur_actions = ?, cur_money = ?, cur_deadline = ? WHERE user_id = 1";
+        String updateStatsQuery = "UPDATE temporarystatsholder SET avatar = ?, username = ?, cur_day = ?, cur_actions = ?, cur_money = ?, cur_deadline = ? WHERE user_id = 1";
         String updateItemsQuery = "UPDATE tempitems SET seed_bronze = ?, seed_silver = ?, seed_gold = ?, crop_bronze = ?, crop_silver = ?, crop_gold = ? WHERE temp_id = 1";
         String insertGrowingBronzeQuery = "INSERT INTO tempgrowingbronze (day_planted, grown_day, seed_planted_num, watered, day_watered) VALUES (?, ?, ?, ?, ?) ON DUPLICATE KEY UPDATE grown_day = VALUES(grown_day), seed_planted_num = VALUES(seed_planted_num), watered = VALUES(watered), day_watered = VALUES(day_watered)";
         String insertGrowingSilverQuery = "INSERT INTO tempgrowingsilver (day_planted, grown_day, seed_planted_num, watered, day_watered) VALUES (?, ?, ?, ?, ?) ON DUPLICATE KEY UPDATE grown_day = VALUES(grown_day), seed_planted_num = VALUES(seed_planted_num), watered = VALUES(watered), day_watered = VALUES(day_watered)";
@@ -120,11 +120,12 @@ public class ControllerSaveLoad implements Initializable {
             ResultSet rsStats = pstmtSelectStats.executeQuery();
             if (rsStats.next()) {
                 
-                pstmtUpdateStats.setString(1, rsStats.getString("username"));
-                pstmtUpdateStats.setInt(2, rsStats.getInt("cur_day"));
-                pstmtUpdateStats.setInt(3, rsStats.getInt("cur_actions"));
-                pstmtUpdateStats.setDouble(4, rsStats.getDouble("cur_money"));
-                pstmtUpdateStats.setInt(5, rsStats.getInt("cur_deadline"));
+            	pstmtUpdateStats.setString(1, rsStats.getString("avatar"));
+                pstmtUpdateStats.setString(2, rsStats.getString("username"));
+                pstmtUpdateStats.setInt(3, rsStats.getInt("cur_day"));
+                pstmtUpdateStats.setInt(4, rsStats.getInt("cur_actions"));
+                pstmtUpdateStats.setDouble(5, rsStats.getDouble("cur_money"));
+                pstmtUpdateStats.setInt(6, rsStats.getInt("cur_deadline"));
                 pstmtUpdateStats.executeUpdate();
                 
             }

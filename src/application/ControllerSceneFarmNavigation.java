@@ -10,6 +10,8 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
@@ -47,6 +49,9 @@ public class ControllerSceneFarmNavigation implements Initializable {
     @FXML
     private Label playerName;
     
+    @FXML
+    private ImageView charAvatar;
+    
     
     public void getUser() throws SQLException {
         Statement stmt = connection.createStatement();
@@ -66,13 +71,28 @@ public class ControllerSceneFarmNavigation implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         try {
             getUser();
-            
+            setAvatar();
         } catch (SQLException e) {
             e.printStackTrace();
             
         }
         
         setTopTexts(); 
+    }
+    
+    public void setAvatar() throws SQLException {
+    	String queryAvatar = "SELECT * FROM temporarystatsholder WHERE user_id = 1";
+    	Statement stmtAvatar = connection.prepareStatement(queryAvatar);
+    	ResultSet rsAvatar = stmtAvatar.executeQuery(queryAvatar);
+    	
+    	if(rsAvatar.next()) {
+    		String getAvatar = rsAvatar.getString("avatar");
+    		Image theAvatar = new Image(getClass().getResourceAsStream(getAvatar));
+    		charAvatar.setImage(theAvatar);
+    		
+    	}
+    	
+    	
     }
 
 
@@ -125,9 +145,25 @@ public class ControllerSceneFarmNavigation implements Initializable {
 
     public void deadline() {
         if (deadline == 0) {
-            money -= 50;
-            deadline += 14;
+            if (money > 0) {
+                money -= 50;
+                deadline += 14;
+            } else {
+                try {
+                    switchToEndLoseScene();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
         }
+    }
+    
+    private void switchToEndLoseScene() throws IOException {
+        root = FXMLLoader.load(getClass().getResource("SceneEndLose.fxml"));
+        stage = (Stage) charAvatar.getScene().getWindow(); // Use any node in the current scene to get the window
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
     
     private void resetWateredColumn(String tableName) throws SQLException {

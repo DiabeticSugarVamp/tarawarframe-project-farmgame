@@ -330,8 +330,6 @@ public class ControllerSceneFarmFields implements Initializable {
 
                             actionPointsRemaining = actionPointsTotal;
                             
-                          
-                            
                             
                         }
 
@@ -391,36 +389,34 @@ public class ControllerSceneFarmFields implements Initializable {
     }
     
     public void harvestCrops(MouseEvent e) throws IOException, SQLException {
-        if (!isOwnedTractor) {
-            
-            String getHarvestedCropsQuery = "SELECT * FROM tempreadytoharvest WHERE temp_id = 1";
-            String getStats = "SELECT * FROM temporarystatsholder WHERE user_id = 1";
-            Statement stmt = connection.createStatement();
-            ResultSet rs = stmt.executeQuery(getHarvestedCropsQuery);
-            Statement stmtStats = connection.createStatement();
-            ResultSet rsStats = stmtStats.executeQuery(getStats);
-            
+        String getHarvestedCropsQuery = "SELECT * FROM tempreadytoharvest WHERE temp_id = 1";
+        String getStats = "SELECT * FROM temporarystatsholder WHERE user_id = 1";
+        try (Statement stmt = connection.createStatement();
+             ResultSet rs = stmt.executeQuery(getHarvestedCropsQuery);
+             Statement stmtStats = connection.createStatement();
+             ResultSet rsStats = stmtStats.executeQuery(getStats)) {
 
-            
             if (rs.next() && rsStats.next()) {
                
-                harvestBronze = rs.getInt("crop_bronze");
-                harvestSilver = rs.getInt("crop_silver");
-                harvestGold = rs.getInt("crop_gold");
+                int harvestedBronze = rs.getInt("crop_bronze");
+                int harvestedSilver = rs.getInt("crop_silver");
+                int harvestedGold = rs.getInt("crop_gold");
+
                 
                 int currentActions = rsStats.getInt("cur_actions");
                 currentDay = rsStats.getInt("cur_day");
                 deadline = rsStats.getInt("cur_deadline");
+
                 
                 if (currentActions > 0) {
                     currentActions--;
-                    
-                    
                 }
 
                 if (currentActions == 0) {
                     currentDay++;
                     deadline--;
+                    currentActions = actionPointsTotal;
+
                     
                     removeUnwateredCrops("tempgrowingbronze");
                     removeUnwateredCrops("tempgrowingsilver");
@@ -429,48 +425,50 @@ public class ControllerSceneFarmFields implements Initializable {
                     resetWateredColumn("tempgrowingsilver");
                     resetWateredColumn("tempgrowinggold");
                     
-                    currentActions = actionPointsTotal;
-                    
-                    
                 }
-                
-                String updateStats = "UPDATE temporarystatsholder SET cur_actions = ?, cur_day = ?, cur_deadline = ? WHERE user_id = 1";
 
                 
+                String updateStats = "UPDATE temporarystatsholder SET cur_actions = ?, cur_day = ?, cur_deadline = ? WHERE user_id = 1";
                 try (PreparedStatement pstmtStats = connection.prepareStatement(updateStats)) {
-                     pstmtStats.setInt(1, currentActions);
-                     pstmtStats.setInt(2, currentDay);
-                     pstmtStats.setInt(3, deadline);
-                     pstmtStats.executeUpdate();
-                        
-                        
-                 }
-                
-               
-                
-                
+                    pstmtStats.setInt(1, currentActions);
+                    pstmtStats.setInt(2, currentDay);
+                    pstmtStats.setInt(3, deadline);
+                    pstmtStats.executeUpdate();
+                }
+
                 
                 String updateItemsQuery = "UPDATE tempitems SET crop_bronze = crop_bronze + ?, crop_silver = crop_silver + ?, crop_gold = crop_gold + ? WHERE temp_id = 1";
                 try (PreparedStatement pstmt = connection.prepareStatement(updateItemsQuery)) {
-                    pstmt.setInt(1, harvestBronze);
-                    pstmt.setInt(2, harvestSilver);
-                    pstmt.setInt(3, harvestGold);
+                    pstmt.setInt(1, harvestedBronze);
+                    pstmt.setInt(2, harvestedSilver);
+                    pstmt.setInt(3, harvestedGold);
                     pstmt.executeUpdate();
-                    
-                   
-                    String resetHarvestedCropsQuery = "UPDATE tempreadytoharvest SET crop_bronze = 0, crop_silver = 0, crop_gold = 0 WHERE temp_id = 1";
-                    try (PreparedStatement resetPstmt = connection.prepareStatement(resetHarvestedCropsQuery)) {
-                        resetPstmt.executeUpdate();
-                    }
-                    
                 }
+
                 
-               
-              
-            } 
-            initialize(null, null);
-           
+                String resetHarvestedCropsQuery = "UPDATE tempreadytoharvest SET crop_bronze = 0, crop_silver = 0, crop_gold = 0 WHERE temp_id = 1";
+                try (PreparedStatement resetPstmt = connection.prepareStatement(resetHarvestedCropsQuery)) {
+                    resetPstmt.executeUpdate();
+                }
+
+                
+                harvestBronze = 0;
+                harvestSilver = 0;
+                harvestGold = 0;
+                initialize(null, null);
+
+            } else {
+                
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("No Crops to Harvest");
+                alert.setHeaderText(null);
+                alert.setContentText("There are no crops ready to harvest.");
+                alert.showAndWait();
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
             
+            throw new IOException("Failed to harvest crops", ex);
         }
     }
 
