@@ -31,7 +31,7 @@ public class ControllerScenePrologue {
 	@FXML
 	Label prologueText; 
 	
-	Image prologueImage2 = new Image(getClass().getResourceAsStream("/assets/imagePrologue2.jpg"));
+	Image prologueImage2 = new Image(getClass().getResourceAsStream("/assets/imagePrologue2.png"));
 	Image prologueImage3 = new Image(getClass().getResourceAsStream("/assets/imagePrologue3.jpg"));
 	Image prologueImage4 = new Image(getClass().getResourceAsStream("/assets/imagePrologue4.jpg"));
 	
@@ -43,7 +43,7 @@ public class ControllerScenePrologue {
 	public void displayImage(MouseEvent event) throws IOException {
 		if (prologueCounter == 0) {
 			prologueImageView.setImage(prologueImage2);
-			prologueText.setText("your landlord, a man of stern countenance "
+			prologueText.setText("Your landlord, a man of stern countenance "
 					+ "and a penchant for punctuality, demands his due every "
 					+ "fortnight. Like clockwork, he arrives at your doorstep, "
 					+ "his gaze as sharp as the edge of a freshly sharpened plow. "

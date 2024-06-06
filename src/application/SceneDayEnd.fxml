@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+
+
+<BorderPane fx:id="dayEndPane" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="768.0" prefWidth="1028.0" stylesheets="@application.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ControllerSceneDayEnd">
+   <center>
+      <Label alignment="CENTER" contentDisplay="CENTER" onMouseClicked="#switchToSceneFarmNavigation" prefHeight="246.0" prefWidth="585.0" text="Fatigue overtakes your body. Perhaps you can continue tomorrow." textFill="#ffee00" wrapText="true" BorderPane.alignment="CENTER">
+         <font>
+            <Font name="Papyrus" size="38.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Label>
+   </center>
+</BorderPane>

@@ -11,9 +11,6 @@
 <?import javafx.scene.layout.RowConstraints?>
 
 <BorderPane prefHeight="768.0" prefWidth="1024.0" styleClass="gamePane" stylesheets="@application.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ControllerSceneFarmNavigation">
-   <center>
-      <Label lineSpacing="10.0" prefHeight="196.0" prefWidth="608.0" styleClass="gameText" text="Nestled in rolling countryside, the tranquil farm is a haven of peace, where fields of golden wheat sway gently in the breeze. The farmhouse, with its rustic charm, is surrounded by blooming gardens and shaded by ancient oaks, offering a perfect retreat from the bustle of modern life." wrapText="true" BorderPane.alignment="CENTER" />
-   </center>
    <bottom>
       <GridPane vgap="30.0" BorderPane.alignment="CENTER">
         <columnConstraints>
@@ -35,7 +32,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Label>
-            <Label fx:id="sceneFarmNavOptionAssets" onMouseClicked="#switchToSceneFarmAssets" styleClass="mainMenuButtons" text="Check assets" GridPane.columnIndex="1" GridPane.halignment="CENTER">
+            <Label fx:id="sceneFarmNavOptionAssets" disable="true" onMouseClicked="#switchToSceneFarmAssets" styleClass="mainMenuButtons" text="Check assets" visible="false" GridPane.columnIndex="1" GridPane.halignment="CENTER">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
@@ -61,7 +58,7 @@
                   <Insets right="220.0" />
                </GridPane.margin>
             </ImageView>
-            <ImageView fitHeight="55.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER">
+            <ImageView disable="true" fitHeight="55.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true" visible="false" GridPane.columnIndex="1" GridPane.halignment="CENTER">
                <image>
                   <Image url="@../assets/icons/iconAssets.png" />
                </image>
@@ -76,7 +73,7 @@
       </GridPane>
    </bottom>
    <top>
-      <GridPane maxWidth="-Infinity" prefHeight="166.0" prefWidth="889.0" styleClass="GridPane" BorderPane.alignment="CENTER">
+      <GridPane maxWidth="-Infinity" opacity="0.9" prefHeight="166.0" prefWidth="889.0" styleClass="GridPane" BorderPane.alignment="CENTER">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -94,7 +91,7 @@
             </Label>
             <Label fx:id="labelCurrentDay" styleClass="gameTopText" text="Day:" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
             <Label fx:id="labelActionPoints" styleClass="gameTopText" text="Actions:" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
-            <Label fx:id="labelMoney" styleClass="gameTopText" text="Money:" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+            <Label fx:id="labelMoney" prefHeight="45.0" prefWidth="166.0" styleClass="gameTopText" text="Money:" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
             <Label fx:id="labelDeadline" prefHeight="45.0" prefWidth="174.0" styleClass="gameTopText" text="Deadline:" GridPane.columnIndex="2" GridPane.halignment="CENTER" />
             <GridPane prefHeight="75.0" prefWidth="242.0" GridPane.rowIndex="1">
               <columnConstraints>
@@ -151,4 +148,23 @@
          </BorderPane.margin>
       </GridPane>
    </top>
+   <center>
+      <GridPane maxHeight="-Infinity" maxWidth="-Infinity" opacity="0.9" prefHeight="177.0" prefWidth="627.0" styleClass="GridPane" BorderPane.alignment="CENTER">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Label styleClass="gameText" text="Step-cousin, to ensure the success of our family you only need to heed these words: we must plow fast, and plow even harder." wrapText="true" />
+            <ImageView fitHeight="139.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER">
+               <image>
+                  <Image url="@../assets/icons/spriteMaid.gif" />
+               </image>
+            </ImageView>
+         </children>
+      </GridPane>
+   </center>
 </BorderPane>
