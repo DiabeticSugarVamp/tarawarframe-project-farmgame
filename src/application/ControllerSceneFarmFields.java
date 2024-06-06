@@ -98,7 +98,11 @@ public class ControllerSceneFarmFields implements Initializable {
         String growingSilver = "SELECT * FROM tempgrowingsilver WHERE day_planted >= ?";
         String growingGold = "SELECT * FROM tempgrowinggold WHERE day_planted >= ?";
         String queryHarvest = "SELECT * FROM tempreadytoharvest WHERE temp_id = 1";
-        
+
+        totalBronzeGrowing = 0;
+        totalSilverGrowing = 0;
+        totalGoldGrowing = 0;
+
         try (Statement stmt = connection.createStatement();
              ResultSet rs = stmt.executeQuery(userQuery);
              Statement stmtItems = connection.createStatement();
@@ -107,97 +111,102 @@ public class ControllerSceneFarmFields implements Initializable {
              PreparedStatement pstmtGrowingSilver = connection.prepareStatement(growingSilver);
              PreparedStatement pstmtGrowingGold = connection.prepareStatement(growingGold)) {
 
-            if (rs.next()) { 
+            if (rs.next()) {
                 currentDay = rs.getInt("cur_day");
                 money = rs.getDouble("cur_money");
                 actionPointsRemaining = rs.getInt("cur_actions");
-                actionPointsTotal = 5; 
+                actionPointsTotal = 5;
                 deadline = rs.getInt("cur_deadline");
-                
-                
             }
-            
+
             if (rsItems.next()) {
                 seedBronze = rsItems.getInt("seed_bronze");
                 seedSilver = rsItems.getInt("seed_silver");
                 seedGold = rsItems.getInt("seed_gold");
-                
-                
             }
-            
-            pstmtGrowingBronze.setInt(1, currentDay - bronzeDuration); 
-            pstmtGrowingSilver.setInt(1, currentDay - silverDuration); 
-            pstmtGrowingGold.setInt(1, currentDay - goldDuration); 
-            
+
+            pstmtGrowingBronze.setInt(1, currentDay - bronzeDuration);
+            pstmtGrowingSilver.setInt(1, currentDay - silverDuration);
+            pstmtGrowingGold.setInt(1, currentDay - goldDuration);
+
             try (ResultSet rsGrowingBronze = pstmtGrowingBronze.executeQuery()) {
                 while (rsGrowingBronze.next()) {
-                    int seedsPlanted = rsGrowingBronze.getInt("seed_planted_num"); 
+                    int seedsPlanted = rsGrowingBronze.getInt("seed_planted_num");
                     totalBronzeGrowing += seedsPlanted;
-                    
-                    
                 }
             }
-            
+
             try (ResultSet rsGrowingSilver = pstmtGrowingSilver.executeQuery()) {
                 while (rsGrowingSilver.next()) {
-                    int seedsPlanted = rsGrowingSilver.getInt("seed_planted_num"); 
+                    int seedsPlanted = rsGrowingSilver.getInt("seed_planted_num");
                     totalSilverGrowing += seedsPlanted;
-                    
-                    
                 }
             }
-            
+
             try (ResultSet rsGrowingGold = pstmtGrowingGold.executeQuery()) {
                 while (rsGrowingGold.next()) {
-                    int seedsPlanted = rsGrowingGold.getInt("seed_planted_num"); 
+                    int seedsPlanted = rsGrowingGold.getInt("seed_planted_num");
                     totalGoldGrowing += seedsPlanted;
-                    
-                    
                 }
-                
             }
-            
-            try (Statement stmtHarvest = connection.createStatement();
-                    ResultSet rsHarvest = stmtHarvest.executeQuery(queryHarvest)) {
-                   
-                   if (rs.next()) {
-                       harvestBronze = rsHarvest.getInt("crop_bronze");
-                       harvestSilver = rsHarvest.getInt("crop_silver");
-                       harvestGold = rsHarvest.getInt("crop_gold");
 
-                       
-                   }
-               }
-            
+            try (Statement stmtHarvest = connection.createStatement();
+                 ResultSet rsHarvest = stmtHarvest.executeQuery(queryHarvest)) {
+                if (rsHarvest.next()) {
+                    harvestBronze = rsHarvest.getInt("crop_bronze");
+                    harvestSilver = rsHarvest.getInt("crop_silver");
+                    harvestGold = rsHarvest.getInt("crop_gold");
+                }
+            }
         }
-        
-        
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
             getUser();
-            readyToHarvest();
             removeUnwateredCrops("tempgrowingbronze");
             removeUnwateredCrops("tempgrowingsilver");
             removeUnwateredCrops("tempgrowinggold");
-            
+            resetWateredColumn("tempgrowingbronze");
+            resetWateredColumn("tempgrowingsilver");
+            resetWateredColumn("tempgrowinggold");
+            readyToHarvest();
+            deadline();
+              
+           
+            setTopTexts();
         } catch (SQLException e) {
             e.printStackTrace();
+        }
+    }
+    
+    public void deadline() {
+        if (deadline == 0) {
+            money -= 50;
+            deadline += 14;
+            String updateSql = "UPDATE temporarystatsholder SET cur_day = ?, cur_deadline = ?, cur_money = ?, cur_actions = ? WHERE user_id = 1";
+
+            try (PreparedStatement pstmt = connection.prepareStatement(updateSql)) {
+                pstmt.setInt(1, currentDay);
+                pstmt.setInt(2, deadline);
+                pstmt.setDouble(3, money);
+                pstmt.setInt(4, actionPointsTotal); // Set cur_actions to 5
+                pstmt.executeUpdate();
+
+            } catch (SQLException e1) {
+                e1.printStackTrace();
+            }
+            
             
         }
-        
-        setTopTexts();
-        
-        
     }
 
     public void setTopTexts() {
-        labelCurrentDay.setText("Day: " + currentDay);
-        labelActionPoints.setText("Actions: " + actionPointsRemaining);
-        labelMoney.setText("Money: " + money);
-        labelDeadline.setText("Deadline: " + deadline);
+        labelCurrentDay.setText(" " + currentDay);
+        labelActionPoints.setText(" " + actionPointsRemaining);
+        labelMoney.setText(" " + money);
+        labelDeadline.setText(" " + deadline);
         
         lblSeedsBronze.setText("Bronze seeds: " + seedBronze);
         lblSeedsSilver.setText("Silver seeds: " + seedSilver);
@@ -210,8 +219,6 @@ public class ControllerSceneFarmFields implements Initializable {
         lblHarvestBronze.setText("Bronze crops ready to harvest: " + harvestBronze);
         lblHarvestSilver.setText("Silver crops ready to harvest: " + harvestSilver);
         lblHarvestGold.setText("Gold crops ready to harvest: " + harvestGold);
-        
-        
     }
     
     public void plantSeeds(MouseEvent e) throws IOException, SQLException {
@@ -225,18 +232,18 @@ public class ControllerSceneFarmFields implements Initializable {
                  ResultSet rsStats = stmtStats.executeQuery(getStats)) {
 
                 if (rsItems.next() && rsStats.next()) {
-                    int bronzeSeeds = rsItems.getInt("seed_bronze");
-                    int silverSeeds = rsItems.getInt("seed_silver");
-                    int goldSeeds = rsItems.getInt("seed_gold");
+                	seedBronze = rsItems.getInt("seed_bronze");
+                	seedSilver = rsItems.getInt("seed_silver");
+                	seedGold = rsItems.getInt("seed_gold");
 
-                    int currentActions = rsStats.getInt("cur_actions");
+                    actionPointsRemaining = rsStats.getInt("cur_actions");
                     currentDay = rsStats.getInt("cur_day");
                     deadline = rsStats.getInt("cur_deadline");
 
                     boolean canPlant = false;
 
-                    if (bronzeSeeds > 0) {
-                        bronzeSeeds -= 1;
+                    if (seedBronze > 0) {
+                    	seedBronze -= 1;
                         canPlant = true;
 
                         String updateSeedBronze = "INSERT INTO tempgrowingbronze (grown_day, seed_planted_num, day_planted, day_watered, watered) " +
@@ -258,8 +265,8 @@ public class ControllerSceneFarmFields implements Initializable {
                         
                     } 
 
-                    if (silverSeeds > 0) {
-                        silverSeeds -= 1;
+                    if (seedSilver > 0) {
+                    	seedSilver -= 1;
                         canPlant = true;
                         
 
@@ -281,8 +288,8 @@ public class ControllerSceneFarmFields implements Initializable {
                         totalSilverGrowing++; 
                     }
 
-                    if (goldSeeds > 0) {
-                        goldSeeds -= 1;
+                    if (seedGold > 0) {
+                    	seedGold -= 1;
                         canPlant = true;
 
                         String updateSeedGold = "INSERT INTO tempgrowinggold (grown_day, seed_planted_num, day_planted, day_watered, watered) " +
@@ -304,21 +311,26 @@ public class ControllerSceneFarmFields implements Initializable {
                     }
 
                     if (canPlant) {
-                        if (currentActions > 0) {
-                            currentActions--;
+                        if (actionPointsRemaining > 0) {
+                        	actionPointsRemaining--;
                             
                             
                         }
 
-                        if (currentActions == 0) {
+                        if (actionPointsRemaining == 0) {
                             currentDay++;
                             deadline--;
 
+                            removeUnwateredCrops("tempgrowingbronze");
+                            removeUnwateredCrops("tempgrowingsilver");
+                            removeUnwateredCrops("tempgrowinggold");
                             resetWateredColumn("tempgrowingbronze");
                             resetWateredColumn("tempgrowingsilver");
                             resetWateredColumn("tempgrowinggold");
 
-                            currentActions = actionPointsTotal;
+                            actionPointsRemaining = actionPointsTotal;
+                            
+                          
                             
                             
                         }
@@ -328,7 +340,7 @@ public class ControllerSceneFarmFields implements Initializable {
 
                         try {
                             try (PreparedStatement pstmtStats = connection.prepareStatement(updateStats)) {
-                                pstmtStats.setInt(1, currentActions);
+                                pstmtStats.setInt(1, actionPointsRemaining);
                                 pstmtStats.setInt(2, currentDay);
                                 pstmtStats.setInt(3, deadline);
                                 pstmtStats.executeUpdate();
@@ -337,34 +349,23 @@ public class ControllerSceneFarmFields implements Initializable {
                             }
 
                             try (PreparedStatement pstmtItems = connection.prepareStatement(updateItems)){
-                                pstmtItems.setInt(1, bronzeSeeds);
-                                pstmtItems.setInt(2, silverSeeds);
-                                pstmtItems.setInt(3, goldSeeds);
+                                pstmtItems.setInt(1, seedBronze);
+                                pstmtItems.setInt(2, seedSilver);
+                                pstmtItems.setInt(3, seedGold);
                                 pstmtItems.executeUpdate();
                                 
                                 
                                 
                             }
 
-                            lblSeedsBronze.setText("Bronze seeds: " + bronzeSeeds);
-                            lblSeedsSilver.setText("Silver seeds: " + silverSeeds);
-                            lblSeedsGold.setText("Gold seeds: " + goldSeeds);
-                            labelActionPoints.setText("Actions: " + currentActions);
-                            labelCurrentDay.setText("Day: " + currentDay);
-                            labelDeadline.setText("Deadline: " + deadline);
 
-                           
-                            lblGrowingBronze.setText("Bronze crops growing: " + totalBronzeGrowing);
-                            lblGrowingSilver.setText("Silver crops growing: " + totalSilverGrowing);
-                            lblGrowingGold.setText("Gold crops growing: " + totalGoldGrowing);
-                            
-                            
 
                         } catch (SQLException ex) {
                             ex.printStackTrace();
                             
                             
                         }
+                        initialize(null, null);
                         
                         
                     } else {
@@ -382,6 +383,7 @@ public class ControllerSceneFarmFields implements Initializable {
                 
                 
             }
+            
             
         }
         
@@ -419,6 +421,14 @@ public class ControllerSceneFarmFields implements Initializable {
                 if (currentActions == 0) {
                     currentDay++;
                     deadline--;
+                    
+                    removeUnwateredCrops("tempgrowingbronze");
+                    removeUnwateredCrops("tempgrowingsilver");
+                    removeUnwateredCrops("tempgrowinggold");
+                    resetWateredColumn("tempgrowingbronze");
+                    resetWateredColumn("tempgrowingsilver");
+                    resetWateredColumn("tempgrowinggold");
+                    
                     currentActions = actionPointsTotal;
                     
                     
@@ -436,10 +446,8 @@ public class ControllerSceneFarmFields implements Initializable {
                         
                  }
                 
-                lblHarvestBronze.setText("Bronze crops ready to harvest: " + 0);
-                lblHarvestSilver.setText("Silver crops ready to harvest: " + 0);
-                lblHarvestGold.setText("Gold crops ready to harvest: " + 0);
-                labelActionPoints.setText("Actions: " + currentActions);
+               
+                
                 
                 
                 String updateItemsQuery = "UPDATE tempitems SET crop_bronze = crop_bronze + ?, crop_silver = crop_silver + ?, crop_gold = crop_gold + ? WHERE temp_id = 1";
@@ -459,10 +467,8 @@ public class ControllerSceneFarmFields implements Initializable {
                 
                
               
-            } else {
-                
-            }
-            
+            } 
+            initialize(null, null);
            
             
         }
@@ -477,84 +483,102 @@ public class ControllerSceneFarmFields implements Initializable {
         String deleteReadyBronze = "DELETE FROM tempgrowingbronze WHERE grown_day <= ?";
         String deleteReadySilver = "DELETE FROM tempgrowingsilver WHERE grown_day <= ?";
         String deleteReadyGold = "DELETE FROM tempgrowinggold WHERE grown_day <= ?";
-        
-        String getHarvestCounts = "SELECT * FROM tempreadytoharvest WHERE temp_id = 1";
 
-        try (PreparedStatement pstmtHarvestCounts = connection.prepareStatement(getHarvestCounts);
-             ResultSet rsHarvestCounts = pstmtHarvestCounts.executeQuery()) {
+        int readyBronze = 0;
+        int readySilver = 0;
+        int readyGold = 0;
 
-            if (rsHarvestCounts.next()) {
-                harvestBronze = rsHarvestCounts.getInt("crop_bronze");
-                harvestSilver = rsHarvestCounts.getInt("crop_silver");
-                harvestGold = rsHarvestCounts.getInt("crop_gold");
-            }
-        }
-
-        try (PreparedStatement pstmtReadyToHarvest = connection.prepareStatement(updateReadyToHarvest);
-             PreparedStatement pstmtReadyBronze = connection.prepareStatement(getReadyBronze);
+        try (PreparedStatement pstmtReadyBronze = connection.prepareStatement(getReadyBronze);
              PreparedStatement pstmtReadySilver = connection.prepareStatement(getReadySilver);
              PreparedStatement pstmtReadyGold = connection.prepareStatement(getReadyGold);
              PreparedStatement pstmtDeleteBronze = connection.prepareStatement(deleteReadyBronze);
              PreparedStatement pstmtDeleteSilver = connection.prepareStatement(deleteReadySilver);
-             PreparedStatement pstmtDeleteGold = connection.prepareStatement(deleteReadyGold)) {
+             PreparedStatement pstmtDeleteGold = connection.prepareStatement(deleteReadyGold);
+             PreparedStatement pstmtUpdateHarvest = connection.prepareStatement(updateReadyToHarvest)) {
 
             pstmtReadyBronze.setInt(1, currentDay);
             pstmtReadySilver.setInt(1, currentDay);
             pstmtReadyGold.setInt(1, currentDay);
 
-            try (ResultSet rsReadyBronze = pstmtReadyBronze.executeQuery();
-                 ResultSet rsReadySilver = pstmtReadySilver.executeQuery();
-                 ResultSet rsReadyGold = pstmtReadyGold.executeQuery()) {
-
-                int readyBronze = 0;
-                int readySilver = 0;
-                int readyGold = 0;
-
+            try (ResultSet rsReadyBronze = pstmtReadyBronze.executeQuery()) {
                 if (rsReadyBronze.next()) {
                     readyBronze = rsReadyBronze.getInt("total");
                 }
+            }
 
+            try (ResultSet rsReadySilver = pstmtReadySilver.executeQuery()) {
                 if (rsReadySilver.next()) {
                     readySilver = rsReadySilver.getInt("total");
                 }
+            }
 
+            try (ResultSet rsReadyGold = pstmtReadyGold.executeQuery()) {
                 if (rsReadyGold.next()) {
                     readyGold = rsReadyGold.getInt("total");
                 }
-
-                pstmtReadyToHarvest.setInt(1, readyBronze);
-                pstmtReadyToHarvest.setInt(2, readySilver);
-                pstmtReadyToHarvest.setInt(3, readyGold);
-                pstmtReadyToHarvest.executeUpdate();
-
-                
-                pstmtDeleteBronze.setInt(1, currentDay);
-                pstmtDeleteBronze.executeUpdate();
-                pstmtDeleteSilver.setInt(1, currentDay);
-                pstmtDeleteSilver.executeUpdate();
-                pstmtDeleteGold.setInt(1, currentDay);
-                pstmtDeleteGold.executeUpdate();
-
-                
             }
-        }
 
-        
-        lblGrowingBronze.setText("Bronze crops growing: " + totalBronzeGrowing);
-        lblGrowingSilver.setText("Silver crops growing: " + totalSilverGrowing);
-        lblGrowingGold.setText("Gold crops growing: " + totalGoldGrowing);
-        lblHarvestBronze.setText("Bronze crops ready to harvest: " + harvestBronze);
-        lblHarvestSilver.setText("Silver crops ready to harvest: " + harvestSilver);
-        lblHarvestGold.setText("Gold crops ready to harvest: " + harvestGold);
-        
-        
+            // Updating the harvest table
+            pstmtUpdateHarvest.setInt(1, readyBronze);
+            pstmtUpdateHarvest.setInt(2, readySilver);
+            pstmtUpdateHarvest.setInt(3, readyGold);
+            pstmtUpdateHarvest.executeUpdate();
+
+            // Deleting the matured crops from the growing tables
+            pstmtDeleteBronze.setInt(1, currentDay);
+            pstmtDeleteBronze.executeUpdate();
+
+            pstmtDeleteSilver.setInt(1, currentDay);
+            pstmtDeleteSilver.executeUpdate();
+
+            pstmtDeleteGold.setInt(1, currentDay);
+            pstmtDeleteGold.executeUpdate();
+
+            // Reset growing crops counters after updating
+            totalBronzeGrowing -= readyBronze;
+            totalSilverGrowing -= readySilver;
+            totalGoldGrowing -= readyGold;
+
+            // Update the harvest variables
+            harvestBronze += readyBronze;
+            harvestSilver += readySilver;
+            harvestGold += readyGold;
+            
+            lblGrowingBronze.setText("Bronze crops growing: " + totalBronzeGrowing);
+            lblGrowingSilver.setText("Silver crops growing: " + totalSilverGrowing);
+            lblGrowingGold.setText("Gold crops growing: " + totalGoldGrowing);
+            
+            lblHarvestBronze.setText("Bronze crops ready to harvest: " + harvestBronze);
+            lblHarvestSilver.setText("Silver crops ready to harvest: " + harvestSilver);
+            lblHarvestGold.setText("Gold crops ready to harvest: " + harvestGold);
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            throw ex;
+        }
     }
+
+
+
     
     public void waterCrops(MouseEvent e) throws IOException {
         if (!isOwnedCan) {
             try {
                
-                actionPointsRemaining--;
+            	
+            	if (actionPointsRemaining > 0) {
+            		actionPointsRemaining--;
+                    
+                    
+                }
+
+                if (actionPointsRemaining == 0) {
+                    currentDay++;
+                    deadline--;
+                    actionPointsRemaining = actionPointsTotal;
+                    
+                    
+                }
 
                 resetWateredColumn("tempgrowingbronze");
                 resetWateredColumn("tempgrowingsilver");
@@ -563,6 +587,18 @@ public class ControllerSceneFarmFields implements Initializable {
                 waterCurrentDayCrops("tempgrowingbronze");
                 waterCurrentDayCrops("tempgrowingsilver");
                 waterCurrentDayCrops("tempgrowinggold");
+                
+                String updateStats = "UPDATE temporarystatsholder SET cur_actions = ?, cur_day = ?, cur_deadline = ? WHERE user_id = 1";
+
+              
+                    try (PreparedStatement pstmtStats = connection.prepareStatement(updateStats)) {
+                        pstmtStats.setInt(1, actionPointsRemaining);
+                        pstmtStats.setInt(2, currentDay);
+                        pstmtStats.setInt(3, deadline);
+                        pstmtStats.executeUpdate();
+                        
+                        
+                    }
 
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Crops Watered");
@@ -571,7 +607,7 @@ public class ControllerSceneFarmFields implements Initializable {
                 alert.showAndWait();
 
                 
-                labelActionPoints.setText("Actions: " + actionPointsRemaining);
+                initialize(null, null);
             } catch (SQLException ex) {
                 ex.printStackTrace();
                 
@@ -580,17 +616,18 @@ public class ControllerSceneFarmFields implements Initializable {
     }
 
     private void removeUnwateredCrops(String tableName) throws SQLException {
-        String query = "DELETE FROM " + tableName + " WHERE ? - day_watered > 2";
+        String query = "DELETE FROM " + tableName + " WHERE day_watered < ? AND watered = 0";
         try (PreparedStatement pstmt = connection.prepareStatement(query)) {
-            pstmt.setInt(1, currentDay);
+            // Set the parameter for the current day minus 1
+            pstmt.setInt(1, currentDay - 1);
             pstmt.executeUpdate();
-            
-            
         }
+        
+       
     }
 
     private void resetWateredColumn(String tableName) throws SQLException {
-        String query = "UPDATE " + tableName + " SET watered = 0";
+        String query = "UPDATE " + tableName + " SET watered = 0 WHERE day_watered < " + currentDay;
         try (PreparedStatement pstmt = connection.prepareStatement(query)) {
             pstmt.executeUpdate();
             

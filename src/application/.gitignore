@@ -13,3 +13,6 @@
 /ControllerScenePrologue.class
 /Main.class
 /SceneController.class
+/ControllerSceneEndLose.class
+/ControllerSceneEndWin.class
+/ControllerSceneFarmInventories.class

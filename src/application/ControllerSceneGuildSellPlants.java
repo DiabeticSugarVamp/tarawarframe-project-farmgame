@@ -209,10 +209,10 @@ public class ControllerSceneGuildSellPlants implements Initializable {
 
 
     public void setTopTexts() {
-        labelCurrentDay.setText("Day: " + currentDay);
-        labelActionPoints.setText("Actions: " + actionPointsRemaining);
-        labelMoney.setText("Money: " + money);
-        labelDeadline.setText("Deadline: " + deadline);
+        labelCurrentDay.setText(" " + currentDay);
+        labelActionPoints.setText(" " + actionPointsRemaining);
+        labelMoney.setText(" " + money);
+        labelDeadline.setText(" " + deadline);
         
     }
 

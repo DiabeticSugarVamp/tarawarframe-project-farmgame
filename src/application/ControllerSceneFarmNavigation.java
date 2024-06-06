@@ -53,7 +53,7 @@ public class ControllerSceneFarmNavigation implements Initializable {
         ResultSet rs = stmt.executeQuery("SELECT * FROM temporarystatsholder");
 
         if (rs.next()) { 
-        	playerName.setText(rs.getString("username"));
+            playerName.setText(rs.getString("username"));
             currentDay = rs.getInt("cur_day");
             money = rs.getDouble("cur_money");
             actionPointsRemaining = rs.getInt("cur_actions");
@@ -67,7 +67,6 @@ public class ControllerSceneFarmNavigation implements Initializable {
         try {
             getUser();
             
-            
         } catch (SQLException e) {
             e.printStackTrace();
             
@@ -78,8 +77,17 @@ public class ControllerSceneFarmNavigation implements Initializable {
 
 
     public void endDay(MouseEvent e) {
+        
+
+        currentDay++;
+        actionPointsRemaining = actionPointsTotal;
+        deadline -= 1;
+        
         try {
-        	resetWateredColumn("tempgrowingbronze");
+        	removeUnwateredCrops("tempgrowingbronze");
+            removeUnwateredCrops("tempgrowingsilver");
+            removeUnwateredCrops("tempgrowinggold");
+            resetWateredColumn("tempgrowingbronze");
             resetWateredColumn("tempgrowingsilver");
             resetWateredColumn("tempgrowinggold");
             
@@ -87,21 +95,7 @@ public class ControllerSceneFarmNavigation implements Initializable {
             e1.printStackTrace();
         }
 
-        currentDay++;
-        actionPointsRemaining = actionPointsTotal;
-        deadline -= 1;
-
-        try {
-        	
-        	addToReadyToHarvest("tempgrowingbronze", currentDay);
-            addToReadyToHarvest("tempgrowingsilver", currentDay);
-            addToReadyToHarvest("tempgrowinggold", currentDay);
-            removeUnwateredCrops("tempgrowingbronze", currentDay);
-            removeUnwateredCrops("tempgrowingsilver", currentDay);
-            removeUnwateredCrops("tempgrowinggold", currentDay);
-        } catch (SQLException e1) {
-            e1.printStackTrace();
-        }
+        // Removed the code that updates tempreadytoharvest and removes growing seeds in tempgrowing tables
 
         this.deadline();
 
@@ -121,44 +115,11 @@ public class ControllerSceneFarmNavigation implements Initializable {
         this.setTopTexts();
     }
 
-    private void addToReadyToHarvest(String tableName, int currentDay) throws SQLException {
-        String getReadyCrops = "SELECT * FROM " + tableName + " WHERE grown_day <= ?";
-        String updateReadyToHarvest = "UPDATE tempreadytoharvest SET ";
-
-        if (tableName.equals("tempgrowingbronze")) {
-            updateReadyToHarvest += "crop_bronze = crop_bronze + ?";
-        }
-        if (tableName.equals("tempgrowingsilver")) {
-            updateReadyToHarvest += "crop_silver = crop_silver + ?";
-        } 
-        if (tableName.equals("tempgrowinggold")) {
-            updateReadyToHarvest += "crop_gold = crop_gold + ?";
-        }
-
-        try (PreparedStatement pstmtReadyCrops = connection.prepareStatement(getReadyCrops);
-             PreparedStatement pstmtUpdateReadyToHarvest = connection.prepareStatement(updateReadyToHarvest)) {
-
-            pstmtReadyCrops.setInt(1, currentDay);
-
-            try (ResultSet rsReadyCrops = pstmtReadyCrops.executeQuery()) {
-                int totalCount = 0;
-
-                while (rsReadyCrops.next()) {
-                    int seedsPlanted = rsReadyCrops.getInt("seed_planted_num");
-                    totalCount += seedsPlanted;
-                }
-
-                pstmtUpdateReadyToHarvest.setInt(1, totalCount);
-                pstmtUpdateReadyToHarvest.executeUpdate();
-            }
-        }
-    }
-
     public void setTopTexts() {
-        labelCurrentDay.setText("Day: " + currentDay);
-        labelActionPoints.setText("Actions: " + actionPointsRemaining);
-        labelMoney.setText("Money: " + money);
-        labelDeadline.setText("Deadline: " + deadline);
+        labelCurrentDay.setText(" " + currentDay);
+        labelActionPoints.setText(" " + actionPointsRemaining);
+        labelMoney.setText(" " + money);
+        labelDeadline.setText(" " + deadline);
         
     }
 
@@ -176,12 +137,15 @@ public class ControllerSceneFarmNavigation implements Initializable {
         }
     }
     
-    private void removeUnwateredCrops(String tableName, int currentDay) throws SQLException {
-        String query = "DELETE FROM " + tableName + " WHERE watered = 0 AND ? - day_watered > 1";
+    private void removeUnwateredCrops(String tableName) throws SQLException {
+        String query = "DELETE FROM " + tableName + " WHERE day_watered < ? AND watered = 0";
         try (PreparedStatement pstmt = connection.prepareStatement(query)) {
-            pstmt.setInt(1, currentDay); 
+            // Set the parameter for the current day minus 1
+            pstmt.setInt(1, currentDay - 1);
             pstmt.executeUpdate();
         }
+        
+       
     }
 
     public void switchToScenePauseMenu(MouseEvent event) throws IOException {
@@ -212,12 +176,12 @@ public class ControllerSceneFarmNavigation implements Initializable {
     }
 
     public void switchToSceneGuild(MouseEvent event) throws IOException {
-    	
-    	if (!isOwnedTractor) {
-    		actionPointsRemaining--;
-    		
-    	}
-    	
+        
+        if (!isOwnedTractor) {
+            actionPointsRemaining--;
+            
+        }
+        
         root = FXMLLoader.load(getClass().getResource("SceneGuild.fxml"));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
