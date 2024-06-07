@@ -28,7 +28,7 @@
                   <Image url="@../assets/icons/iconStamina.png" />
                </image>
             </ImageView>
-            <Label fx:id="labelActionPoints" styleClass="gameTopText" text="Actions: " />
+            <ImageView fx:id="actionBars" fitHeight="50.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" />
             <ImageView fitHeight="55.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../assets/icons/iconPlowCoins.png" />

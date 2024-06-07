@@ -30,9 +30,9 @@ public class Main extends Application {
 			stage.setScene(scene);
 			stage.show();
 			
-			//BackgroundMusic bgMusic = BackgroundMusic.getInstance();
-	        //bgMusic.play();
-	        //bgMusic.setVolume(0.1); 
+			BackgroundMusic bgMusic = BackgroundMusic.getInstance();
+	        bgMusic.play();
+	        bgMusic.setVolume(0.1); 
 			
 		} catch(Exception e) {
 			e.printStackTrace();

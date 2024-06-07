@@ -103,19 +103,19 @@
                   <Image url="@../assets/icons/iconStamina.png" />
                </image>
             </ImageView>
-            <Label fx:id="labelActionPoints" styleClass="gameTopText" text="Actions:" GridPane.columnIndex="3" />
             <ImageView fitHeight="55.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
                <image>
                   <Image url="@../assets/icons/iconDeadline.png" />
                </image>
             </ImageView>
-            <Label fx:id="labelDeadline" styleClass="gameTopText" text="Deadline:" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <Label fx:id="labelMoney" styleClass="gameTopText" text="Money:" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+            <Label fx:id="labelDeadline" prefHeight="45.0" prefWidth="110.0" styleClass="gameTopText" text="Deadline:" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Label fx:id="labelMoney" prefHeight="45.0" prefWidth="130.0" styleClass="gameTopText" text="Money:" GridPane.columnIndex="3" GridPane.rowIndex="1" />
             <ImageView fitHeight="55.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
                <image>
                   <Image url="@../assets/icons/iconPlowCoins.png" />
                </image>
             </ImageView>
+            <ImageView fitHeight="50.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" />
          </children>
       </GridPane>
    </top>

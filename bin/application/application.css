@@ -60,7 +60,7 @@
 
 #endLosePane {
 	-fx-background-image: url('../assets/bgYouLose.png');	
-	-fx-background-size: auto;
+	-fx-background-size: stretch;
 }
 
 #rentNotifPane {

@@ -212,7 +212,6 @@
          <children>
             <Label fx:id="labelCurrentDay" styleClass="gameTopText" text="Day:" GridPane.columnIndex="1" />
             <Label fx:id="labelDeadline" styleClass="gameTopText" text="Deadline:" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <Label fx:id="labelActionPoints" styleClass="gameTopText" text="Actions:" GridPane.columnIndex="3" />
             <Label fx:id="labelMoney" styleClass="gameTopText" text="Money:" GridPane.columnIndex="3" GridPane.rowIndex="1" />
             <ImageView fitHeight="55.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="RIGHT">
                <image>
@@ -234,6 +233,7 @@
                   <Image url="@../assets/icons/iconPlowCoins.png" />
                </image>
             </ImageView>
+            <ImageView fx:id="actionBars" fitHeight="50.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" />
          </children>
       </GridPane>
    </top>
