@@ -194,14 +194,14 @@ public class ControllerSceneFarmFields implements Initializable {
             resetWateredColumn("tempgrowinggold");
             readyToHarvest();
 
-           
             setTopTexts();
             
             //For the actionBars , turn to normal later 
             updateActionBarsImage(actionPointsRemaining);
         } catch (SQLException e) {
             e.printStackTrace();
-        }
+        } 
+        
     }
     
     public void deadline() throws IOException {
@@ -250,6 +250,18 @@ public class ControllerSceneFarmFields implements Initializable {
         stage.show();
         	
         	
+    }
+    //The new feature
+    private void youTired() throws IOException {
+    	if(actionPointsRemaining == 0) {
+    		root = FXMLLoader.load(getClass().getResource("SceneDayEnd.fxml"));
+            stage = (Stage) btnGoToInventories.getScene().getWindow(); 
+            scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+    		
+    	}
+    	
     }
         
     private void switchRentNotifDay2() throws IOException {
@@ -390,6 +402,7 @@ public class ControllerSceneFarmFields implements Initializable {
                             currentDay++;
                             deadline--;
                             deadline();
+                            youTired();
 
                             removeUnwateredCrops("tempgrowingbronze");
                             removeUnwateredCrops("tempgrowingsilver");
@@ -532,6 +545,7 @@ public class ControllerSceneFarmFields implements Initializable {
                     currentDay++;
                     deadline--;
                     deadline();
+                    youTired();
                     
                     currentActions = actionPointsTotal;
 
@@ -709,6 +723,7 @@ public class ControllerSceneFarmFields implements Initializable {
                 if (actionPointsRemaining == 0) {
                     currentDay++;
                     deadline--;
+                    youTired();
                     actionPointsRemaining = actionPointsTotal;
                     
                     
