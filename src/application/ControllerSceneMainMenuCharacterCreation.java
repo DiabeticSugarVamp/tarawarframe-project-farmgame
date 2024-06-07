@@ -58,6 +58,22 @@ public class ControllerSceneMainMenuCharacterCreation implements Initializable {
         avatarMap.put("avatarIsrael", "/assets/imageDevIsrael.png");
         avatarMap.put("avatarKen", "/assets/imageDevKen.png");
         avatarMap.put("avatarNat", "/assets/imageDevNat.png");
+        avatarMap.put("avatarGirl0", "/assets/avatars/avatarGirl0.png");
+        avatarMap.put("avatarGirl1", "/assets/avatars/avatarGirl1.png");
+        avatarMap.put("avatarGirl2", "/assets/avatars/avatarGirl2.png");
+        avatarMap.put("avatarGirl3", "/assets/avatars/avatarGirl3.png");
+        avatarMap.put("avatarGirl4", "/assets/avatars/avatarGirl4.png");
+        avatarMap.put("avatarGirl5", "/assets/avatars/avatarGirl5.png");
+        avatarMap.put("avatarGirl6", "/assets/avatars/avatarGirl6.png");
+        avatarMap.put("avatarGirl7", "/assets/avatars/avatarGirl7.png");
+        avatarMap.put("avatarGirlMature0", "/assets/avatars/avatarGirlMature0.png");
+        avatarMap.put("avatarGirlMature1", "/assets/avatars/avatarGirlMature1.png");
+        avatarMap.put("avatarGirlMature2", "/assets/avatars/avatarGirlMature2.png");
+        avatarMap.put("avatarGirlMature3", "/assets/avatars/avatarGirlMature3.png");
+        avatarMap.put("avatarGirlMature4", "/assets/avatars/avatarGirlMature4.png");
+        avatarMap.put("avatarGirlMature5", "/assets/avatars/avatarGirlMature5.png");
+        avatarMap.put("avatarGirlMature6", "/assets/avatars/avatarGirlMature6.png");
+        avatarMap.put("avatarGirlMature7", "/assets/avatars/avatarGirlMature7.png");
         
         avatarChoiceBox.getItems().addAll(avatarMap.keySet());
         avatarChoiceBox.getSelectionModel().selectFirst();

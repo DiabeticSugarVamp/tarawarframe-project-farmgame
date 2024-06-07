@@ -11,6 +11,7 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
 
 <BorderPane prefHeight="768.0" prefWidth="1024.0" styleClass="gamePane" stylesheets="@application.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ControllerSceneMainMenuCharacterCreation">
    <top>
@@ -58,30 +59,33 @@
       </GridPane>
    </bottom>
    <center>
-      <GridPane fx:id="bgFrame" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" styleClass="GridPane" BorderPane.alignment="CENTER">
-        <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-        </columnConstraints>
-        <rowConstraints>
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-        </rowConstraints>
+      <VBox alignment="CENTER" BorderPane.alignment="CENTER">
          <children>
-            <Label styleClass="gameText" text="Name:" GridPane.halignment="CENTER" />
-            <TextField fx:id="charNameInputBox" prefHeight="25.0" prefWidth="288.0" GridPane.columnIndex="1" />
-            <Label styleClass="gameText" text="Avatar:" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
-            <ChoiceBox fx:id="avatarChoiceBox" prefWidth="150.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
-            <ImageView fx:id="avatar" fitHeight="68.0" fitWidth="98.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
-               <GridPane.margin>
-                  <Insets right="10.0" />
-               </GridPane.margin>
-               <image>
-                  <Image url="@../assets/imageDevAndre.png" />
-               </image>
-            </ImageView>
+            <GridPane fx:id="bgFrame" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" styleClass="GridPane">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Label styleClass="gameText" text="Name:" GridPane.halignment="CENTER" />
+                  <TextField fx:id="charNameInputBox" prefHeight="25.0" prefWidth="288.0" GridPane.columnIndex="1" />
+                  <Label styleClass="gameText" text="Avatar:" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+                  <ChoiceBox fx:id="avatarChoiceBox" prefWidth="150.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+                  <ImageView fx:id="avatar" fitHeight="70.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
+                     <GridPane.margin>
+                        <Insets right="10.0" />
+                     </GridPane.margin>
+                     <image>
+                        <Image url="@../assets/imageDevAndre.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </GridPane>
          </children>
-      </GridPane>
+      </VBox>
    </center>
 </BorderPane>
