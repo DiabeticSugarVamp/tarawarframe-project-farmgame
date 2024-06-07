@@ -33,6 +33,8 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
                         <Label alignment="CENTER" prefHeight="66.0" prefWidth="169.0" styleClass="mainMenuText" stylesheets="@application.css" text="Background Images" GridPane.halignment="CENTER" />
@@ -41,10 +43,12 @@
                         <Label alignment="CENTER" prefHeight="66.0" prefWidth="169.0" styleClass="mainMenuText" stylesheets="@application.css" text="Avatars" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
                         <Label styleClass="gameText" text="https://sutemo.itch.io/female-character" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
                         <Label styleClass="gameText" text="https://sutemo.itch.io/female-mature-anime-sprite" GridPane.halignment="CENTER" GridPane.rowIndex="6" />
-                        <Label alignment="CENTER" prefHeight="66.0" prefWidth="169.0" styleClass="mainMenuText" stylesheets="@application.css" text="Icons" GridPane.halignment="CENTER" GridPane.rowIndex="7" />
+                        <Label alignment="CENTER" prefHeight="66.0" prefWidth="169.0" styleClass="mainMenuText" stylesheets="@application.css" text="Icons and etc." GridPane.halignment="CENTER" GridPane.rowIndex="7" />
                         <Label styleClass="gameText" text="https://shikashipx.itch.io/shikashis-fantasy-icons-pack" GridPane.halignment="CENTER" GridPane.rowIndex="9" />
                         <Label styleClass="gameText" text="Roberto Nathaniel Camacho III and Kenichi Lei Calica" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
                         <Label styleClass="gameText" text="Andre Victor Arcilla and Carl Angelo Jamero" GridPane.halignment="CENTER" GridPane.rowIndex="8" />
+                        <Label styleClass="gameText" text="https://gandalfhardcore.itch.io/maid" GridPane.halignment="CENTER" GridPane.rowIndex="10" />
+                        <Label styleClass="gameText" text="https://gandalfhardcore.itch.io/pixel-art-zombie-enemy" GridPane.halignment="CENTER" GridPane.rowIndex="11" />
                      </children>
                      <BorderPane.margin>
                         <Insets bottom="20.0" />
