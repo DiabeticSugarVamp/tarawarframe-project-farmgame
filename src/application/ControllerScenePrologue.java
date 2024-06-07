@@ -2,7 +2,9 @@ package application;
 
 import java.io.IOException;
 
-
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -14,6 +16,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 public class ControllerScenePrologue {
 	
@@ -38,6 +41,13 @@ public class ControllerScenePrologue {
 	public void initialize() {
 		prologueText.setText("In the quaint countryside, you find yourself in a "
 				+ "predicament as predictable as the sunrise...");
+		Timeline timeline = new Timeline(
+	            new KeyFrame(Duration.ZERO, new KeyValue(prologueButton.opacityProperty(), 1.0)),
+	            new KeyFrame(new Duration(750), new KeyValue(prologueButton.opacityProperty(), 0.3)),
+	            new KeyFrame(new Duration(1500), new KeyValue(prologueButton.opacityProperty(), 1.0))
+	        );
+	        timeline.setCycleCount(Timeline.INDEFINITE);
+	        timeline.play();
 	}
 	
 	public void displayImage(MouseEvent event) throws IOException {
@@ -85,6 +95,8 @@ public class ControllerScenePrologue {
 			stage.setScene(scene);
 			stage.show();
 		}
+		
+		
 		
 		prologueCounter++;
 	}

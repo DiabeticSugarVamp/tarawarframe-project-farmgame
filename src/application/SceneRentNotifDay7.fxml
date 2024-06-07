@@ -5,9 +5,9 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.BorderPane?>
 
-<BorderPane fx:id="rentNotifDay7Pane" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="768.0" prefWidth="1028.0" stylesheets="@application.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane fx:id="rentNotifDay7Pane" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="768.0" prefWidth="1028.0" stylesheets="@application.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ControllerSceneRentNotif">
    <bottom>
-      <Label styleClass="mainMenuButtons" text="YOU SHOULD START PREPARATIONS!" BorderPane.alignment="CENTER">
+      <Label onMouseClicked="#switchToSceneFarmNavigation" styleClass="mainMenuButtons" text="YOU SHOULD START PREPARATIONS!" BorderPane.alignment="CENTER">
          <BorderPane.margin>
             <Insets bottom="20.0" />
          </BorderPane.margin>

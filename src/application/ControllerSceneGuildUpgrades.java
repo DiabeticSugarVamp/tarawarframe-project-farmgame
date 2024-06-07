@@ -16,7 +16,13 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.DialogPane;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonBar.ButtonData;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
@@ -126,6 +132,23 @@ public class ControllerSceneGuildUpgrades implements Initializable {
         alert.setTitle("Insufficient Funds");
         alert.setHeaderText(null);
         alert.setContentText(message);
+        DialogPane dialogPane = alert.getDialogPane();
+        dialogPane.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+        dialogPane.getStyleClass().add("alert");
+        
+        ImageView icon = new ImageView(new Image(getClass().getResourceAsStream("/assets/icon.jpg")));
+        icon.setFitHeight(48);
+        icon.setFitWidth(48); 
+        alert.setGraphic(icon); 
+
+        //ButtonType okButtonType = new ButtonType("OK", ButtonData.OK_DONE);
+        ButtonType cancelButtonType = new ButtonType("Ok", ButtonData.CANCEL_CLOSE);
+        alert.getButtonTypes().setAll(cancelButtonType);
+
+        
+        Button cancelButton = (Button) alert.getDialogPane().lookupButton(cancelButtonType);
+        cancelButton.getStyleClass().add("button-cancel");
+        
         alert.showAndWait();
     }
 }

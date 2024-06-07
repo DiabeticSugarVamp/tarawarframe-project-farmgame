@@ -17,8 +17,13 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonBar.ButtonData;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.DialogPane;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
@@ -129,6 +134,25 @@ public class ControllerSaveCreate implements Initializable {
 
                 if (checkSlotRs.next()) {
                     Alert alert = new Alert(AlertType.CONFIRMATION, "Slot " + slot + " is already occupied. Do you want to overwrite it?", ButtonType.YES, ButtonType.NO);
+                    
+                    DialogPane dialogPane = alert.getDialogPane();
+                    dialogPane.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+                    dialogPane.getStyleClass().add("alert");
+                    
+                    ImageView icon = new ImageView(new Image(getClass().getResourceAsStream("/assets/icon.jpg")));
+                    icon.setFitHeight(48);
+                    icon.setFitWidth(48); 
+                    alert.setGraphic(icon); 
+
+                    ButtonType okButtonType = new ButtonType("OK", ButtonData.OK_DONE);
+                    ButtonType cancelButtonType = new ButtonType("Cancel", ButtonData.CANCEL_CLOSE);
+                    alert.getButtonTypes().setAll(okButtonType, cancelButtonType);
+
+                    Button okButton = (Button) alert.getDialogPane().lookupButton(okButtonType);
+                    okButton.getStyleClass().add("button-ok");
+                    Button cancelButton = (Button) alert.getDialogPane().lookupButton(cancelButtonType);
+                    cancelButton.getStyleClass().add("button-cancel");
+                    
                     alert.showAndWait();
                     
 

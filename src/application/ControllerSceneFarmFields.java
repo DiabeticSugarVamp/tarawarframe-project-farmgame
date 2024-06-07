@@ -17,7 +17,13 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.DialogPane;
 import javafx.scene.control.Label;
+import javafx.scene.control.ButtonBar.ButtonData;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
@@ -57,6 +63,16 @@ public class ControllerSceneFarmFields implements Initializable {
     private boolean isOwnedGloves;
     private boolean isOwnedTractor;
     private boolean isOwnedCan;
+    
+    //For the actionBars
+    private String[] actionBarImages = {
+    		"/assets/stamina bars/stamina (blue)/stamina0 (blue).png",
+    	    "/assets/stamina bars/stamina (blue)/stamina1 (blue).png",
+    	    "/assets/stamina bars/stamina (blue)/stamina2 (blue).png",
+    	    "/assets/stamina bars/stamina (blue)/stamina3 (blue).png",
+    	    "/assets/stamina bars/stamina (blue)/stamina4 (blue).png",
+    	    "/assets/stamina bars/stamina (blue)/stamina5 (blue).png"
+    	};
 
     @FXML
     private Label labelCurrentDay;
@@ -90,6 +106,9 @@ public class ControllerSceneFarmFields implements Initializable {
     
     @FXML
     private Label btnGoToInventories;
+    
+    @FXML
+    private ImageView actionBars;
 
     public void getUser() throws SQLException {
         String userQuery = "SELECT * FROM temporarystatsholder WHERE user_id = 1";
@@ -172,36 +191,84 @@ public class ControllerSceneFarmFields implements Initializable {
             resetWateredColumn("tempgrowingsilver");
             resetWateredColumn("tempgrowinggold");
             readyToHarvest();
-            deadline();
-              
+
            
             setTopTexts();
+            
+            //For the actionBars , turn to normal later 
+            //updateActionBarsImage(actionPointsRemaining);
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
     
-    public void deadline() {
-        if (deadline == 0) {
-            money -= 50;
-            deadline += 14;
-            String updateSql = "UPDATE temporarystatsholder SET cur_day = ?, cur_deadline = ?, cur_money = ?, cur_actions = ? WHERE user_id = 1";
-
-            try (PreparedStatement pstmt = connection.prepareStatement(updateSql)) {
-                pstmt.setInt(1, currentDay);
-                pstmt.setInt(2, deadline);
-                pstmt.setDouble(3, money);
-                pstmt.setInt(4, actionPointsTotal); // Set cur_actions to 5
-                pstmt.executeUpdate();
-
-            } catch (SQLException e1) {
-                e1.printStackTrace();
-            }
+    public void deadline() throws IOException {
+	    	if(deadline == 7) {
+	    		switchRentNotifDay7();
+	    		
+	    	}else if(deadline == 2) {
+	    		switchRentNotifDay2();
+	    		
+	    	}else if (deadline == 0){
+	            if (money > 0) {
+	            	switchRentNotif();
+	            	money -= 50;
+		            deadline += 14;
+		            String updateSql = "UPDATE temporarystatsholder SET cur_day = ?, cur_deadline = ?, cur_money = ?, cur_actions = ? WHERE user_id = 1";
+		
+		            try (PreparedStatement pstmt = connection.prepareStatement(updateSql)) {
+		                pstmt.setInt(1, currentDay);
+		                pstmt.setInt(2, deadline);
+		                pstmt.setDouble(3, money);
+		                pstmt.setInt(4, actionPointsTotal); // Set cur_actions to 5
+		                pstmt.executeUpdate();
+		
+		            } catch (SQLException e1) {
+		                e1.printStackTrace();
+		            }
+	            }   
             
-            
+	    	}
+	    	
+    }
+    //For the action bars
+    public void updateActionBarsImage(int actionPointsRemaining) {
+        if (actionPointsRemaining >= 0 && actionPointsRemaining < actionBarImages.length) {
+            String imageUrl = actionBarImages[actionPointsRemaining];
+            Image image = new Image(getClass().getResource(imageUrl).toExternalForm());
+            actionBars.setImage(image);
         }
     }
-
+    
+    private void switchRentNotif() throws IOException {
+        root = FXMLLoader.load(getClass().getResource("SceneRentNotif.fxml"));
+        stage = (Stage) btnGoToInventories.getScene().getWindow(); 
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+        	
+        	
+    }
+        
+    private void switchRentNotifDay2() throws IOException {
+    	root = FXMLLoader.load(getClass().getResource("SceneRentNotifDay2.fxml"));
+        stage = (Stage) btnGoToInventories.getScene().getWindow(); 
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+        	
+        	
+     }
+        
+        private void switchRentNotifDay7() throws IOException {
+        	root = FXMLLoader.load(getClass().getResource("SceneRentNotifDay7.fxml"));
+            stage = (Stage) btnGoToInventories.getScene().getWindow(); 
+            scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        	
+        	
+        }
     public void setTopTexts() {
         labelCurrentDay.setText(" " + currentDay);
         labelActionPoints.setText(" " + actionPointsRemaining);
@@ -320,6 +387,7 @@ public class ControllerSceneFarmFields implements Initializable {
                         if (actionPointsRemaining == 0) {
                             currentDay++;
                             deadline--;
+                            deadline();
 
                             removeUnwateredCrops("tempgrowingbronze");
                             removeUnwateredCrops("tempgrowingsilver");
@@ -371,6 +439,24 @@ public class ControllerSceneFarmFields implements Initializable {
                         alert.setTitle("No Seeds");
                         alert.setHeaderText("Insufficient Seeds");
                         alert.setContentText("You do not have enough seeds to plant.");
+                        DialogPane dialogPane = alert.getDialogPane();
+                        dialogPane.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+                        dialogPane.getStyleClass().add("alert");
+                        
+                        ImageView icon = new ImageView(new Image(getClass().getResourceAsStream("/assets/icon.jpg")));
+                        icon.setFitHeight(48);
+                        icon.setFitWidth(48); 
+                        alert.setGraphic(icon); 
+
+                        //ButtonType okButtonType = new ButtonType("OK", ButtonData.OK_DONE);
+                        ButtonType cancelButtonType = new ButtonType("Ok", ButtonData.CANCEL_CLOSE);
+                        alert.getButtonTypes().setAll(cancelButtonType);
+
+                        
+                        Button cancelButton = (Button) alert.getDialogPane().lookupButton(cancelButtonType);
+                        cancelButton.getStyleClass().add("button-cancel");
+                        
+                        
                         alert.showAndWait();
                         
                         
@@ -401,6 +487,34 @@ public class ControllerSceneFarmFields implements Initializable {
                 int harvestedBronze = rs.getInt("crop_bronze");
                 int harvestedSilver = rs.getInt("crop_silver");
                 int harvestedGold = rs.getInt("crop_gold");
+                
+                if(harvestedBronze == 0 && harvestedSilver == 0 && harvestedGold == 0) {
+                	Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("No Crops to Harvest");
+                    alert.setHeaderText(null);
+                    alert.setContentText("There are no crops ready to harvest.");
+                    DialogPane dialogPane = alert.getDialogPane();
+                    dialogPane.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+                    dialogPane.getStyleClass().add("alert");
+                    
+                    ImageView icon = new ImageView(new Image(getClass().getResourceAsStream("/assets/icon.jpg")));
+                    icon.setFitHeight(48);
+                    icon.setFitWidth(48); 
+                    alert.setGraphic(icon); 
+
+                    //ButtonType okButtonType = new ButtonType("OK", ButtonData.OK_DONE);
+                    ButtonType cancelButtonType = new ButtonType("Ok", ButtonData.CANCEL_CLOSE);
+                    alert.getButtonTypes().setAll(cancelButtonType);
+
+                    
+                    Button cancelButton = (Button) alert.getDialogPane().lookupButton(cancelButtonType);
+                    cancelButton.getStyleClass().add("button-cancel");
+                    
+                    alert.showAndWait();
+                    
+                	return;
+                	
+                }
 
                 
                 int currentActions = rsStats.getInt("cur_actions");
@@ -415,6 +529,8 @@ public class ControllerSceneFarmFields implements Initializable {
                 if (currentActions == 0) {
                     currentDay++;
                     deadline--;
+                    deadline();
+                    
                     currentActions = actionPointsTotal;
 
                     
@@ -463,7 +579,25 @@ public class ControllerSceneFarmFields implements Initializable {
                 alert.setTitle("No Crops to Harvest");
                 alert.setHeaderText(null);
                 alert.setContentText("There are no crops ready to harvest.");
+                DialogPane dialogPane = alert.getDialogPane();
+                dialogPane.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+                dialogPane.getStyleClass().add("alert");
+                
+                ImageView icon = new ImageView(new Image(getClass().getResourceAsStream("/assets/icon.jpg")));
+                icon.setFitHeight(48);
+                icon.setFitWidth(48); 
+                alert.setGraphic(icon); 
+
+                //ButtonType okButtonType = new ButtonType("OK", ButtonData.OK_DONE);
+                ButtonType cancelButtonType = new ButtonType("Ok", ButtonData.CANCEL_CLOSE);
+                alert.getButtonTypes().setAll(cancelButtonType);
+
+                
+                Button cancelButton = (Button) alert.getDialogPane().lookupButton(cancelButtonType);
+                cancelButton.getStyleClass().add("button-cancel");
+                
                 alert.showAndWait();
+                
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -516,13 +650,13 @@ public class ControllerSceneFarmFields implements Initializable {
                 }
             }
 
-            // Updating the harvest table
+            
             pstmtUpdateHarvest.setInt(1, readyBronze);
             pstmtUpdateHarvest.setInt(2, readySilver);
             pstmtUpdateHarvest.setInt(3, readyGold);
             pstmtUpdateHarvest.executeUpdate();
 
-            // Deleting the matured crops from the growing tables
+          
             pstmtDeleteBronze.setInt(1, currentDay);
             pstmtDeleteBronze.executeUpdate();
 
@@ -532,12 +666,12 @@ public class ControllerSceneFarmFields implements Initializable {
             pstmtDeleteGold.setInt(1, currentDay);
             pstmtDeleteGold.executeUpdate();
 
-            // Reset growing crops counters after updating
+            
             totalBronzeGrowing -= readyBronze;
             totalSilverGrowing -= readySilver;
             totalGoldGrowing -= readyGold;
 
-            // Update the harvest variables
+    
             harvestBronze += readyBronze;
             harvestSilver += readySilver;
             harvestGold += readyGold;
@@ -602,6 +736,23 @@ public class ControllerSceneFarmFields implements Initializable {
                 alert.setTitle("Crops Watered");
                 alert.setHeaderText(null);
                 alert.setContentText("All crops have been watered for today.");
+                DialogPane dialogPane = alert.getDialogPane();
+                dialogPane.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+                dialogPane.getStyleClass().add("alert");
+                
+                ImageView icon = new ImageView(new Image(getClass().getResourceAsStream("/assets/icon.jpg")));
+                icon.setFitHeight(48);
+                icon.setFitWidth(48); 
+                alert.setGraphic(icon); 
+
+                //ButtonType okButtonType = new ButtonType("OK", ButtonData.OK_DONE);
+                ButtonType cancelButtonType = new ButtonType("Ok", ButtonData.CANCEL_CLOSE);
+                alert.getButtonTypes().setAll(cancelButtonType);
+
+                
+                Button cancelButton = (Button) alert.getDialogPane().lookupButton(cancelButtonType);
+                cancelButton.getStyleClass().add("button-cancel");
+                
                 alert.showAndWait();
 
                 
@@ -616,7 +767,7 @@ public class ControllerSceneFarmFields implements Initializable {
     private void removeUnwateredCrops(String tableName) throws SQLException {
         String query = "DELETE FROM " + tableName + " WHERE day_watered < ? AND watered = 0";
         try (PreparedStatement pstmt = connection.prepareStatement(query)) {
-            // Set the parameter for the current day minus 1
+            
             pstmt.setInt(1, currentDay - 1);
             pstmt.executeUpdate();
         }

@@ -1,5 +1,6 @@
 package application;
 	
+import aidpackage.BackgroundMusic;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
@@ -28,6 +29,11 @@ public class Main extends Application {
 			scene.getStylesheets().add(css);
 			stage.setScene(scene);
 			stage.show();
+			
+			//BackgroundMusic bgMusic = BackgroundMusic.getInstance();
+	        //bgMusic.play();
+	        //bgMusic.setVolume(0.1); 
+			
 		} catch(Exception e) {
 			e.printStackTrace();
 			

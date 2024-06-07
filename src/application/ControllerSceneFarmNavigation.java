@@ -51,6 +51,7 @@ public class ControllerSceneFarmNavigation implements Initializable {
     
     @FXML
     private ImageView charAvatar;
+   
     
     
     public void getUser() throws SQLException {
@@ -96,7 +97,7 @@ public class ControllerSceneFarmNavigation implements Initializable {
     }
 
 
-    public void endDay(MouseEvent e) {
+    public void endDay(MouseEvent e) throws IOException {
         
 
         currentDay++;
@@ -115,7 +116,6 @@ public class ControllerSceneFarmNavigation implements Initializable {
             e1.printStackTrace();
         }
 
-        // Removed the code that updates tempreadytoharvest and removes growing seeds in tempgrowing tables
 
         this.deadline();
 
@@ -125,11 +125,12 @@ public class ControllerSceneFarmNavigation implements Initializable {
             pstmt.setInt(1, currentDay);
             pstmt.setInt(2, deadline);
             pstmt.setDouble(3, money);
-            pstmt.setInt(4, actionPointsTotal); // Set cur_actions to 5
+            pstmt.setInt(4, actionPointsTotal); 
             pstmt.executeUpdate();
 
         } catch (SQLException e1) {
             e1.printStackTrace();
+            
         }
 
         this.setTopTexts();
@@ -143,9 +144,16 @@ public class ControllerSceneFarmNavigation implements Initializable {
         
     }
 
-    public void deadline() {
-        if (deadline == 0) {
+    public void deadline() throws IOException {
+    	if(deadline == 7) {
+    		switchRentNotifDay7();
+    		
+    	}else if(deadline == 2) {
+    		switchRentNotifDay2();
+    		
+    	}else if (deadline == 0){
             if (money > 0) {
+            	switchRentNotif();
                 money -= 50;
                 deadline += 14;
             } else {
@@ -158,9 +166,39 @@ public class ControllerSceneFarmNavigation implements Initializable {
         }
     }
     
+    private void switchRentNotif() throws IOException {
+    	root = FXMLLoader.load(getClass().getResource("SceneRentNotif.fxml"));
+        stage = (Stage) charAvatar.getScene().getWindow(); 
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    	
+    	
+    }
+    
+    private void switchRentNotifDay2() throws IOException {
+    	root = FXMLLoader.load(getClass().getResource("SceneRentNotifDay2.fxml"));
+        stage = (Stage) charAvatar.getScene().getWindow(); 
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    	
+    	
+    }
+    
+    private void switchRentNotifDay7() throws IOException {
+    	root = FXMLLoader.load(getClass().getResource("SceneRentNotifDay7.fxml"));
+        stage = (Stage) charAvatar.getScene().getWindow(); 
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    	
+    	
+    }
+    
     private void switchToEndLoseScene() throws IOException {
         root = FXMLLoader.load(getClass().getResource("SceneEndLose.fxml"));
-        stage = (Stage) charAvatar.getScene().getWindow(); // Use any node in the current scene to get the window
+        stage = (Stage) charAvatar.getScene().getWindow(); 
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
@@ -176,7 +214,7 @@ public class ControllerSceneFarmNavigation implements Initializable {
     private void removeUnwateredCrops(String tableName) throws SQLException {
         String query = "DELETE FROM " + tableName + " WHERE day_watered < ? AND watered = 0";
         try (PreparedStatement pstmt = connection.prepareStatement(query)) {
-            // Set the parameter for the current day minus 1
+            
             pstmt.setInt(1, currentDay - 1);
             pstmt.executeUpdate();
         }

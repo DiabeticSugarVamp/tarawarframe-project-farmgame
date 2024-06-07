@@ -19,10 +19,16 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.DialogPane;
 import javafx.scene.control.Label;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ButtonBar.ButtonData;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
@@ -38,6 +44,10 @@ public class ControllerSceneGuildBuyPlants implements Initializable {
     private int actionPointsRemaining;
     private int actionPointsTotal;
     private int deadline;
+    
+    private int ownedBronzeSeeds;
+    private int ownedSilverSeeds;
+    private int ownedGoldSeeds;
 
     @FXML
     private Label labelCurrentDay;
@@ -54,6 +64,13 @@ public class ControllerSceneGuildBuyPlants implements Initializable {
     private Spinner<Integer> buySilverSpinner;
     @FXML
     private Spinner<Integer> buyGoldSpinner;
+    
+    @FXML
+    private Label lblOwnSeedBronze;
+    @FXML
+    private Label lblOwnSeedSilver;
+    @FXML
+    private Label lblOwnSeedGold;
 
     @FXML
     private Label btnBuyItems;
@@ -81,6 +98,7 @@ public class ControllerSceneGuildBuyPlants implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         try {
             getUser();
+            setOwnedSeeds();
             
         } catch (SQLException e) {
             e.printStackTrace();
@@ -137,13 +155,36 @@ public class ControllerSceneGuildBuyPlants implements Initializable {
         buyTotal.setText(Integer.toString(calculatedTotalValue));
         
     }
+    
+    public void setOwnedSeeds() {
+    	String querySeeds = "SELECT * FROM tempitems WHERE temp_id = 1";
+    	try (Statement stmtSeeds = connection.createStatement();
+    	     ResultSet rsSeeds = stmtSeeds.executeQuery(querySeeds)) {
+
+    	    if (rsSeeds.next()) {
+    	        ownedBronzeSeeds = rsSeeds.getInt("seed_bronze");
+    	        ownedSilverSeeds = rsSeeds.getInt("seed_silver");
+    	        ownedGoldSeeds = rsSeeds.getInt("seed_gold");
+    	        
+    	    }
+    	    
+    	    lblOwnSeedBronze.setText("Bronze seeds owned: " + ownedBronzeSeeds);
+    	    lblOwnSeedSilver.setText("Bronze seeds owned: " + ownedSilverSeeds);
+    	    lblOwnSeedGold.setText("Bronze seeds owned: " + ownedGoldSeeds);
+
+    	} catch (SQLException e) {
+    	    e.printStackTrace();
+    	    
+    	}
+    	
+    }
 
     public void buyTotalItems(MouseEvent event) {
         if (money >= calculatedTotalValue) {
             money -= calculatedTotalValue;
             updateUserMoney();
             updateTempItems();
-
+            initialize(null, null);
            
             try {
                 switchToSceneGuild(event);
@@ -191,6 +232,23 @@ public class ControllerSceneGuildBuyPlants implements Initializable {
         alert.setTitle(title);
         alert.setHeaderText(null);
         alert.setContentText(content);
+        DialogPane dialogPane = alert.getDialogPane();
+        dialogPane.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+        dialogPane.getStyleClass().add("alert");
+        
+        ImageView icon = new ImageView(new Image(getClass().getResourceAsStream("/assets/icon.jpg")));
+        icon.setFitHeight(48);
+        icon.setFitWidth(48); 
+        alert.setGraphic(icon); 
+
+        //ButtonType okButtonType = new ButtonType("OK", ButtonData.OK_DONE);
+        ButtonType cancelButtonType = new ButtonType("Ok", ButtonData.CANCEL_CLOSE);
+        alert.getButtonTypes().setAll(cancelButtonType);
+
+        
+        Button cancelButton = (Button) alert.getDialogPane().lookupButton(cancelButtonType);
+        cancelButton.getStyleClass().add("button-cancel");
+        
         alert.showAndWait();
         
     }

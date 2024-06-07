@@ -18,10 +18,17 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.DialogPane;
 import javafx.scene.control.Label;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ButtonBar.ButtonData;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
@@ -37,6 +44,10 @@ public class ControllerSceneGuildSellPlants implements Initializable {
     private int actionPointsRemaining;
     private int actionPointsTotal;
     private int deadline;
+    
+    private int ownedBronzeCrops;
+    private int ownedSilverCrops;
+    private int ownedGoldCrops;
 
     @FXML
     private Label labelCurrentDay;
@@ -53,6 +64,13 @@ public class ControllerSceneGuildSellPlants implements Initializable {
     private Spinner<Integer> sellSilverSpinner;
     @FXML
     private Spinner<Integer> sellGoldSpinner;
+    
+    @FXML
+    private Label lblOwnCropsBronze;
+    @FXML
+    private Label lblOwnCropsSilver;
+    @FXML
+    private Label lblOwnCropsGold;
 
     @FXML
     private Label btnSellItems;
@@ -78,8 +96,11 @@ public class ControllerSceneGuildSellPlants implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         try {
             getUser();
+            setOwnedCrops();
+            
         } catch (SQLException e) {
             e.printStackTrace();
+            
         }
         setTopTexts();
 
@@ -145,14 +166,14 @@ public class ControllerSceneGuildSellPlants implements Initializable {
                 int availableSilver = rs.getInt("crop_silver");
                 int availableGold = rs.getInt("crop_gold");
 
-                // Check if the character has enough crops to sell
+                
                 if (bronzeSold > availableBronze || silverSold > availableSilver || goldSold > availableGold) {
-                    // Show an alert indicating insufficient crops
-                    System.out.println("You do not have enough crops to sell.");
+                    
+                	showAlert("Insufficient Crops", "You do not have enough crops to sell.");
                     return;
                 }
 
-                // Update tempitems table
+                
                 String updateTempItemsQuery = "UPDATE tempitems SET crop_bronze = ?, crop_silver = ?, crop_gold = ? WHERE temp_id = 1";
                 PreparedStatement pstmt = connection.prepareStatement(updateTempItemsQuery);
                 pstmt.setInt(1, availableBronze - bronzeSold);
@@ -160,7 +181,7 @@ public class ControllerSceneGuildSellPlants implements Initializable {
                 pstmt.setInt(3, availableGold - goldSold);
                 pstmt.executeUpdate();
 
-                // Update money in temporarystatsholder
+                
                 double totalSale = calculatedTotalValue;
                 money += totalSale;
                 String updateMoneyQuery = "UPDATE temporarystatsholder SET cur_money = ? WHERE user_id = 1";
@@ -168,24 +189,74 @@ public class ControllerSceneGuildSellPlants implements Initializable {
                 pstmtMoney.setDouble(1, money);
                 pstmtMoney.executeUpdate();
 
-                // Update UI
+                
                 setTopTexts();
 
-                // Reset spinners
+                
                 sellBronzeSpinner.getValueFactory().setValue(0);
                 sellSilverSpinner.getValueFactory().setValue(0);
                 sellGoldSpinner.getValueFactory().setValue(0);
 
-                // Switch to SceneGuild.fxml
+                
                 switchToSceneGuild(null);
-
+                
             } else {
-                // Show an alert indicating no crops available
+                
                 System.out.println("You do not have any crops to sell.");
             }
+            initialize(null, null);
         } catch (SQLException | IOException e) {
             e.printStackTrace();
         }
+    }
+    
+    public void setOwnedCrops() {
+    	String querySeeds = "SELECT * FROM tempitems WHERE temp_id = 1";
+    	try (Statement stmtSeeds = connection.createStatement();
+    	     ResultSet rsSeeds = stmtSeeds.executeQuery(querySeeds)) {
+
+    	    if (rsSeeds.next()) {
+    	    	ownedBronzeCrops = rsSeeds.getInt("crop_bronze");
+    	    	ownedSilverCrops = rsSeeds.getInt("crop_silver");
+    	    	ownedGoldCrops = rsSeeds.getInt("crop_gold");
+    	        
+    	    }
+    	    
+    	    lblOwnCropsBronze.setText("Bronze crops owned: " + ownedBronzeCrops);
+    	    lblOwnCropsSilver.setText("Silver crops owned: " + ownedSilverCrops);
+    	    lblOwnCropsGold.setText("Gold crops owned: " + ownedGoldCrops);
+
+    	} catch (SQLException e) {
+    	    e.printStackTrace();
+    	    
+    	}
+    	
+    }
+    
+    private void showAlert(String title, String content) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(content);
+        DialogPane dialogPane = alert.getDialogPane();
+        dialogPane.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+        dialogPane.getStyleClass().add("alert");
+        
+        ImageView icon = new ImageView(new Image(getClass().getResourceAsStream("/assets/icon.jpg")));
+        icon.setFitHeight(48);
+        icon.setFitWidth(48); 
+        alert.setGraphic(icon); 
+
+        //ButtonType okButtonType = new ButtonType("OK", ButtonData.OK_DONE);
+        ButtonType cancelButtonType = new ButtonType("Ok", ButtonData.CANCEL_CLOSE);
+        alert.getButtonTypes().setAll(cancelButtonType);
+
+        
+        Button cancelButton = (Button) alert.getDialogPane().lookupButton(cancelButtonType);
+        cancelButton.getStyleClass().add("button-cancel");
+        
+        alert.showAndWait();
+        
     }
 
     public void setTopTexts() {

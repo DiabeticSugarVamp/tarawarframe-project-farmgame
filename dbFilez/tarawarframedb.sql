@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 04, 2024 at 04:08 AM
+-- Generation Time: Jun 06, 2024 at 11:56 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -36,14 +36,6 @@ CREATE TABLE `savedgrowingbronze` (
   `day_watered` int(100) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `savedgrowingbronze`
---
-
-INSERT INTO `savedgrowingbronze` (`save_slots`, `day_planted`, `grown_day`, `seed_planted_num`, `watered`, `day_watered`) VALUES
-(2, 1, 3, 3, 1, 1),
-(3, 28, 30, 1, 1, 29);
-
 -- --------------------------------------------------------
 
 --
@@ -64,9 +56,8 @@ CREATE TABLE `savedgrowinggold` (
 --
 
 INSERT INTO `savedgrowinggold` (`save_slots`, `day_planted`, `grown_day`, `seed_planted_num`, `watered`, `day_watered`) VALUES
-(2, 1, 8, 1, 1, 1),
-(3, 26, 33, 2, 1, 29),
-(3, 28, 35, 1, 1, 29);
+(1, 1, 8, 1, 1, 3),
+(3, 35, 42, 1, 1, 37);
 
 -- --------------------------------------------------------
 
@@ -88,9 +79,8 @@ CREATE TABLE `savedgrowingsilver` (
 --
 
 INSERT INTO `savedgrowingsilver` (`save_slots`, `day_planted`, `grown_day`, `seed_planted_num`, `watered`, `day_watered`) VALUES
-(2, 1, 5, 3, 1, 1),
-(3, 26, 30, 2, 1, 29),
-(3, 28, 32, 1, 1, 29);
+(1, 1, 5, 3, 1, 3),
+(3, 35, 39, 1, 1, 37);
 
 -- --------------------------------------------------------
 
@@ -113,9 +103,9 @@ CREATE TABLE `saveditems` (
 --
 
 INSERT INTO `saveditems` (`save_slots`, `seed_bronze`, `seed_silver`, `seed_gold`, `crop_bronze`, `crop_silver`, `crop_gold`) VALUES
-(1, 3, 1, 0, 0, 0, 0),
-(2, 2, 0, 0, 0, 0, 0),
-(3, 43, 43, 43, 0, 0, 0);
+(1, 0, 0, 0, 5, 0, 0),
+(2, 5, 3, 1, 6, 2, 2),
+(3, 41, 41, 40, 5, 2, 2);
 
 -- --------------------------------------------------------
 
@@ -135,7 +125,9 @@ CREATE TABLE `savedreadytoharvest` (
 --
 
 INSERT INTO `savedreadytoharvest` (`save_slots`, `crop_bronze`, `crop_silver`, `crop_gold`) VALUES
-(3, 2, 0, 0);
+(1, 0, 0, 0),
+(2, 0, 0, 0),
+(3, 1, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -146,6 +138,7 @@ INSERT INTO `savedreadytoharvest` (`save_slots`, `crop_bronze`, `crop_silver`, `
 CREATE TABLE `savedstats` (
   `save_slots` int(1) NOT NULL,
   `user_id` int(6) NOT NULL,
+  `avatar` text NOT NULL DEFAULT '/assets/imageDevAndre.png',
   `username` varchar(100) NOT NULL,
   `cur_day` int(100) NOT NULL DEFAULT 1,
   `cur_actions` int(2) NOT NULL DEFAULT 5,
@@ -158,10 +151,10 @@ CREATE TABLE `savedstats` (
 -- Dumping data for table `savedstats`
 --
 
-INSERT INTO `savedstats` (`save_slots`, `user_id`, `username`, `cur_day`, `cur_actions`, `cur_money`, `cur_deadline`, `time_stamp`) VALUES
-(1, 1, 'Carl1', 15, 3, 50, 14, '2024-06-03 14:30:13'),
-(2, 2, 'Drealord', 1, 2, 100, 14, '2024-06-03 18:52:34'),
-(3, 3, 'Ahh yes', 29, 5, 950, 14, '2024-06-04 00:24:54');
+INSERT INTO `savedstats` (`save_slots`, `user_id`, `avatar`, `username`, `cur_day`, `cur_actions`, `cur_money`, `cur_deadline`, `time_stamp`) VALUES
+(1, 1, '/assets/imageDevAndre.png', 'CarlAngelo', 3, 2, 100, 12, '2024-06-06 12:08:47'),
+(2, 2, '/assets/imageDevNat.png', 'Dreadlord', 12, 4, 100, 3, '2024-06-06 21:52:06'),
+(3, 3, '/assets/imageDevAndre.png', 'Ahh yes', 37, 4, 953, 6, '2024-06-06 07:12:42');
 
 -- --------------------------------------------------------
 
@@ -177,13 +170,6 @@ CREATE TABLE `tempgrowingbronze` (
   `day_watered` int(100) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `tempgrowingbronze`
---
-
-INSERT INTO `tempgrowingbronze` (`day_planted`, `grown_day`, `seed_planted_num`, `watered`, `day_watered`) VALUES
-(28, 30, 1, 1, 29);
-
 -- --------------------------------------------------------
 
 --
@@ -198,14 +184,6 @@ CREATE TABLE `tempgrowinggold` (
   `day_watered` int(100) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `tempgrowinggold`
---
-
-INSERT INTO `tempgrowinggold` (`day_planted`, `grown_day`, `seed_planted_num`, `watered`, `day_watered`) VALUES
-(26, 33, 2, 1, 29),
-(28, 35, 1, 1, 29);
-
 -- --------------------------------------------------------
 
 --
@@ -219,14 +197,6 @@ CREATE TABLE `tempgrowingsilver` (
   `watered` int(1) NOT NULL DEFAULT 1,
   `day_watered` int(100) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `tempgrowingsilver`
---
-
-INSERT INTO `tempgrowingsilver` (`day_planted`, `grown_day`, `seed_planted_num`, `watered`, `day_watered`) VALUES
-(26, 30, 2, 1, 29),
-(28, 32, 1, 1, 29);
 
 -- --------------------------------------------------------
 
@@ -249,7 +219,7 @@ CREATE TABLE `tempitems` (
 --
 
 INSERT INTO `tempitems` (`temp_id`, `seed_bronze`, `seed_silver`, `seed_gold`, `crop_bronze`, `crop_silver`, `crop_gold`) VALUES
-(1, 43, 43, 43, 2, 0, 0);
+(1, 5, 3, 1, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -259,6 +229,7 @@ INSERT INTO `tempitems` (`temp_id`, `seed_bronze`, `seed_silver`, `seed_gold`, `
 
 CREATE TABLE `temporarystatsholder` (
   `user_id` int(6) NOT NULL,
+  `avatar` text NOT NULL DEFAULT '/assets/imageDevAndre.png',
   `username` varchar(100) NOT NULL,
   `cur_day` int(100) NOT NULL DEFAULT 1,
   `cur_actions` int(2) NOT NULL DEFAULT 5,
@@ -271,8 +242,8 @@ CREATE TABLE `temporarystatsholder` (
 -- Dumping data for table `temporarystatsholder`
 --
 
-INSERT INTO `temporarystatsholder` (`user_id`, `username`, `cur_day`, `cur_actions`, `cur_money`, `cur_deadline`, `time_stamp`) VALUES
-(1, 'Ahh yes', 29, 5, 950, 14, '2024-06-04 02:07:04');
+INSERT INTO `temporarystatsholder` (`user_id`, `avatar`, `username`, `cur_day`, `cur_actions`, `cur_money`, `cur_deadline`, `time_stamp`) VALUES
+(1, '/assets/imageDevIsrael.png', 'Test1', 1, 5, 100, 14, '2024-06-06 21:52:55');
 
 -- --------------------------------------------------------
 
