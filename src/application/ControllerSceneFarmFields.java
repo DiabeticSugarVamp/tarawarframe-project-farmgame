@@ -220,7 +220,7 @@ public class ControllerSceneFarmFields implements Initializable {
 		                pstmt.setInt(1, currentDay);
 		                pstmt.setInt(2, deadline);
 		                pstmt.setDouble(3, money);
-		                pstmt.setInt(4, actionPointsTotal); // Set cur_actions to 5
+		                pstmt.setInt(4, actionPointsTotal); 
 		                pstmt.executeUpdate();
 		
 		            } catch (SQLException e1) {

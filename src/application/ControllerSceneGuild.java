@@ -16,6 +16,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
@@ -31,6 +32,15 @@ public class ControllerSceneGuild implements Initializable {
     private int actionPointsRemaining; 
     private int actionPointsTotal; 
     private int deadline;
+    
+    private String[] actionBarImages = {
+    		"/assets/stamina bars/stamina (blue)/stamina0 (blue).png",
+    	    "/assets/stamina bars/stamina (blue)/stamina1 (blue).png",
+    	    "/assets/stamina bars/stamina (blue)/stamina2 (blue).png",
+    	    "/assets/stamina bars/stamina (blue)/stamina3 (blue).png",
+    	    "/assets/stamina bars/stamina (blue)/stamina4 (blue).png",
+    	    "/assets/stamina bars/stamina (blue)/stamina5 (blue).png"
+    	};
 
     @FXML
     private Label labelCurrentDay;
@@ -69,6 +79,15 @@ public class ControllerSceneGuild implements Initializable {
         labelActionPoints.setText(" " + actionPointsRemaining);
         labelMoney.setText(" " + money);
         labelDeadline.setText(" " + deadline);
+    }
+    
+  //For the action bars
+    public void updateActionBarsImage(int actionPointsRemaining) {
+        if (actionPointsRemaining >= 0 && actionPointsRemaining < actionBarImages.length) {
+            String imageUrl = actionBarImages[actionPointsRemaining];
+            Image image = new Image(getClass().getResource(imageUrl).toExternalForm());
+           // actionBars.setImage(image);
+        }
     }
 	
 	public void switchToSceneGuildBuyPlants(MouseEvent event) throws IOException {
