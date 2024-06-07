@@ -72,6 +72,8 @@ public class ControllerSceneMainMenuCharacterCreation implements Initializable {
         avatar.setImage(avatarImage);
         
     }
+    
+    
 
     private void deleteTempGrowingData() throws SQLException {
         String deleteGrowingBronzeQuery = "DELETE FROM tempgrowingbronze";

@@ -17,6 +17,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
@@ -44,12 +45,15 @@ public class ControllerSceneGuild implements Initializable {
 
     @FXML
     private Label labelCurrentDay;
-    @FXML
-    private Label labelActionPoints;
+    //@FXML
+    //private Label labelActionPoints;
     @FXML
     private Label labelMoney;
     @FXML
     private Label labelDeadline;
+    
+    @FXML
+    private ImageView actionBars;
 
     public void getUser() throws SQLException {
         Statement stmt = connection.createStatement();
@@ -68,6 +72,7 @@ public class ControllerSceneGuild implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         try {
             getUser();
+            updateActionBarsImage(actionPointsRemaining);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -76,17 +81,17 @@ public class ControllerSceneGuild implements Initializable {
 
     public void setTopTexts() {
         labelCurrentDay.setText(" " + currentDay);
-        labelActionPoints.setText(" " + actionPointsRemaining);
+        //labelActionPoints.setText(" " + actionPointsRemaining);
         labelMoney.setText(" " + money);
         labelDeadline.setText(" " + deadline);
     }
     
-  //For the action bars
+    //For the action bars
     public void updateActionBarsImage(int actionPointsRemaining) {
         if (actionPointsRemaining >= 0 && actionPointsRemaining < actionBarImages.length) {
             String imageUrl = actionBarImages[actionPointsRemaining];
             Image image = new Image(getClass().getResource(imageUrl).toExternalForm());
-           // actionBars.setImage(image);
+            actionBars.setImage(image);
         }
     }
 	

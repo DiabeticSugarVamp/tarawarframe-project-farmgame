@@ -48,8 +48,8 @@ public class ControllerSceneFarmNavigation implements Initializable {
 
     @FXML
     private Label labelCurrentDay;
-    @FXML
-    private Label labelActionPoints;
+    //@FXML
+    //private Label labelActionPoints;
     @FXML
     private Label labelMoney;
     @FXML
@@ -60,7 +60,8 @@ public class ControllerSceneFarmNavigation implements Initializable {
     @FXML
     private ImageView charAvatar;
    
-    
+    @FXML
+    private ImageView actionBars;
     
     public void getUser() throws SQLException {
         Statement stmt = connection.createStatement();
@@ -83,7 +84,7 @@ public class ControllerSceneFarmNavigation implements Initializable {
             setAvatar();
             
             //For the actionBars , turn to normal later 
-            //updateActionBarsImage(actionPointsRemaining);
+            updateActionBarsImage(actionPointsRemaining);
         } catch (SQLException e) {
             e.printStackTrace();
             
@@ -112,7 +113,7 @@ public class ControllerSceneFarmNavigation implements Initializable {
         if (actionPointsRemaining >= 0 && actionPointsRemaining < actionBarImages.length) {
             String imageUrl = actionBarImages[actionPointsRemaining];
             Image image = new Image(getClass().getResource(imageUrl).toExternalForm());
-           // actionBars.setImage(image);
+            actionBars.setImage(image);
         }
     }
 
@@ -153,12 +154,12 @@ public class ControllerSceneFarmNavigation implements Initializable {
             
         }
 
-        this.setTopTexts();
+        initialize(null, null);
     }
 
     public void setTopTexts() {
         labelCurrentDay.setText(" " + currentDay);
-        labelActionPoints.setText(" " + actionPointsRemaining);
+        //labelActionPoints.setText(" " + actionPointsRemaining);
         labelMoney.setText(" " + money);
         labelDeadline.setText(" " + deadline);
         

@@ -48,11 +48,20 @@ public class ControllerSceneGuildSellPlants implements Initializable {
     private int ownedBronzeCrops;
     private int ownedSilverCrops;
     private int ownedGoldCrops;
+    
+    private String[] actionBarImages = {
+    		"/assets/stamina bars/stamina (blue)/stamina0 (blue).png",
+    	    "/assets/stamina bars/stamina (blue)/stamina1 (blue).png",
+    	    "/assets/stamina bars/stamina (blue)/stamina2 (blue).png",
+    	    "/assets/stamina bars/stamina (blue)/stamina3 (blue).png",
+    	    "/assets/stamina bars/stamina (blue)/stamina4 (blue).png",
+    	    "/assets/stamina bars/stamina (blue)/stamina5 (blue).png"
+    	};
 
     @FXML
     private Label labelCurrentDay;
-    @FXML
-    private Label labelActionPoints;
+    //@FXML
+    //private Label labelActionPoints;
     @FXML
     private Label labelMoney;
     @FXML
@@ -78,6 +87,9 @@ public class ControllerSceneGuildSellPlants implements Initializable {
     int calculatedTotalValue;
     @FXML
     private TextField sellTotal;
+    
+    @FXML
+    private ImageView actionBars;
 
     public void getUser() throws SQLException {
         Statement stmt = connection.createStatement();
@@ -97,7 +109,7 @@ public class ControllerSceneGuildSellPlants implements Initializable {
         try {
             getUser();
             setOwnedCrops();
-            
+            updateActionBarsImage(actionPointsRemaining);
         } catch (SQLException e) {
             e.printStackTrace();
             
@@ -210,6 +222,15 @@ public class ControllerSceneGuildSellPlants implements Initializable {
         }
     }
     
+  //For the action bars
+    public void updateActionBarsImage(int actionPointsRemaining) {
+        if (actionPointsRemaining >= 0 && actionPointsRemaining < actionBarImages.length) {
+            String imageUrl = actionBarImages[actionPointsRemaining];
+            Image image = new Image(getClass().getResource(imageUrl).toExternalForm());
+            actionBars.setImage(image);
+        }
+    }
+    
     public void setOwnedCrops() {
     	String querySeeds = "SELECT * FROM tempitems WHERE temp_id = 1";
     	try (Statement stmtSeeds = connection.createStatement();
@@ -261,7 +282,7 @@ public class ControllerSceneGuildSellPlants implements Initializable {
 
     public void setTopTexts() {
         labelCurrentDay.setText(" " + currentDay);
-        labelActionPoints.setText(" " + actionPointsRemaining);
+        //labelActionPoints.setText(" " + actionPointsRemaining);
         labelMoney.setText(" " + money);
         labelDeadline.setText(" " + deadline);
     }

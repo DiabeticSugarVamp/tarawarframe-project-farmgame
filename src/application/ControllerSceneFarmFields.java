@@ -76,8 +76,10 @@ public class ControllerSceneFarmFields implements Initializable {
 
     @FXML
     private Label labelCurrentDay;
-    @FXML
-    private Label labelActionPoints;
+    
+    //@FXML
+    //private Label labelActionPoints;
+    
     @FXML
     private Label labelMoney;
     @FXML
@@ -196,7 +198,7 @@ public class ControllerSceneFarmFields implements Initializable {
             setTopTexts();
             
             //For the actionBars , turn to normal later 
-            //updateActionBarsImage(actionPointsRemaining);
+            updateActionBarsImage(actionPointsRemaining);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -271,7 +273,7 @@ public class ControllerSceneFarmFields implements Initializable {
         }
     public void setTopTexts() {
         labelCurrentDay.setText(" " + currentDay);
-        labelActionPoints.setText(" " + actionPointsRemaining);
+        //labelActionPoints.setText(" " + actionPointsRemaining);
         labelMoney.setText(" " + money);
         labelDeadline.setText(" " + deadline);
         

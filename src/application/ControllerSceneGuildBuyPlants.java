@@ -48,11 +48,20 @@ public class ControllerSceneGuildBuyPlants implements Initializable {
     private int ownedBronzeSeeds;
     private int ownedSilverSeeds;
     private int ownedGoldSeeds;
+    
+    private String[] actionBarImages = {
+    		"/assets/stamina bars/stamina (blue)/stamina0 (blue).png",
+    	    "/assets/stamina bars/stamina (blue)/stamina1 (blue).png",
+    	    "/assets/stamina bars/stamina (blue)/stamina2 (blue).png",
+    	    "/assets/stamina bars/stamina (blue)/stamina3 (blue).png",
+    	    "/assets/stamina bars/stamina (blue)/stamina4 (blue).png",
+    	    "/assets/stamina bars/stamina (blue)/stamina5 (blue).png"
+    	};
 
     @FXML
     private Label labelCurrentDay;
-    @FXML
-    private Label labelActionPoints;
+    //@FXML
+    //private Label labelActionPoints;
     @FXML
     private Label labelMoney;
     @FXML
@@ -78,6 +87,9 @@ public class ControllerSceneGuildBuyPlants implements Initializable {
     int calculatedTotalValue;
     @FXML
     private TextField buyTotal;
+    
+    @FXML
+    private ImageView actionBars;
 
     public void getUser() throws SQLException {
         Statement stmt = connection.createStatement();
@@ -99,7 +111,7 @@ public class ControllerSceneGuildBuyPlants implements Initializable {
         try {
             getUser();
             setOwnedSeeds();
-            
+            updateActionBarsImage(actionPointsRemaining);
         } catch (SQLException e) {
             e.printStackTrace();
             
@@ -154,6 +166,15 @@ public class ControllerSceneGuildBuyPlants implements Initializable {
                 (buyGoldSpinner.getValue() * 15);
         buyTotal.setText(Integer.toString(calculatedTotalValue));
         
+    }
+    
+    //For the action bars
+    public void updateActionBarsImage(int actionPointsRemaining) {
+        if (actionPointsRemaining >= 0 && actionPointsRemaining < actionBarImages.length) {
+            String imageUrl = actionBarImages[actionPointsRemaining];
+            Image image = new Image(getClass().getResource(imageUrl).toExternalForm());
+            actionBars.setImage(image);
+        }
     }
     
     public void setOwnedSeeds() {
@@ -255,7 +276,7 @@ public class ControllerSceneGuildBuyPlants implements Initializable {
 
     public void setTopTexts() {
         labelCurrentDay.setText(" " + currentDay);
-        labelActionPoints.setText(" " + actionPointsRemaining);
+        //labelActionPoints.setText(" " + actionPointsRemaining);
         labelMoney.setText(" " + money);
         labelDeadline.setText(" " + deadline);
         

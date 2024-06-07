@@ -20,6 +20,10 @@
         <rowConstraints>
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
         </rowConstraints>
          <children>
             <Label styleClass="gameText" text="Money:" wrapText="true" GridPane.halignment="CENTER" />
@@ -30,7 +34,7 @@
                </image>
             </ImageView>
 
-            <Label fx:id="buyMansion" onMouseClicked="#buyMansion" styleClass="gameText" text="Buy ($300)" GridPane.halignment="CENTER" GridPane.rowIndex="5">
+            <Label fx:id="buyMansion" onMouseClicked="#buyMansion" styleClass="mainMenuButtons" text="Buy ($300)" GridPane.halignment="CENTER" GridPane.rowIndex="1">
 
                <cursor>
                   <Cursor fx:constant="HAND" />
