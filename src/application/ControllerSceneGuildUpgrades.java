@@ -10,6 +10,7 @@ import java.sql.Statement;
 import java.util.ResourceBundle;
 
 import dbpackage.Dbconnect;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
@@ -19,6 +20,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.DialogPane;
+import javafx.scene.control.Label;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.image.Image;
@@ -39,6 +41,9 @@ public class ControllerSceneGuildUpgrades implements Initializable {
     private boolean isOwnedTractor;
     private boolean isOwnedGloves;
     
+    @FXML
+    private Label totalMoney;
+    
     public void switchToSceneGuild(MouseEvent event) throws IOException {
         root = FXMLLoader.load(getClass().getResource("/application/SceneGuild.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
@@ -57,6 +62,8 @@ public class ControllerSceneGuildUpgrades implements Initializable {
             if(rsMoney.next()) {
                 money = rsMoney.getInt("cur_money");
             }
+            totalMoney.setText(" " + money);
+            
         } catch (SQLException e) {
             e.printStackTrace();
         }

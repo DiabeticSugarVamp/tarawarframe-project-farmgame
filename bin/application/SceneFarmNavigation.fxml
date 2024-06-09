@@ -91,7 +91,7 @@
             </Label>
             <Label fx:id="labelCurrentDay" styleClass="gameTopText" text="Day:" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
             <Label fx:id="labelMoney" prefHeight="45.0" prefWidth="166.0" styleClass="gameTopText" text="Money:" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
-            <Label fx:id="labelDeadline" prefHeight="45.0" prefWidth="100.0" styleClass="gameTopText" text="Deadline:" GridPane.columnIndex="2" GridPane.halignment="CENTER" />
+            <Label fx:id="labelDeadline" prefHeight="45.0" prefWidth="100.0" styleClass="gameTopText" text="Deadline:" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
             <GridPane prefHeight="75.0" prefWidth="242.0" GridPane.rowIndex="1">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -109,7 +109,7 @@
                   <Label fx:id="playerName" styleClass="gameText" text="PLAYERNAME" GridPane.columnIndex="1" />
                </children>
             </GridPane>
-            <ImageView fitHeight="55.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.halignment="LEFT">
+            <ImageView fitHeight="55.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="1">
                <image>
                   <Image url="@../assets/icons/iconDeadline.png" />
                </image>
@@ -117,7 +117,7 @@
                   <Insets left="20.0" />
                </GridPane.margin>
             </ImageView>
-            <ImageView fitHeight="55.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <ImageView fitHeight="55.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
                <image>
                   <Image url="@../assets/icons/iconStamina.png" />
                </image>
@@ -141,7 +141,7 @@
                   <Insets left="20.0" />
                </GridPane.margin>
             </ImageView>
-            <ImageView fx:id="actionBars" fitHeight="50.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+            <ImageView fx:id="actionBars" fitHeight="50.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.halignment="CENTER">
                <GridPane.margin>
                   <Insets left="25.0" />
                </GridPane.margin>

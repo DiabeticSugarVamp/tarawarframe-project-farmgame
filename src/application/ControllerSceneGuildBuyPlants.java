@@ -190,8 +190,8 @@ public class ControllerSceneGuildBuyPlants implements Initializable {
     	    }
     	    
     	    lblOwnSeedBronze.setText("Bronze seeds owned: " + ownedBronzeSeeds);
-    	    lblOwnSeedSilver.setText("Bronze seeds owned: " + ownedSilverSeeds);
-    	    lblOwnSeedGold.setText("Bronze seeds owned: " + ownedGoldSeeds);
+    	    lblOwnSeedSilver.setText("Silver seeds owned: " + ownedSilverSeeds);
+    	    lblOwnSeedGold.setText("Gold seeds owned: " + ownedGoldSeeds);
 
     	} catch (SQLException e) {
     	    e.printStackTrace();

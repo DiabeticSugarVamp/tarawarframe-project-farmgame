@@ -33,7 +33,7 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <GridPane styleClass="mainMenuButtons">
+            <GridPane onMouseClicked="#saveCurrentSlot1" styleClass="mainMenuButtons">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
               </columnConstraints>
@@ -48,7 +48,7 @@
                   </Label>
                </children>
             </GridPane>
-            <GridPane styleClass="mainMenuButtons" GridPane.rowIndex="1">
+            <GridPane onMouseClicked="#saveCurrentSlot2" styleClass="mainMenuButtons" GridPane.rowIndex="1">
                <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                </columnConstraints>
@@ -63,7 +63,7 @@
                   </Label>
                </children>
             </GridPane>
-            <GridPane styleClass="mainMenuButtons" GridPane.rowIndex="2">
+            <GridPane onMouseClicked="#saveCurrentSlot3" styleClass="mainMenuButtons" GridPane.rowIndex="2">
                <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                </columnConstraints>
